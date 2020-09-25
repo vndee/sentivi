@@ -15,11 +15,22 @@ class SentimentModel(object):
         pass
 
 
-class TransformationLayer(object):
+class DataLayer(object):
     def __init__(self):
-        super(TransformationLayer, self).__init__()
+        super(DataLayer, self).__init__()
 
     def __call__(self, *args, **kwargs):
+        pass
+
+
+class ClassifierLayer(object):
+    def __init__(self):
+        super(ClassifierLayer, self).__init__()
+
+    def fit(self, *args, **kwargs):
+        pass
+
+    def save(self, *args, **kwargs):
         pass
 
 
