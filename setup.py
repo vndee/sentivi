@@ -3,6 +3,7 @@ from setuptools import find_packages, setup
 
 HERE = pathlib.Path(__file__).parent
 README = (HERE / 'README.md').read_text()
+requires = (HERE / 'requirements.txt').read_text().split('\n')
 
 setup(
     name="sentivi",
@@ -10,8 +11,8 @@ setup(
     description="A simple tool for Vietnamese Sentiment Analysis",
     long_description=README,
     long_description_content_type="text/markdown",
-    url="https://github.com/vndee/deepgen",
-    author="Duy Huynh",
+    url="https://github.com/vndee/sentivi",
+    author="Duy V. Huynh",
     author_email="hvd.huynhduy@gmail.com",
     license="MIT",
     classifiers=[
@@ -19,9 +20,7 @@ setup(
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.7",
     ],
-    packages=find_packages(exclude=('example', 'test')),
+    packages=find_packages(exclude=('data', 'test')),
     include_package_data=True,
-    install_requires=['torch==1.1.0',
-                      'torchvision==0.3.0',
-                      'tqdm==4.32.2'],
+    install_requires=requires
 )
