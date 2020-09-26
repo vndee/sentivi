@@ -29,7 +29,7 @@ class Corpus(object):
         self.__source_file = source_file
         self.__delimiter = delimiter
         self.__line_separator = line_separator
-        self.__n_grams = n_grams
+        self.n_grams = n_grams
         self.__text_processor = text_processor
 
         self.vocab = None
@@ -58,7 +58,7 @@ class Corpus(object):
             if label not in label_set:
                 label_set.add(label)
 
-            words = self.__text_processor.n_gram_split(text, self.__n_grams)
+            words = self.__text_processor.n_gram_split(text, self.n_grams)
             for word in words:
                 if word not in warehouse:
                     warehouse.add(word)
