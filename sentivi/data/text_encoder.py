@@ -35,6 +35,8 @@ class TextEncoder(DataLayer):
             return self.bow(x), target
         elif self.encode_type == 'tf_idf':
             return self.tf_idf(x), target
+        elif self.encode_type == 'word2vec':
+            return self.word2vec(x), target
 
     def one_hot(self, x: Corpus) -> np.ndarray:
         """
@@ -101,3 +103,11 @@ class TextEncoder(DataLayer):
                 _x[i][j] = math.log(1 + appearances_in_here[__]) * math.log(x.__len__() / appearances_in_doc[__])
 
         return _x
+
+    def word2vec(self, x: Corpus) -> np.ndarray:
+        """
+        Convert corpus instance into word2vec
+        :param x:
+        :return:
+        """
+        pass
