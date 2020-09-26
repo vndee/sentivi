@@ -1,5 +1,6 @@
 import re
 import string
+from pyvi import ViTokenizer
 
 
 class TextProcessor(object):
@@ -10,8 +11,20 @@ class TextProcessor(object):
         super(TextProcessor, self).__init__()
         self.__apply_function = list()
 
+    def lower(self):
+        self.__apply_function.append(lambda x: x.lower())
+
+    def capitalize_first(self):
+        self.__apply_function.append(lambda x: x.title())
+
+    def capitalize(self):
+        self.__apply_function.append(lambda x: x.upper())
+
+    def word_segmentation(self):
+        self.__apply_function.append(lambda x: ViTokenizer.tokenize(x))
+
     def remove_punctuation(self):
-        self.__apply_function.append(lambda x: re.sub(r'[' + string.punctuation + ']', '', x))
+        self.__apply_function.append(lambda x: re.sub(r'[!"#$%&\'()*+,-./:;<=>?@[\]^`{|}~]', '', x))
 
     def add_pattern(self, pattern, replace_text):
         self.__apply_function.append(lambda x: re.sub(pattern, replace_text, x))

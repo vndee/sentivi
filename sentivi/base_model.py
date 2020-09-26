@@ -34,7 +34,7 @@ class ClassifierLayer(object):
         pass
 
 
-class Sequential(object):
+class Pipeline(object):
     def __init__(self, *args):
         self.apply_layers = list()
         for method in args:
