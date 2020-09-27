@@ -24,8 +24,8 @@ class NaiveBayesClassifier(ClassifierLayer):
             for x in train_X.shape[1:]:
                 flatten_dim *= x
 
-            logging.info(f'Input features view be flatten into np.ndarray({train_X.shape[0]}, {flatten_dim}) '
-                         f'for NaiveBayesClassifier.')
+            print(f'Input features view be flatten into np.ndarray({train_X.shape[0]}, {flatten_dim}) for '
+                  f'NaiveBayesClassifier.')
             train_X = train_X.reshape((train_X.shape[0], flatten_dim))
             test_X = test_X.reshape((test_X.shape[0], flatten_dim))
 
@@ -33,15 +33,35 @@ class NaiveBayesClassifier(ClassifierLayer):
         self.clf.fit(train_X, train_y)
         predicts = self.clf.predict(train_X)
         train_report = classification_report(train_y, predicts)
-        print(f'Training results:\n{train_report}')
+        results = f'Training results:\n{train_report}\n'
 
         # testing
         predicts = self.clf.predict(test_X)
         test_report = classification_report(test_y, predicts)
-        print(f'Test results:\n{test_report}')
+        results += f'Test results:\n{test_report}\n'
 
         if 'save_path' in kwargs:
             self.save(kwargs['save_path'])
+
+        return results
+
+    def predict(self, x, *args, **kwargs):
+        """
+        Predict polarities given sentences
+        :param x:
+        :param args:
+        :param kwargs:
+        :return:
+        """
+        if x.shape.__len__() > 2:
+            flatten_dim = 1
+            for _x in x.shape[1:]:
+                flatten_dim *= _x
+
+            print(f'Input features view be flatten into np.ndarray({x.shape[0]}, {flatten_dim}) for '
+                  f'NaiveBayesClassifier.')
+            x = x.reshape((x.shape[0], flatten_dim))
+        return self.clf.predict(x)
 
     def save(self, save_path, *args, **kwargs):
         """

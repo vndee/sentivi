@@ -19,8 +19,15 @@ class Pipeline(object):
         n_grams, vocab = None, None
         for method in self.apply_layers:
             if isinstance(method, DataLoader):
-                n_grams, vocab = method.n_grams, method.vocab
+                n_grams, vocab, text_processor = method.n_grams, method.vocab, method.text_processor
+                x = [' '.join([_text for _text in text_processor(text).split(' ') if _text != '']) for text in x]
                 continue
             x = method.predict(x, vocab=vocab, n_grams=n_grams, *args, **kwargs)
-            print(x)
         return x
+
+    def decode_polarity(self, x: Optional[list]):
+        for method in self.apply_layers:
+            if isinstance(method, DataLoader):
+                labels_set = method.labels_set
+                results = [labels_set[idx] for idx in x]
+                return results

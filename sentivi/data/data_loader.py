@@ -42,6 +42,7 @@ class Corpus(object):
         self.__text_processor = text_processor
 
         self.vocab = None
+        self.labels_set = None
         self.__train_sentences = list()
         self.__train_sentiments = list()
         self.__test_sentences = list()
@@ -101,6 +102,7 @@ class Corpus(object):
         assert self.__test_sentences.__len__() == self.__test_sentiments.__len__(), ValueError(
             'Index value is out of bound.')
 
+        self.labels_set = label_set
         return self.vocab
 
     def get_train_set(self):
@@ -140,13 +142,16 @@ class DataLoader(DataLayer):
         self.__delimiter = delimiter
         self.__line_separator = line_separator
         self.n_grams = n_grams
-        self.__text_processor = text_processor
+        self.text_processor = text_processor
         self.vocab = None
+        self.labels_set = None
 
     def __call__(self, *args, **kwargs):
         assert 'train' in kwargs, ValueError('train parameter is required.')
         assert 'test' in kwargs, ValueError('test parameter is required.')
 
-        corpus = Corpus(train_file=kwargs['train'], test_file=kwargs['test'], delimiter=self.__delimiter, line_separator=self.__line_separator, n_grams=self.n_grams, text_processor=self.__text_processor)
+        corpus = Corpus(train_file=kwargs['train'], test_file=kwargs['test'], delimiter=self.__delimiter,
+                        line_separator=self.__line_separator, n_grams=self.n_grams, text_processor=self.text_processor)
         self.vocab = corpus.vocab
+        self.labels_set = corpus.labels_set
         return corpus

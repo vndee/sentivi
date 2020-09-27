@@ -33,7 +33,7 @@ class TextEncoder(DataLayer):
         assert self.encode_type in ['one-hot', 'word2vec', 'bow', 'tf-idf'], ValueError(
             'Text encoder type must be one of [\'one-hot\', \'word2vec\', \'bow\', \'tf-idf\']')
 
-    def __call__(self, x, *args, **kwargs) -> (np.ndarray, np.ndarray):
+    def __call__(self, x: Optional[Corpus], *args, **kwargs) -> (np.ndarray, np.ndarray):
         train_set, test_set = x.get_train_set(), x.get_test_set()
         train_X, train_y = train_set
         test_X, test_y = test_set
