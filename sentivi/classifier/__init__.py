@@ -3,6 +3,7 @@ from .naive_bayes import NaiveBayesClassifier
 from .svm import SVMClassifier
 from .mlp import MLPClassifier
 from .decision_tree import DecisionTreeClassifier
+from .sgd import SGDClassifier
 
 
 class CNNClassifier(ClassifierLayer):
