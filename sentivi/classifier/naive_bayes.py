@@ -29,10 +29,16 @@ class NaiveBayesClassifier(ClassifierLayer):
             train_X = train_X.reshape((train_X.shape[0], flatten_dim))
             test_X = test_X.reshape((test_X.shape[0], flatten_dim))
 
+        # training
         self.clf.fit(train_X, train_y)
         predicts = self.clf.predict(train_X)
-        report = classification_report(train_y, predicts)
-        print(f'Training results:\n{report}')
+        train_report = classification_report(train_y, predicts)
+        print(f'Training results:\n{train_report}')
+
+        # testing
+        predicts = self.clf.predict(test_X)
+        test_report = classification_report(test_y, predicts)
+        print(f'Test results:\n{test_report}')
 
         if 'save_path' in kwargs:
             self.save(kwargs['save_path'])
