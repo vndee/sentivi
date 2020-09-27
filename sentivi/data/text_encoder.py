@@ -28,11 +28,26 @@ class TextEncoder(DataLayer):
         self.encode_type = encode_type
         self.max_length = 256
         self.model_path = model_path
+        self.word_vectors = None
 
         assert self.encode_type in ['one-hot', 'word2vec', 'bow', 'tf-idf'], ValueError(
             'Text encoder type must be one of [\'one-hot\', \'word2vec\', \'bow\', \'tf-idf\']')
 
-    def __call__(self, x: Corpus, *args, **kwargs) -> (np.ndarray, np.ndarray):
+    def __call__(self, x, *args, **kwargs) -> (np.ndarray, np.ndarray):
+        if 'mode' in kwargs:
+            if kwargs['mode'] == 'predict':
+                assert 'n_grams' in kwargs, AttributeError('It\'s seem like DataLoader has no n_grams attribute.')
+                assert 'vocab' in kwargs, AttributeError('It\'s seem like DataLoader has no vocab attribute.')
+
+                if self.encode_type == 'one-hot':
+                    return self.one_hot(x, kwargs['vocab'], kwargs['n_grams'])
+                elif self.encode_type == 'bow':
+                    return self.bow(x, kwargs['vocab'], kwargs['n_grams'])
+                elif self.encode_type == 'tf-idf':
+                    return self.tf_idf(x, kwargs['vocab'], kwargs['n_grams'])
+                elif self.encode_type == 'word2vec':
+                    return self.word2vec(x, kwargs['vocab'], kwargs['n_grams'])
+
         train_set, test_set = x.get_train_set(), x.get_test_set()
         train_X, train_y = train_set
         test_X, test_y = test_set
@@ -131,15 +146,16 @@ class TextEncoder(DataLayer):
         :param n_grams
         :return:
         """
-        import gensim
-        from distutils.version import LooseVersion
+        if self.word_vectors is None:
+            import gensim
+            from distutils.version import LooseVersion
 
-        if LooseVersion(gensim.__version__) >= LooseVersion('1.0.1'):
-            from gensim.models import KeyedVectors
-            word_vectors = KeyedVectors.load_word2vec_format(model_path, binary=True)
-        else:
-            from gensim.models import Word2Vec
-            word_vectors = Word2Vec.load_word2vec_format(model_path, binary=True)
+            if LooseVersion(gensim.__version__) >= LooseVersion('1.0.1'):
+                from gensim.models import KeyedVectors
+                self.word_vectors = KeyedVectors.load_word2vec_format(model_path, binary=True)
+            else:
+                from gensim.models import Word2Vec
+                self.word_vectors = Word2Vec.load_word2vec_format(model_path, binary=True)
 
         _x = None
 
@@ -148,7 +164,7 @@ class TextEncoder(DataLayer):
             items = TextProcessor.n_gram_split(item, n_grams)
             for token in items:
                 try:
-                    vector = word_vectors.get_vector(token)
+                    vector = self.word_vectors.get_vector(token)
                     vector = np.expand_dims(vector, axis=0)
                     __x = vector if __x is None else np.concatenate((__x, vector))
                 except Exception as ex:

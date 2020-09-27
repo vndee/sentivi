@@ -15,3 +15,4 @@ if __name__ == '__main__':
                         NaiveBayesClassifier(num_labels=3))
     results = pipeline(train='./data/dev.vi', test='./data/dev_test.vi')
     print(results)
+    pipeline.predict(['ABC'])

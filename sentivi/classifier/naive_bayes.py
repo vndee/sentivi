@@ -2,7 +2,7 @@ import logging
 import numpy as np
 
 from typing import Optional
-from sentivi import ClassifierLayer
+from sentivi.base_model import ClassifierLayer
 from sklearn.naive_bayes import GaussianNB
 from sklearn.metrics import classification_report
 

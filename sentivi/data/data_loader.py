@@ -2,7 +2,7 @@ import os
 import logging
 
 from typing import Optional
-from sentivi import DataLayer
+from sentivi.base_model import DataLayer
 from sentivi.text_processor import TextProcessor
 
 
@@ -101,6 +101,8 @@ class Corpus(object):
         assert self.__test_sentences.__len__() == self.__test_sentiments.__len__(), ValueError(
             'Index value is out of bound.')
 
+        return self.vocab
+
     def get_train_set(self):
         return self.__train_sentences, self.__train_sentiments
 
@@ -137,13 +139,14 @@ class DataLoader(DataLayer):
 
         self.__delimiter = delimiter
         self.__line_separator = line_separator
-        self.__n_grams = n_grams
+        self.n_grams = n_grams
         self.__text_processor = text_processor
+        self.vocab = None
 
     def __call__(self, *args, **kwargs):
         assert 'train' in kwargs, ValueError('train parameter is required.')
         assert 'test' in kwargs, ValueError('test parameter is required.')
 
-        return Corpus(train_file=kwargs['train'], test_file=kwargs['test'], delimiter=self.__delimiter,
-                      line_separator=self.__line_separator, n_grams=self.__n_grams,
-                      text_processor=self.__text_processor)
+        corpus = Corpus(train_file=kwargs['train'], test_file=kwargs['test'], delimiter=self.__delimiter, line_separator=self.__line_separator, n_grams=self.n_grams, text_processor=self.__text_processor)
+        self.vocab = corpus.vocab
+        return corpus

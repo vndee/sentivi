@@ -1,7 +1,5 @@
 from typing import Optional
-
-from sentivi import PretrainedClassifier
-from sklearn.metrics import classification_report
+from sentivi.data import DataLoader
 
 
 class Pipeline(object):
@@ -12,11 +10,17 @@ class Pipeline(object):
             self.apply_layers.append(method)
 
     def __call__(self, *args, **kwargs):
-        x: Optional[PretrainedClassifier] = None
+        x = None
         for method in self.apply_layers:
             x = method(x, *args, **kwargs)
         return x
 
-    def test(self, model: PretrainedClassifier, x):
+    def predict(self, x: Optional[list], *args, **kwargs):
+        n_grams, vocab = None, None
         for method in self.apply_layers:
-            x = method(x)
+            if isinstance(method, DataLoader):
+                n_grams, vocab = method.n_grams, method.vocab
+                continue
+            x = method(x, mode='predict', vocab=vocab, n_grams=n_grams, *args, **kwargs)
+            print(x)
+        return x

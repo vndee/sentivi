@@ -1,4 +1,4 @@
-from sentivi import ClassifierLayer
+from sentivi.base_model import ClassifierLayer
 from .naive_bayes import NaiveBayesClassifier
 
 

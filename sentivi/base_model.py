@@ -38,16 +38,3 @@ class ClassifierLayer(object):
 
     def load(self, *args, **kwargs):
         pass
-
-
-class PretrainedClassifier(object):
-    def __init__(self, *args, **kwargs):
-        super(PretrainedClassifier, self).__init__()
-        self.classifier_type = None
-        self.clf = None
-
-    def save(self, save_path, *args, **kwargs):
-        pass
-
-    def predict(self, *args, **kwargs):
-        pass
