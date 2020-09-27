@@ -20,7 +20,7 @@ class ScikitLearnClassifier(ClassifierLayer):
                 flatten_dim *= x
 
             print(f'Input features view be flatten into np.ndarray({train_X.shape[0]}, {flatten_dim}) for '
-                  f'NaiveBayesClassifier.')
+                  f'scikit-learn classifier.')
             train_X = train_X.reshape((train_X.shape[0], flatten_dim))
             test_X = test_X.reshape((test_X.shape[0], flatten_dim))
 
