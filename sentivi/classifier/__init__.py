@@ -1,6 +1,7 @@
 from sentivi.base_model import ClassifierLayer
 from .naive_bayes import NaiveBayesClassifier
 from .svm import SVMClassifier
+from .mlp import MLPClassifier
 
 
 class CNNClassifier(ClassifierLayer):
@@ -16,11 +17,6 @@ class RNNClassifier(ClassifierLayer):
 class TransformerClassifier(ClassifierLayer):
     def __init__(self):
         super(TransformerClassifier, self).__init__()
-
-
-class MLPClassifier(ClassifierLayer):
-    def __init__(self):
-        super(MLPClassifier, self).__init__()
 
 
 class DecisionTreeClassifier(ClassifierLayer):
