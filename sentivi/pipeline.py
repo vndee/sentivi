@@ -3,8 +3,13 @@ from sentivi.data import DataLoader
 
 
 class Pipeline(object):
-    def __init__(self, *args):
-        super(Pipeline, self).__init__()
+    def __init__(self, *args, **kwargs):
+        """
+        Init full pipeline for Vietnamese Sentiment Analysis
+        :param args:
+        :param kwargs:
+        """
+        super(Pipeline, self).__init__(*args, **kwargs)
         self.apply_layers = list()
         for method in args:
             self.apply_layers.append(method)
@@ -14,6 +19,12 @@ class Pipeline(object):
         self.__n_grams = None
 
     def __call__(self, *args, **kwargs):
+        """
+        Execute all
+        :param args:
+        :param kwargs:
+        :return:
+        """
         x = None
         for method in self.apply_layers:
             x = method(x, *args, **kwargs)
@@ -22,6 +33,13 @@ class Pipeline(object):
         return x
 
     def predict(self, x: Optional[list], *args, **kwargs):
+        """
+        Predict target polarity from list of given features
+        :param x:
+        :param args:
+        :param kwargs:
+        :return:
+        """
         for method in self.apply_layers:
             if isinstance(method, DataLoader):
                 text_processor = method.text_processor
@@ -31,10 +49,23 @@ class Pipeline(object):
         return x
 
     def decode_polarity(self, x: Optional[list]):
+        """
+        Decode numeric targets into label targets
+        :param x:
+        :return:
+        """
         return [self.__labels_set[idx] for idx in x]
 
     def get_labels_set(self):
+        """
+        Get labels set
+        :return:
+        """
         return self.__labels_set
 
     def get_vocab(self):
+        """
+        Get vocabulary
+        :return:
+        """
         return self.__vocab
