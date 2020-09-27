@@ -9,25 +9,32 @@ class Pipeline(object):
         for method in args:
             self.apply_layers.append(method)
 
+        self.__vocab = None
+        self.__labels_set = None
+        self.__n_grams = None
+
     def __call__(self, *args, **kwargs):
         x = None
         for method in self.apply_layers:
             x = method(x, *args, **kwargs)
+            if isinstance(method, DataLoader):
+                self.__n_grams, self.__vocab, self.__labels_set = method.n_grams, method.vocab, method.labels_set
         return x
 
     def predict(self, x: Optional[list], *args, **kwargs):
-        n_grams, vocab = None, None
         for method in self.apply_layers:
             if isinstance(method, DataLoader):
-                n_grams, vocab, text_processor = method.n_grams, method.vocab, method.text_processor
+                text_processor = method.text_processor
                 x = [' '.join([_text for _text in text_processor(text).split(' ') if _text != '']) for text in x]
                 continue
-            x = method.predict(x, vocab=vocab, n_grams=n_grams, *args, **kwargs)
+            x = method.predict(x, vocab=self.__vocab, n_grams=self.__n_grams, *args, **kwargs)
         return x
 
     def decode_polarity(self, x: Optional[list]):
-        for method in self.apply_layers:
-            if isinstance(method, DataLoader):
-                labels_set = method.labels_set
-                results = [labels_set[idx] for idx in x]
-                return results
+        return [self.__labels_set[idx] for idx in x]
+
+    def get_labels_set(self):
+        return self.__labels_set
+
+    def get_vocab(self):
+        return self.__vocab

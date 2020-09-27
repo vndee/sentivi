@@ -111,13 +111,6 @@ class Corpus(object):
     def get_test_set(self):
         return self.__test_sentences, self.__test_sentiments
 
-    def export_vocab(self, file_path):
-        file_writer = open(file_path, mode='w+')
-        for token in self.vocab:
-            file_writer.write(token + '\n')
-        file_writer.close()
-        print(f'Exported vocabulary to {file_path}')
-
 
 class DataLoader(DataLayer):
     def __init__(self,
