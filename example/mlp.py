@@ -8,7 +8,7 @@ if __name__ == '__main__':
 
     pipeline = Pipeline(DataLoader(text_processor=text_processor, n_grams=3),
                         TextEncoder(encode_type='word2vec', model_path='./pretrained/wiki.vi.model.bin.gz'),
-                        MLPClassifier(num_labels=3))
+                        MLPClassifier(num_labels=3, max_iter=10, verbose=True))
 
     train_results = pipeline(train='./data/dev.vi', test='./data/dev_test.vi',
                              save_path='./weights/svm.sentivi')
