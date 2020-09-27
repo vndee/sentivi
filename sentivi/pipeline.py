@@ -3,13 +3,13 @@ from sentivi.data import DataLoader
 
 
 class Pipeline(object):
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args):
         """
         Init full pipeline for Vietnamese Sentiment Analysis
         :param args:
         :param kwargs:
         """
-        super(Pipeline, self).__init__(*args, **kwargs)
+        super(Pipeline, self).__init__()
         self.apply_layers = list()
         for method in args:
             self.apply_layers.append(method)
