@@ -1,3 +1,6 @@
+import numpy as np
+
+
 class SentimentModel(object):
     def __init__(self):
         super(SentimentModel, self).__init__()
@@ -27,20 +30,24 @@ class ClassifierLayer(object):
     def __init__(self):
         super(ClassifierLayer, self).__init__()
 
-    def fit(self, *args, **kwargs):
+    def __call__(self, *args, **kwargs):
         pass
 
     def save(self, *args, **kwargs):
         pass
 
+    def load(self, *args, **kwargs):
+        pass
 
-class Pipeline(object):
-    def __init__(self, *args):
-        self.apply_layers = list()
-        for method in args:
-            self.apply_layers.append(method)
 
-    def __call__(self, x):
-        for method in self.apply_layers:
-            x = method(x)
-        return x
+class PretrainedClassifier(object):
+    def __init__(self, *args, **kwargs):
+        super(PretrainedClassifier, self).__init__()
+        self.classifier_type = None
+        self.clf = None
+
+    def save(self, save_path, *args, **kwargs):
+        pass
+
+    def predict(self, *args, **kwargs):
+        pass

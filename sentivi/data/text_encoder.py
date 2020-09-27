@@ -15,7 +15,7 @@ class TextEncoder(DataLayer):
                  model_path: Optional[str] = None):
         """
         Simple text encode layer
-        :param encode_type: ['one-hot', 'word2vec', 'bow', 'tf-idf', 'spacy']
+        :param encode_type: ['one-hot', 'word2vec', 'bow', 'tf-idf']
         """
         super(TextEncoder, self).__init__()
 
@@ -29,32 +29,40 @@ class TextEncoder(DataLayer):
         self.max_length = 256
         self.model_path = model_path
 
-        assert self.encode_type in ['one-hot', 'word2vec', 'bow', 'tf-idf', 'spacy'], ValueError(
-            'Text encoder type must be one of [\'one-hot\', \'word2vec\', \'bow\', \'tf-idf\', \'spacy\']')
+        assert self.encode_type in ['one-hot', 'word2vec', 'bow', 'tf-idf'], ValueError(
+            'Text encoder type must be one of [\'one-hot\', \'word2vec\', \'bow\', \'tf-idf\']')
 
-    def __call__(self, x: Corpus) -> (np.ndarray, np.ndarray):
-        target = np.array([y for x, y in x])
+    def __call__(self, x: Corpus, *args, **kwargs) -> (np.ndarray, np.ndarray):
+        train_set, test_set = x.get_train_set(), x.get_test_set()
+        train_X, train_y = train_set
+        test_X, test_y = test_set
+
+        train_y, test_y = np.array(train_y), np.array(test_y)
+        vocab, n_grams = x.vocab, x.n_grams
+
         if self.encode_type == 'one-hot':
-            return self.one_hot(x), target
+            return (self.one_hot(train_X, vocab, n_grams), train_y), (self.one_hot(test_X, vocab, n_grams), test_y)
         elif self.encode_type == 'bow':
-            return self.bow(x), target
+            return (self.bow(train_X, vocab, n_grams), train_y), (self.bow(test_X, vocab, n_grams), test_y)
         elif self.encode_type == 'tf-idf':
-            return self.tf_idf(x), target
+            return (self.tf_idf(train_X, vocab, n_grams), train_y), (self.tf_idf(test_X, vocab, n_grams), test_y)
         elif self.encode_type == 'word2vec':
-            return self.word2vec(x, model_path=self.model_path), target
-        elif self.encode_type == 'spacy':
-            return self.spacy(x), target
+            return (self.word2vec(train_X, model_path=self.model_path, n_grams=n_grams), train_y), (
+            self.word2vec(test_X, model_path=self.model_path, n_grams=n_grams), test_y)
+        # elif self.encode_type == 'spacy':
+        #     return self.spacy(x), target
 
-    def one_hot(self, x: Corpus) -> np.ndarray:
+    def one_hot(self, x, vocab, n_grams) -> np.ndarray:
         """
         Convert corpus into batch of one-hot vectors.
         :param x:
+        :param vocab:
+        :param n_grams
         :return:
         """
-        vocab = x.vocab
         _x = np.zeros((x.__len__(), self.max_length, vocab.__len__()))
-        for i, (item, _) in enumerate(tqdm(x, desc='One Hot Text Encoder')):
-            items = TextProcessor.n_gram_split(item, x.n_grams)
+        for i, item in enumerate(tqdm(x, desc='One Hot Text Encoder')):
+            items = TextProcessor.n_gram_split(item, n_grams)
             for j, token in enumerate(items):
                 if j >= self.max_length:
                     break
@@ -63,29 +71,33 @@ class TextEncoder(DataLayer):
 
         return _x
 
-    def bow(self, x: Corpus) -> np.ndarray:
+    def bow(self, x, vocab, n_grams) -> np.ndarray:
         """
         Bag-of-Word encoder
+        :param x
+        :param vocab
+        :param n_grams
         :return:
         """
-        vocab = x.vocab
         _x = np.zeros((x.__len__(), vocab.__len__()))
-        for i, (item, _) in enumerate(tqdm(x, desc='Bag Of Words Text Encoder')):
-            items = TextProcessor.n_gram_split(item, x.n_grams)
+        for i, item in enumerate(tqdm(x, desc='Bag Of Words Text Encoder')):
+            items = TextProcessor.n_gram_split(item, n_grams)
             for token in items:
                 j = vocab.index(token)
                 _x[i][j] = _x[i][j] + 1
 
         return _x
 
-    def tf_idf(self, x: Corpus) -> np.ndarray:
+    def tf_idf(self, x, vocab, n_grams) -> np.ndarray:
         """
         Simple TF-IDF feature
         :param x:
+        :param vocab:
+        :param n_grams
         :return:
         """
-        items = [TextProcessor.n_gram_split(item, x.n_grams) for item, _ in x]
-        appearances_in_doc = {k: 0 for k in x.vocab}
+        items = [TextProcessor.n_gram_split(item, n_grams) for item in x]
+        appearances_in_doc = {k: 0 for k in vocab}
 
         for _ in items:
             _set = set()
@@ -96,7 +108,6 @@ class TextEncoder(DataLayer):
 
         import math
 
-        vocab = x.vocab
         _x = np.zeros((x.__len__(), vocab.__len__()))
         for i, _ in enumerate(tqdm(items, desc='TF-IDF Text Encoder')):
             appearances_in_here = dict()
@@ -112,11 +123,12 @@ class TextEncoder(DataLayer):
 
         return _x
 
-    def word2vec(self, x: Corpus, model_path) -> np.ndarray:
+    def word2vec(self, x, model_path, n_grams) -> np.ndarray:
         """
         Convert corpus instance into glove
         :param x:
         :param model_path
+        :param n_grams
         :return:
         """
         import gensim
@@ -131,9 +143,9 @@ class TextEncoder(DataLayer):
 
         _x = None
 
-        for item, _ in tqdm(x, desc='Word2Vec Text Encoder'):
+        for item in tqdm(x, desc='Word2Vec Text Encoder'):
             __x = None
-            items = TextProcessor.n_gram_split(item, x.n_grams)
+            items = TextProcessor.n_gram_split(item, n_grams)
             for token in items:
                 try:
                     vector = word_vectors.get_vector(token)
@@ -152,15 +164,15 @@ class TextEncoder(DataLayer):
 
         return _x
 
-    def spacy(self, x: Corpus) -> np.ndarray:
-        """
-        Using vi-spacy
-        :param x:
-        :return:
-        """
-        import spacy
-        nlp = spacy.load('vi_spacy_model')
-
-        for item, _ in tqdm(x, desc='Vi-Spacy Text Encoder'):
-            __x = None
-            print(item)
+    # def spacy(self, x: Corpus) -> np.ndarray:
+    #     """
+    #     Using vi-spacy
+    #     :param x:
+    #     :return:
+    #     """
+    #     import spacy
+    #     nlp = spacy.load('vi_spacy_model')
+    #
+    #     for item, _ in tqdm(x, desc='Vi-Spacy Text Encoder'):
+    #         __x = None
+    #         print(item)

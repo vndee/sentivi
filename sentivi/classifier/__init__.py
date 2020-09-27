@@ -1,9 +1,5 @@
 from sentivi import ClassifierLayer
-
-
-class NaiveBayesClassifier(ClassifierLayer):
-    def __init__(self):
-        super(NaiveBayesClassifier, self).__init__()
+from .naive_bayes import NaiveBayesClassifier
 
 
 class SVMClassifier(ClassifierLayer):
