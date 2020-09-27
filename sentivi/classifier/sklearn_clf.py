@@ -25,14 +25,14 @@ class ScikitLearnClassifier(ClassifierLayer):
             test_X = test_X.reshape((test_X.shape[0], flatten_dim))
 
         # training
-        print(f'Training model...')
+        print(f'Training classifier...')
         self.clf.fit(train_X, train_y)
         predicts = self.clf.predict(train_X)
         train_report = classification_report(train_y, predicts)
         results = f'Training results:\n{train_report}\n'
 
         # testing
-        print(f'Testing model...')
+        print(f'Testing classifier...')
         predicts = self.clf.predict(test_X)
         test_report = classification_report(test_y, predicts)
         results += f'Test results:\n{test_report}\n'
