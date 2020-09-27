@@ -1,15 +1,24 @@
 import re
-import string
+import logging
+
+from typing import Optional
 from pyvi import ViTokenizer
 
 
 class TextProcessor(object):
-    def __init__(self):
+    def __init__(self, methods: Optional[list] = None):
         """
         A simple text processor base on regex
         """
         super(TextProcessor, self).__init__()
         self.__apply_function = list()
+
+        if methods is not None:
+            for method in methods:
+                if hasattr(self, method):
+                    getattr(self, method)()
+                else:
+                    logging.warning(f'There is no text processor method: {method}. Therefore {method} will be ignored.')
 
     def lower(self):
         self.__apply_function.append(lambda x: x.lower())
