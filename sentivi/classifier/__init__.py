@@ -1,10 +1,6 @@
 from sentivi.base_model import ClassifierLayer
 from .naive_bayes import NaiveBayesClassifier
-
-
-class SVMClassifier(ClassifierLayer):
-    def __init__(self):
-        super(SVMClassifier, self).__init__()
+from .svm import SVMClassifier
 
 
 class CNNClassifier(ClassifierLayer):
