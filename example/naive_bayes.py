@@ -9,6 +9,7 @@ if __name__ == '__main__':
     pipeline = Pipeline(DataLoader(text_processor=text_processor, n_grams=1),
                         TextEncoder(encode_type='word2vec', model_path='./pretrained/wiki.vi.model.bin.gz'),
                         NaiveBayesClassifier(num_labels=3))
+
     train_results = pipeline(train='./data/dev.vi', test='./data/dev_test.vi',
                              save_path='./weights/naive_bayes.sentivi')
     print(train_results)
