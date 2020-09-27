@@ -4,6 +4,7 @@ from .svm import SVMClassifier
 from .mlp import MLPClassifier
 from .decision_tree import DecisionTreeClassifier
 from .sgd import SGDClassifier
+from .nearest_centroid import NearestCentroidClassifier
 
 
 class CNNClassifier(ClassifierLayer):
