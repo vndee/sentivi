@@ -1,6 +1,3 @@
-import numpy as np
-
-
 class SentimentModel(object):
     def __init__(self):
         super(SentimentModel, self).__init__()
@@ -25,6 +22,9 @@ class DataLayer(object):
     def __call__(self, *args, **kwargs):
         pass
 
+    def predict(self, *args, **kwargs):
+        pass
+
 
 class ClassifierLayer(object):
     def __init__(self):
@@ -37,4 +37,7 @@ class ClassifierLayer(object):
         pass
 
     def load(self, *args, **kwargs):
+        pass
+
+    def predict(self, *args, **kwargs):
         pass

@@ -21,6 +21,6 @@ class Pipeline(object):
             if isinstance(method, DataLoader):
                 n_grams, vocab = method.n_grams, method.vocab
                 continue
-            x = method(x, mode='predict', vocab=vocab, n_grams=n_grams, *args, **kwargs)
+            x = method.predict(x, vocab=vocab, n_grams=n_grams, *args, **kwargs)
             print(x)
         return x
