@@ -5,6 +5,7 @@ from .mlp import MLPClassifier
 from .decision_tree import DecisionTreeClassifier
 from .sgd import SGDClassifier
 from .nearest_centroid import NearestCentroidClassifier
+from .gaussian_process import GaussianProcessClassifier
 
 
 class CNNClassifier(ClassifierLayer):
