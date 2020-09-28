@@ -1,7 +1,10 @@
 import torch
 import torch.nn as nn
+from tqdm import tqdm
+from torch.utils.data import DataLoader
 from typing import Optional
 
+from sentivi.classifier.nn_clf import NeuralNetworkDataset
 from sentivi.classifier.nn_clf import NeuralNetworkClassifier
 
 
@@ -49,9 +52,18 @@ class TextCNN(nn.Module):
 
 
 class TextCNNClassifier(NeuralNetworkClassifier):
-    def __init__(self, num_labels: int, embedding_size: Optional[int] = None, max_length: Optional[int] = None,
-                 device: Optional[str] = 'cpu', num_epochs: Optional[int] = 10, learning_rate: Optional[float] = 1e-3,
-                 batch_size: Optional[int] = 2, *args, **kwargs):
+    def __init__(self,
+                 num_labels: int,
+                 embedding_size: Optional[int] = None,
+                 max_length: Optional[int] = None,
+                 device: Optional[str] = 'cpu',
+                 num_epochs: Optional[int] = 10,
+                 learning_rate: Optional[float] = 1e-3,
+                 batch_size: Optional[int] = 2,
+                 shuffle: Optional[bool] = True,
+                 random_state: Optional[int] = 101,
+                 *args,
+                 **kwargs):
         """
         Initialize TextCNNClassifier
         :param num_labels:
@@ -61,6 +73,8 @@ class TextCNNClassifier(NeuralNetworkClassifier):
         :param num_epochs:
         :param learning_rate:
         :param batch_size:
+        :param shuffle
+        :param random_state
         :param args:
         :param kwargs:
         """
@@ -72,6 +86,8 @@ class TextCNNClassifier(NeuralNetworkClassifier):
         self.num_epochs = num_epochs
         self.learning_rate = learning_rate
         self.batch_size = batch_size
+        self.shuffle = shuffle
+        self.random_state = random_state
 
     def __call__(self, data, *args, **kwargs):
         (train_X, train_y), (test_X, test_y) = data
@@ -92,11 +108,13 @@ class TextCNNClassifier(NeuralNetworkClassifier):
                 'Expected array with number of dimension less or equal than 3.')
             if train_X.shape.__len__() == 3:
                 self.max_length = train_X.shape[1]
+                train_X = train_X.reshape((train_X.shape[-3], 1, train_X.shape[-2], train_X.shape[-1]))
+                test_X = test_X.reshape((test_X.shape[-3], 1, test_X.shape[-2], test_X.shape[-1]))
             else:
                 self.max_length = 1
-                print(f'Reshape input array into (n_samples, 1, feature_dim) for Neural Network Classifier')
-                train_X = train_X.reshape((train_X.shape[0], 1, train_X.shape[-1]))
-                test_X = test_X.reshape((test_X.shape[0], 1, test_X.shape[-1]))
+                train_X = train_X.reshape((train_X.shape[0], 1, 1, train_X.shape[-1]))
+                test_X = test_X.reshape((test_X.shape[0], 1, 1, test_X.shape[-1]))
+            print(f'Reshape input array into (n_samples, 1, 1, feature_dim) for Neural Network Classifier')
 
         if 'device' in kwargs:
             self.device = kwargs['device']
@@ -104,4 +122,38 @@ class TextCNNClassifier(NeuralNetworkClassifier):
         self.clf = TextCNN(num_labels=self.num_labels, embedding_size=self.embedding_size, max_length=self.max_length)
         self.clf = self.clf.to(self.device)
 
-        print(self.clf)
+        self.learning_rate = kwargs.get('learning_rate', 0.01)
+        self.optimizer = kwargs.get('optimizer', torch.optim.SGD(self.clf.parameters(), lr=self.learning_rate))
+        self.batch_size = kwargs.get('batch_size', 2)
+        self.criterion = kwargs.get('criterion', torch.nn.CrossEntropyLoss())
+        self.num_epochs = kwargs.get('num_epochs', self.num_epochs)
+
+        self.train_loader = DataLoader(NeuralNetworkDataset(train_X, train_y), batch_size=self.batch_size,
+                                       shuffle=self.shuffle)
+        self.test_loader = DataLoader(NeuralNetworkDataset(test_X, test_y), batch_size=self.batch_size,
+                                      shuffle=self.shuffle)
+
+        for epoch in range(self.num_epochs):
+            self.clf.train()
+            train_loss, train_acc, test_loss, test_acc = 0.0, 0.0, 0.0, 0.0
+
+            for X, y in tqdm(self.train_loader, desc=f'Training {epoch + 1}/{self.num_epochs}'):
+                X, y = X.type(torch.FloatTensor).to(self.device), y.type(torch.LongTensor).to(self.device)
+                preds = self.clf(X)
+                loss = self.criterion(preds, y)
+
+                loss.backward()
+                self.optimizer.step()
+
+                train_loss = train_loss + loss.item()
+
+            self.clf.eval()
+            with torch.no_grad():
+                for X, y in tqdm(self.test_loader, desc=f'Testing {epoch + 1}/{self.num_epochs}'):
+                    X, y = X.type(torch.FloatTensor).to(self.device), y.type(torch.LongTensor).to(self.device)
+                    preds = self.clf(X)
+                    loss = self.criterion(preds, y)
+                    test_loss = test_loss + loss.item()
+
+            print(f'Train loss: {train_loss / train_X.shape[0]} | Train acc: {train_acc} | Test loss: '
+                  f'{test_loss / test_X.shape[0]} | Test acc: {test_acc}')
