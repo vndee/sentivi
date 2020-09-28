@@ -23,13 +23,22 @@ class TextCNN(nn.Module):
         self.embedding_size = embedding_size
         self.max_length = max_length
 
-        self.conv_1 = nn.Conv2d(1, 1, (3, self.embedding_size))
-        self.conv_2 = nn.Conv2d(1, 1, (4, self.embedding_size))
-        self.conv_3 = nn.Conv2d(1, 1, (5, self.embedding_size))
+        if self.max_length == 1:
+            self.conv_1 = nn.Conv1d(1, 1, 3)
+            self.conv_2 = nn.Conv1d(1, 1, 4)
+            self.conv_3 = nn.Conv1d(1, 1, 5)
 
-        self.max_pool_1 = nn.MaxPool2d((self.max_length - 3 + 1, 1))
-        self.max_pool_2 = nn.MaxPool2d((self.max_length - 4 + 1, 1))
-        self.max_pool_3 = nn.MaxPool2d((self.max_length - 5 + 1, 1))
+            self.max_pool_1 = nn.MaxPool1d(kernel_size=self.embedding_size - 3 + 1, stride=1)
+            self.max_pool_2 = nn.MaxPool1d(kernel_size=self.embedding_size - 4 + 1, stride=1)
+            self.max_pool_3 = nn.MaxPool1d(kernel_size=self.embedding_size - 5 + 1, stride=1)
+        else:
+            self.conv_1 = nn.Conv2d(1, 1, (3, self.embedding_size))
+            self.conv_2 = nn.Conv2d(1, 1, (4, self.embedding_size))
+            self.conv_3 = nn.Conv2d(1, 1, (5, self.embedding_size))
+
+            self.max_pool_1 = nn.MaxPool2d((self.max_length - 3 + 1, 1))
+            self.max_pool_2 = nn.MaxPool2d((self.max_length - 4 + 1, 1))
+            self.max_pool_3 = nn.MaxPool2d((self.max_length - 5 + 1, 1))
 
         self.linear = nn.Linear(3, self.num_labels)
 
@@ -145,8 +154,8 @@ class TextCNNClassifier(NeuralNetworkClassifier):
                 test_X = test_X.reshape((test_X.shape[-3], 1, test_X.shape[-2], test_X.shape[-1]))
             else:
                 self.max_length = 1
-                train_X = train_X.reshape((train_X.shape[0], 1, 1, train_X.shape[-1]))
-                test_X = test_X.reshape((test_X.shape[0], 1, 1, test_X.shape[-1]))
+                train_X = train_X.reshape((train_X.shape[0], 1, train_X.shape[-1]))
+                test_X = test_X.reshape((test_X.shape[0], 1, test_X.shape[-1]))
             print(f'Reshape input array into (n_samples, 1, 1, feature_dim) for Neural Network Classifier')
 
         if 'device' in kwargs:
@@ -240,7 +249,7 @@ class TextCNNClassifier(NeuralNetworkClassifier):
         if X.shape.__len__() == 3:
             X = X.reshape((X.shape[-3], 1, X.shape[-2], X.shape[-1]))
         else:
-            X = X.reshape((X.shape[0], 1, 1, X.shape[-1]))
+            X = X.reshape((X.shape[0], 1, X.shape[-1]))
 
         _preds = None
         self.predict_loader = DataLoader(X, batch_size=self.batch_size, shuffle=self.shuffle)
@@ -269,7 +278,7 @@ class TextCNNClassifier(NeuralNetworkClassifier):
         :param kwargs:
         :return:
         """
-        pass
+        torch.save(self.clf.state_dict(), save_path)
 
     def load(self, model_path, *args, **kwargs):
         """
@@ -279,4 +288,4 @@ class TextCNNClassifier(NeuralNetworkClassifier):
         :param kwargs:
         :return:
         """
-        pass
+        self.clf.load_state_dict(torch.load(model_path, map_location=self.device))
