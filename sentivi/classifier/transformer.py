@@ -24,14 +24,19 @@ class TransformerClassifier(ClassifierLayer):
                  warmup_steps: Optional[int] = 100,
                  weight_decay: Optional[float] = 0.01,
                  accumulation_steps: Optional[int] = 10,
-                 save_steps: Optional[int] = 100):
+                 save_steps: Optional[int] = 100,
+                 device: Optional[str] = 'cpu',
+                 *args,
+                 **kwargs):
         super(TransformerClassifier, self).__init__()
 
         self.batch_size = batch_size
         self.warmup_steps = warmup_steps
         self.weight_decay = weight_decay
         self.accumulation_steps = accumulation_steps
+        self.language_model_shortcut = language_model_shortcut
         self.save_steps = save_steps
+        self.device = device
 
         assert language_model_shortcut in TransformerClassifier.TRANSFORMER_ALIASES, ValueError(
             f'language_model_shortcut must be in {TransformerClassifier.TRANSFORMER_ALIASES} '

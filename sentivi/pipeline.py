@@ -1,3 +1,5 @@
+import logging
+
 from typing import Optional
 from sentivi.data import DataLoader, TextEncoder
 from sentivi.classifier.transformer import TransformerClassifier
@@ -23,6 +25,9 @@ class Pipeline(object):
         if language_model_shortcut is not None:
             for method in self.apply_layers:
                 if isinstance(method, TextEncoder):
+                    if method.encode_type != 'transformer':
+                        logging.warning(f'Expected transformer encoder type for TextEncoder, '
+                                        f'but got {method.encode_type}. It\'s will be implicit cast into transformer')
                     method.encode_type = 'transformer'
                     method.language_model_shortcut = language_model_shortcut
                     break
