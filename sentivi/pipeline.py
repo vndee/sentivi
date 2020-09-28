@@ -1,5 +1,5 @@
 from typing import Optional
-from sentivi.data import DataLoader
+from sentivi.data import DataLoader, TextEncoder
 
 
 class Pipeline(object):
@@ -17,6 +17,12 @@ class Pipeline(object):
         self.__vocab = None
         self.__labels_set = None
         self.__n_grams = None
+        self.__max_length = None
+        self.__embedding_size = None
+
+    def keyword_arguments(self):
+        return {attr[11:]: getattr(self, attr) for attr in dir(self) if
+                attr[:10] == '_Pipeline_' and getattr(self, attr) is not None}
 
     def __call__(self, *args, **kwargs):
         """
@@ -27,9 +33,11 @@ class Pipeline(object):
         """
         x = None
         for method in self.apply_layers:
-            x = method(x, *args, **kwargs)
+            x = method(x, *args, **kwargs, **self.keyword_arguments())
+
             if isinstance(method, DataLoader):
                 self.__n_grams, self.__vocab, self.__labels_set = method.n_grams, method.vocab, method.labels_set
+
         return x
 
     def predict(self, x: Optional[list], *args, **kwargs):
@@ -45,7 +53,7 @@ class Pipeline(object):
                 text_processor = method.text_processor
                 x = [' '.join([_text for _text in text_processor(text).split(' ') if _text != '']) for text in x]
                 continue
-            x = method.predict(x, vocab=self.__vocab, n_grams=self.__n_grams, *args, **kwargs)
+            x = method.predict(x, *args, **kwargs, **self.keyword_arguments())
         return x
 
     def decode_polarity(self, x: Optional[list]):

@@ -6,6 +6,7 @@ from .decision_tree import DecisionTreeClassifier
 from .sgd import SGDClassifier
 from .nearest_centroid import NearestCentroidClassifier
 from .gaussian_process import GaussianProcessClassifier
+from .text_cnn import TextCNNClassifier
 
 
 class CNNClassifier(ClassifierLayer):

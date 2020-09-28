@@ -53,7 +53,7 @@ class TextEncoder(DataLayer):
         # elif self.encode_type == 'spacy':
         #     return self.spacy(x), target
 
-    def predict(self, x, vocab, n_grams):
+    def predict(self, x, vocab, n_grams, *args, **kwargs):
         if self.encode_type == 'one-hot':
             return self.one_hot(x, vocab, n_grams)
         elif self.encode_type == 'bow':
