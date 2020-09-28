@@ -1,3 +1,4 @@
+import os
 import logging
 import numpy as np
 
@@ -49,7 +50,7 @@ class TextEncoder(DataLayer):
             return (self.tf_idf(train_X, vocab, n_grams), train_y), (self.tf_idf(test_X, vocab, n_grams), test_y)
         elif self.encode_type == 'word2vec':
             return (self.word2vec(train_X, n_grams=n_grams), train_y), (
-            self.word2vec(test_X, n_grams=n_grams), test_y)
+                self.word2vec(test_X, n_grams=n_grams), test_y)
         # elif self.encode_type == 'spacy':
         #     return self.spacy(x), target
 
@@ -142,6 +143,9 @@ class TextEncoder(DataLayer):
         :return:
         """
         if self.word_vectors is None:
+            assert os.path.exists(self.model_path), FileNotFoundError(
+                f'Could not found word2vec model at {self.model_path}')
+
             import gensim
             from distutils.version import LooseVersion
 
