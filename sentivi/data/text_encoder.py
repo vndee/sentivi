@@ -15,7 +15,7 @@ class TextEncoder(DataLayer):
                  model_path: Optional[str] = None):
         """
         Simple text encode layer
-        :param encode_type: ['one-hot', 'word2vec', 'bow', 'tf-idf']
+        :param encode_type: ['one-hot', 'word2vec', 'bow', 'tf-idf', 'transformer']
         """
         super(TextEncoder, self).__init__()
 
@@ -26,9 +26,10 @@ class TextEncoder(DataLayer):
         self.max_length = None
         self.model_path = model_path
         self.word_vectors = None
+        self.language_model_shortcut = None
 
-        assert self.encode_type in ['one-hot', 'word2vec', 'bow', 'tf-idf'], ValueError(
-            'Text encoder type must be one of [\'one-hot\', \'word2vec\', \'bow\', \'tf-idf\']')
+        assert self.encode_type in ['one-hot', 'word2vec', 'bow', 'tf-idf', 'transformer'], ValueError(
+            'Text encoder type must be one of [\'one-hot\', \'word2vec\', \'bow\', \'tf-idf\', \'transformer\']')
 
     def __call__(self, x: Optional[Corpus], *args, **kwargs) -> (np.ndarray, np.ndarray):
         self.max_length = kwargs.get('max_length', 256)
@@ -49,8 +50,16 @@ class TextEncoder(DataLayer):
         elif self.encode_type == 'word2vec':
             return (self.word2vec(train_X, n_grams=n_grams), train_y), (
                 self.word2vec(test_X, n_grams=n_grams), test_y)
-        # elif self.encode_type == 'spacy':
-        #     return self.spacy(x), target
+        elif self.encode_type == 'transformer':
+            from sentivi.classifier.transformer import TransformerClassifier
+            assert self.language_model_shortcut in TransformerClassifier.TRANSFORMER_ALIASES, ValueError(
+                f'language_model_shortcut must be in {TransformerClassifier.TRANSFORMER_ALIASES} - '
+                f'not {self.language_model_shortcut}')
+
+            from transformers import AutoTokenizer
+            tokenizer = AutoTokenizer.from_pretrained(self.language_model_shortcut)
+            return (self.transformer_tokenizer(tokenizer, train_X), train_y), \
+                   (self.transformer_tokenizer(tokenizer, test_X), test_y)
 
     def predict(self, x, vocab, n_grams, *args, **kwargs):
         if self.encode_type == 'one-hot':
@@ -177,15 +186,11 @@ class TextEncoder(DataLayer):
 
         return _x
 
-    # def spacy(self, x: Corpus) -> np.ndarray:
-    #     """
-    #     Using vi-spacy
-    #     :param x:
-    #     :return:
-    #     """
-    #     import spacy
-    #     nlp = spacy.load('vi_spacy_model')
-    #
-    #     for item, _ in tqdm(x, desc='Vi-Spacy Text Encoder'):
-    #         __x = None
-    #         print(item)
+    def transformer_tokenizer(self, tokenizer, x):
+        """
+        Transformer tokenizer
+        :param tokenizer
+        :param x:
+        :return:
+        """
+        return tokenizer(x, truncation=True, padding=True, max_length=self.max_length)

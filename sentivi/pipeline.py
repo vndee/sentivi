@@ -1,5 +1,6 @@
 from typing import Optional
 from sentivi.data import DataLoader, TextEncoder
+from sentivi.classifier.transformer import TransformerClassifier
 
 
 class Pipeline(object):
@@ -11,8 +12,20 @@ class Pipeline(object):
         """
         super(Pipeline, self).__init__()
         self.apply_layers = list()
+        language_model_shortcut = None
+
         for method in args:
             self.apply_layers.append(method)
+
+            if isinstance(method, TransformerClassifier):
+                language_model_shortcut = method.language_model_shortcut
+
+        if language_model_shortcut is not None:
+            for method in self.apply_layers:
+                if isinstance(method, TextEncoder):
+                    method.encode_type = 'transformer'
+                    method.language_model_shortcut = language_model_shortcut
+                    break
 
         self.__vocab = None
         self.__labels_set = None
