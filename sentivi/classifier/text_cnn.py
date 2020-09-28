@@ -155,9 +155,9 @@ class TextCNNClassifier(NeuralNetworkClassifier):
         self.clf = TextCNN(num_labels=self.num_labels, embedding_size=self.embedding_size, max_length=self.max_length)
         self.clf = self.clf.to(self.device)
 
-        self.learning_rate = kwargs.get('learning_rate', 0.01)
-        self.optimizer = kwargs.get('optimizer', torch.optim.SGD(self.clf.parameters(), lr=self.learning_rate))
-        self.batch_size = kwargs.get('batch_size', 2)
+        self.learning_rate = kwargs.get('learning_rate', self.learning_rate)
+        self.optimizer = kwargs.get('optimizer', torch.optim.Adam(self.clf.parameters(), lr=self.learning_rate))
+        self.batch_size = kwargs.get('batch_size', self.batch_size)
         self.criterion = kwargs.get('criterion', torch.nn.CrossEntropyLoss())
         self.num_epochs = kwargs.get('num_epochs', self.num_epochs)
 
@@ -171,7 +171,7 @@ class TextCNNClassifier(NeuralNetworkClassifier):
             _preds, _targets = None, None
             train_loss, train_acc, train_f1, test_loss, test_acc, test_f1 = 0.0, 0.0, 0.0, 0.0, 0.0, 0.0
 
-            for X, y in tqdm(self.train_loader, desc=f'Training {epoch + 1}/{self.num_epochs}'):
+            for X, y in self.train_loader:
                 X, y = X.type(torch.FloatTensor).to(self.device), y.type(torch.LongTensor).to(self.device)
                 preds = self.clf(X)
                 loss = self.criterion(preds, y)
@@ -198,7 +198,7 @@ class TextCNNClassifier(NeuralNetworkClassifier):
             self.clf.eval()
             _preds, _targets = None, None
             with torch.no_grad():
-                for X, y in tqdm(self.test_loader, desc=f'Testing {epoch + 1}/{self.num_epochs}'):
+                for X, y in self.test_loader:
                     X, y = X.type(torch.FloatTensor).to(self.device), y.type(torch.LongTensor).to(self.device)
                     preds = self.clf(X)
                     loss = self.criterion(preds, y)
@@ -219,10 +219,64 @@ class TextCNNClassifier(NeuralNetworkClassifier):
 
             test_acc, test_f1 = TextCNNClassifier.compute_metrics(_preds, _targets)
 
-            print(f'Train loss: {train_loss / train_X.shape[0]} | Train acc: {train_acc} | Train F1: '
-                  f'{train_f1} | Test loss: {test_loss / test_X.shape[0]} | Test acc: {test_acc} | Test F1: {test_f1}')
+            print(f'[EPOCH {epoch + 1}/{self.num_epochs}] Train loss: {train_loss / train_X.shape[0]} | '
+                  f'Train acc: {train_acc} | Train F1: {train_f1} | Test loss: {test_loss / test_X.shape[0]} | '
+                  f'Test acc: {test_acc} | Test F1: {test_f1}')
 
         print('Finishing...')
 
         return f'Train results:\n{self.get_overall_result(self.train_loader)}\n' \
                f'Test results:\n{self.get_overall_result(self.test_loader)}'
+
+    def predict(self, X, *args, **kwargs):
+        """
+        Predict polarity with given sentences
+        :param X:
+        :param args:
+        :param kwargs:
+        :return:
+        """
+        self.clf.eval()
+        if X.shape.__len__() == 3:
+            X = X.reshape((X.shape[-3], 1, X.shape[-2], X.shape[-1]))
+        else:
+            X = X.reshape((X.shape[0], 1, 1, X.shape[-1]))
+
+        _preds = None
+        self.predict_loader = DataLoader(X, batch_size=self.batch_size, shuffle=self.shuffle)
+
+        with torch.no_grad():
+            for items in tqdm(self.predict_loader, desc='Prediction'):
+                items = items.type(torch.FloatTensor).to(self.device)
+                preds = self.clf(items)
+
+                if self.device == 'cuda':
+                    preds = preds.detach().cpu().numpy()
+                else:
+                    preds = preds.detach().numpy()
+
+                predicted = np.argmax(preds, -1)
+                _preds = np.atleast_1d(predicted) if _preds is None else np.concatenate(
+                    [_preds, np.atleast_1d(predicted)])
+
+        return _preds
+
+    def save(self, save_path, *args, **kwargs):
+        """
+        Save model to disk
+        :param save_path:
+        :param args:
+        :param kwargs:
+        :return:
+        """
+        pass
+
+    def load(self, model_path, *args, **kwargs):
+        """
+        Load model from disk
+        :param model_path:
+        :param args:
+        :param kwargs:
+        :return:
+        """
+        pass

@@ -11,7 +11,7 @@ if __name__ == '__main__':
                         TextCNNClassifier(num_labels=3))
 
     train_results = pipeline(train='./data/dev.vi', test='./data/dev_test.vi',
-                             save_path='./weights/svm.sentivi')
+                             save_path='./weights/svm.sentivi', num_epochs=1000)
     print(train_results)
 
     predict_results = pipeline.predict(['hàng ok đầu tuýp có một số không vừa ốc siết. chỉ được một số đầu thôi .cần '
