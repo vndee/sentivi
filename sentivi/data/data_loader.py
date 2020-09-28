@@ -170,6 +170,7 @@ class DataLoader(DataLayer):
         corpus = Corpus(train_file=kwargs['train'], test_file=kwargs['test'], delimiter=self.__delimiter,
                         line_separator=self.__line_separator, n_grams=self.n_grams, text_processor=self.text_processor,
                         max_length=self.max_length)
+
         self.vocab = corpus.vocab
         self.labels_set = corpus.labels_set
         return corpus
