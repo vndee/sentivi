@@ -13,7 +13,9 @@ class Corpus(object):
                  delimiter: Optional[str] = None,
                  line_separator: Optional[str] = None,
                  n_grams: Optional[int] = None,
-                 text_processor: Optional[TextProcessor] = None):
+                 text_processor: Optional[TextProcessor] = None,
+                 max_length: Optional[int] = 256,
+                 truncation: Optional[str] = 'head'):
         """
         Text corpus for sentiment analysis
         :param train_file: Path to train text file
@@ -21,6 +23,8 @@ class Corpus(object):
         :param delimiter: Separator between text and labels
         :param line_separator: Separator between samples.
         :param n_grams: N-grams
+        :param text_processor:
+        :param max_length:
         """
         super(Corpus, self).__init__()
 
@@ -43,12 +47,25 @@ class Corpus(object):
 
         self.vocab = None
         self.labels_set = None
+        self.max_length = max_length
+        self.truncation = truncation
         self.__train_sentences = list()
         self.__train_sentiments = list()
         self.__test_sentences = list()
         self.__test_sentiments = list()
 
         self.build()
+
+    def text_transform(self, text):
+        __text = [_x for _x in self.__text_processor(text).split(' ') if _x != '']
+        if __text.__len__() > self.max_length:
+            if self.truncation == 'head':
+                __text = __text[:self.max_length]
+            elif self.truncation == 'tail':
+                __text = __text[__text.__len__() - self.max_length:]
+            else:
+                raise ValueError(f'truncation method must be in [head, tail] - not {self.truncation}')
+        return ' '.join(__text)
 
     def build(self):
         """
@@ -62,8 +79,7 @@ class Corpus(object):
         for line in train_file_reader:
             line = line.split('\n')
             label, text = line[0], ' '.join(line[1:])
-            text = ' '.join([_x for _x in self.__text_processor(text).split(' ') if _x != ''])
-
+            text = self.text_transform(text)
             self.__train_sentences.append(text)
             self.__train_sentiments.append(label)
 
@@ -79,7 +95,7 @@ class Corpus(object):
         for line in test_file_reader:
             line = line.split('\n')
             label, text = line[0], ' '.join(line[1:])
-            text = ' '.join([_x for _x in self.__text_processor(text).split(' ') if _x != ''])
+            text = self.text_transform(text)
 
             self.__test_sentences.append(text)
             self.__test_sentiments.append(label)
@@ -117,7 +133,8 @@ class DataLoader(DataLayer):
                  delimiter: Optional[str] = None,
                  line_separator: Optional[str] = None,
                  n_grams: Optional[int] = None,
-                 text_processor: Optional[TextProcessor] = None):
+                 text_processor: Optional[TextProcessor] = None,
+                 max_length: Optional[int] = 256):
         super(DataLoader, self).__init__()
 
         if delimiter is None:
@@ -132,8 +149,13 @@ class DataLoader(DataLayer):
             n_grams = 1
             logging.warning(f'Default n_grams will be 1')
 
+        if max_length is None:
+            max_length = 256
+            logging.warning(f'Default max_length will be 256')
+
         self.__delimiter = delimiter
         self.__line_separator = line_separator
+        self.max_length = max_length
         self.n_grams = n_grams
         self.text_processor = text_processor
         self.vocab = None
@@ -144,7 +166,8 @@ class DataLoader(DataLayer):
         assert 'test' in kwargs, ValueError('test parameter is required.')
 
         corpus = Corpus(train_file=kwargs['train'], test_file=kwargs['test'], delimiter=self.__delimiter,
-                        line_separator=self.__line_separator, n_grams=self.n_grams, text_processor=self.text_processor)
+                        line_separator=self.__line_separator, n_grams=self.n_grams, text_processor=self.text_processor,
+                        max_length=self.max_length)
         self.vocab = corpus.vocab
         self.labels_set = corpus.labels_set
         return corpus

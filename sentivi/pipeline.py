@@ -36,7 +36,9 @@ class Pipeline(object):
             x = method(x, *args, **kwargs, **self.keyword_arguments())
 
             if isinstance(method, DataLoader):
-                self.__n_grams, self.__vocab, self.__labels_set = method.n_grams, method.vocab, method.labels_set
+                self.__n_grams, self.__vocab, self.__labels_set, self.__max_length = method.n_grams, method.vocab, \
+                                                                                     method.labels_set, \
+                                                                                     method.max_length
 
         return x
 

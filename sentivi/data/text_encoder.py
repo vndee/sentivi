@@ -12,7 +12,6 @@ from sentivi.text_processor import TextProcessor
 class TextEncoder(DataLayer):
     def __init__(self,
                  encode_type: Optional[str] = None,
-                 max_length: Optional[int] = None,
                  model_path: Optional[str] = None):
         """
         Simple text encode layer
@@ -23,11 +22,8 @@ class TextEncoder(DataLayer):
         if encode_type is None:
             logging.warning(f'encode_type will be set to default value one-hot.')
 
-        if max_length is None:
-            logging.warning(f'max_length will be set to default value 256')
-
         self.encode_type = encode_type
-        self.max_length = 256
+        self.max_length = None
         self.model_path = model_path
         self.word_vectors = None
 
@@ -35,6 +31,8 @@ class TextEncoder(DataLayer):
             'Text encoder type must be one of [\'one-hot\', \'word2vec\', \'bow\', \'tf-idf\']')
 
     def __call__(self, x: Optional[Corpus], *args, **kwargs) -> (np.ndarray, np.ndarray):
+        self.max_length = kwargs.get('max_length', 256)
+
         train_set, test_set = x.get_train_set(), x.get_test_set()
         train_X, train_y = train_set
         test_X, test_y = test_set

@@ -126,21 +126,18 @@ class LSTMClassifier(NeuralNetworkClassifier):
                 'Feature embedding size of train set and test set must be equal.')
             self.embedding_size = train_X.shape[-1]
 
-        if 'max_length' in kwargs:
-            self.max_length = kwargs['max_length']
-        elif self.max_length is None:
-            assert train_X.shape.__len__() == test_X.shape.__len__(), ValueError(
-                'Number of dimension in train set and test set must be equal.')
-            assert train_X.shape.__len__() <= 3, ValueError(
-                'Expected array with number of dimension less or equal than 3.')
-            if train_X.shape.__len__() == 3:
-                self.max_length = train_X.shape[1]
-                self.train_X, self.test_X = train_X, test_X
-            else:
-                self.max_length = 1
-                self.train_X = train_X.reshape((train_X.shape[0], 1, train_X.shape[-1]))
-                self.test_X = test_X.reshape((test_X.shape[0], 1, test_X.shape[-1]))
-                print(f'Reshape input array into (n_samples, 1, feature_dim) for LSTM Network Classifier')
+        assert train_X.shape.__len__() == test_X.shape.__len__(), ValueError(
+            'Number of dimension in train set and test set must be equal.')
+        assert train_X.shape.__len__() <= 3, ValueError(
+            'Expected array with number of dimension less or equal than 3.')
+        if train_X.shape.__len__() == 3:
+            self.max_length = train_X.shape[1]
+            self.train_X, self.test_X = train_X, test_X
+        else:
+            self.max_length = 1
+            self.train_X = train_X.reshape((train_X.shape[0], 1, train_X.shape[-1]))
+            self.test_X = test_X.reshape((test_X.shape[0], 1, test_X.shape[-1]))
+            print(f'Reshape input array into (n_samples, 1, feature_dim) for LSTM Network Classifier')
 
         self.train_y, self.test_y = train_y, test_y
 

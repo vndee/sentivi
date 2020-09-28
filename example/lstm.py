@@ -6,13 +6,13 @@ from sentivi.text_processor import TextProcessor
 if __name__ == '__main__':
     text_processor = TextProcessor(methods=['word_segmentation', 'remove_punctuation', 'lower'])
 
-    pipeline = Pipeline(DataLoader(text_processor=text_processor, n_grams=2),
+    pipeline = Pipeline(DataLoader(text_processor=text_processor, n_grams=2, max_length=100),
                         TextEncoder(encode_type='word2vec', model_path='./pretrained/wiki.vi.model.bin.gz'),
-                        LSTMClassifier(num_labels=3, bidirectional=True, attention=True, device='cuda',
-                                       hidden_layers=2))
+                        LSTMClassifier(num_labels=3, bidirectional=False, attention=True, device='cuda',
+                                       hidden_layers=1))
 
     train_results = pipeline(train='./data/dev.vi', test='./data/dev_test.vi',
-                             save_path='./weights/lstm.sentivi', num_epochs=100, learning_rate=1e-3)
+                             save_path='./weights/lstm.sentivi', num_epochs=3, learning_rate=1e-3)
     print(train_results)
 
     predict_results = pipeline.predict(['hàng ok đầu tuýp có một số không vừa ốc siết. chỉ được một số đầu thôi .cần '
