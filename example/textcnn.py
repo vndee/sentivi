@@ -7,7 +7,7 @@ if __name__ == '__main__':
     text_processor = TextProcessor(methods=['word_segmentation', 'remove_punctuation', 'lower'])
 
     pipeline = Pipeline(DataLoader(text_processor=text_processor, n_grams=3),
-                        TextEncoder(encode_type='word2vec', model_path='./pretrained/wiki.vi.model.bin.gz'),
+                        TextEncoder(encode_type='one-hot'),
                         TextCNNClassifier(num_labels=3))
 
     train_results = pipeline(train='./data/dev.vi', test='./data/dev_test.vi',
