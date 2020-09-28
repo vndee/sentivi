@@ -1,12 +1,7 @@
 import torch
-import numpy as np
 import torch.nn as nn
-from tqdm import tqdm
-from torch.utils.data import DataLoader
-from typing import Optional
-from sklearn.metrics import classification_report
 
-from sentivi.classifier.nn_clf import NeuralNetworkDataset
+from typing import Optional
 from sentivi.classifier.nn_clf import NeuralNetworkClassifier
 
 
@@ -126,11 +121,12 @@ class TextCNNClassifier(NeuralNetworkClassifier):
                 self.max_length = train_X.shape[1]
                 self.train_X = train_X.reshape((train_X.shape[-3], 1, train_X.shape[-2], train_X.shape[-1]))
                 self.test_X = test_X.reshape((test_X.shape[-3], 1, test_X.shape[-2], test_X.shape[-1]))
+                print(f'Reshape input array into (n_samples, 1, 1, feature_dim) for TextCNN Network Classifier')
             else:
                 self.max_length = 1
                 self.train_X = train_X.reshape((train_X.shape[0], 1, train_X.shape[-1]))
                 self.test_X = test_X.reshape((test_X.shape[0], 1, test_X.shape[-1]))
-            print(f'Reshape input array into (n_samples, 1, 1, feature_dim) for TextCNN Network Classifier')
+                print(f'Reshape input array into (n_samples, 1, feature_dim) for TextCNN Network Classifier')
 
         self.train_y, self.test_y = train_y, test_y
 

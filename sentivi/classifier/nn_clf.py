@@ -20,7 +20,9 @@ class NeuralNetworkClassifier(ClassifierLayer):
                  batch_size: Optional[int] = 2,
                  shuffle: Optional[bool] = True,
                  random_state: Optional[int] = 101,
-                 *args, **kwargs):
+                 hidden_size: Optional[int] = 512,
+                 *args,
+                 **kwargs):
         super(NeuralNetworkClassifier, self).__init__()
 
         self.num_labels = num_labels
@@ -38,6 +40,7 @@ class NeuralNetworkClassifier(ClassifierLayer):
         self.batch_size = batch_size
         self.shuffle = shuffle
         self.random_state = random_state
+        self.hidden_size = hidden_size
         self.train_X = None
         self.train_y = None
         self.test_X = None
@@ -209,7 +212,7 @@ class NeuralNetworkDataset(Dataset):
     def __init__(self, X, y, *args, **kwargs):
         super(NeuralNetworkDataset, self).__init__()
 
-        assert X.shape[0] == y.shape[0], ValueError('Number of samples must be equal.')
+        assert X.shape[0] == y.shape[0], ValueError(f'Number of samples must be equal {X.shape[0]} != {y.shape[0]}.')
         self.X, self.y = X, y
 
     def __getitem__(self, item):

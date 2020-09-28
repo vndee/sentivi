@@ -7,6 +7,7 @@ from .sgd import SGDClassifier
 from .nearest_centroid import NearestCentroidClassifier
 from .gaussian_process import GaussianProcessClassifier
 from .text_cnn import TextCNNClassifier
+from .lstm import LSTMClassifier
 
 
 class RNNClassifier(ClassifierLayer):
