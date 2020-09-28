@@ -11,12 +11,13 @@ from sentivi.classifier.nn_clf import NeuralNetworkClassifier
 
 
 class TextCNN(nn.Module):
-    """
-        @author: Cheneng
-        @time  : 2018-19-04
-    """
-
     def __init__(self, num_labels: int, embedding_size: int, max_length: int):
+        """
+        Initialize TextCNN classifier
+        :param num_labels:
+        :param embedding_size:
+        :param max_length:
+        """
         super(TextCNN, self).__init__()
 
         self.num_labels = num_labels
@@ -43,6 +44,11 @@ class TextCNN(nn.Module):
         self.linear = nn.Linear(3, self.num_labels)
 
     def forward(self, x):
+        """
+        Forward method for torch.nn.Module
+        :param x:
+        :return:
+        """
         batch = x.shape[0]
 
         x_1 = torch.nn.functional.relu(self.conv_1(x))
@@ -99,6 +105,9 @@ class TextCNNClassifier(NeuralNetworkClassifier):
         self.batch_size = batch_size
         self.shuffle = shuffle
         self.random_state = random_state
+        self.predict_loader = None
+        self.train_loader = None
+        self.test_loader = None
 
     @staticmethod
     def compute_metrics(preds, targets, eval=False):
@@ -132,6 +141,13 @@ class TextCNNClassifier(NeuralNetworkClassifier):
         return TextCNNClassifier.compute_metrics(_preds, _targets, eval=True)
 
     def __call__(self, data, *args, **kwargs):
+        """
+        Training method
+        :param data:
+        :param args:
+        :param kwargs:
+        :return:
+        """
         (train_X, train_y), (test_X, test_y) = data
 
         if 'embedding_size' in kwargs:
