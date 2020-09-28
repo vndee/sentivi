@@ -28,13 +28,13 @@ class ScikitLearnClassifier(ClassifierLayer):
         print(f'Training classifier...')
         self.clf.fit(train_X, train_y)
         predicts = self.clf.predict(train_X)
-        train_report = classification_report(train_y, predicts)
+        train_report = classification_report(train_y, predicts, zero_division=1)
         results = f'Training results:\n{train_report}\n'
 
         # testing
         print(f'Testing classifier...')
         predicts = self.clf.predict(test_X)
-        test_report = classification_report(test_y, predicts)
+        test_report = classification_report(test_y, predicts, zero_division=1)
         results += f'Test results:\n{test_report}\n'
 
         if 'save_path' in kwargs:

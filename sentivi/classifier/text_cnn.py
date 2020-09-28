@@ -1,8 +1,10 @@
 import torch
+import numpy as np
 import torch.nn as nn
 from tqdm import tqdm
 from torch.utils.data import DataLoader
 from typing import Optional
+from sklearn.metrics import classification_report
 
 from sentivi.classifier.nn_clf import NeuralNetworkDataset
 from sentivi.classifier.nn_clf import NeuralNetworkClassifier
@@ -89,6 +91,37 @@ class TextCNNClassifier(NeuralNetworkClassifier):
         self.shuffle = shuffle
         self.random_state = random_state
 
+    @staticmethod
+    def compute_metrics(preds, targets, eval=False):
+        if eval is True:
+            return classification_report(preds, targets, zero_division=1)
+
+        report = classification_report(preds, targets, output_dict=True, zero_division=1)
+        return report['accuracy'], report['macro avg']['f1-score']
+
+    def get_overall_result(self, loader):
+        self.clf.eval()
+        _preds, _targets = None, None
+
+        with torch.no_grad():
+            for X, y in loader:
+                X, y = X.type(torch.FloatTensor).to(self.device), y.type(torch.LongTensor).to(self.device)
+                preds = self.clf(X)
+
+                if self.device == 'cuda':
+                    preds = preds.detach().cpu().numpy()
+                    y = y.detach().cpu().numpy()
+                else:
+                    preds = preds.detach().numpy()
+                    y = y.detach().numpy()
+
+                predicted = np.argmax(preds, -1)
+                _preds = np.atleast_1d(predicted) if _preds is None else np.concatenate(
+                    [_preds, np.atleast_1d(predicted)])
+                _targets = np.atleast_1d(y) if _targets is None else np.concatenate([_targets, np.atleast_1d(y)])
+
+        return TextCNNClassifier.compute_metrics(_preds, _targets, eval=True)
+
     def __call__(self, data, *args, **kwargs):
         (train_X, train_y), (test_X, test_y) = data
 
@@ -135,25 +168,61 @@ class TextCNNClassifier(NeuralNetworkClassifier):
 
         for epoch in range(self.num_epochs):
             self.clf.train()
-            train_loss, train_acc, test_loss, test_acc = 0.0, 0.0, 0.0, 0.0
+            _preds, _targets = None, None
+            train_loss, train_acc, train_f1, test_loss, test_acc, test_f1 = 0.0, 0.0, 0.0, 0.0, 0.0, 0.0
 
             for X, y in tqdm(self.train_loader, desc=f'Training {epoch + 1}/{self.num_epochs}'):
                 X, y = X.type(torch.FloatTensor).to(self.device), y.type(torch.LongTensor).to(self.device)
                 preds = self.clf(X)
                 loss = self.criterion(preds, y)
 
+                if self.device == 'cuda':
+                    preds = preds.detach().cpu().numpy()
+                    y = y.detach().cpu().numpy()
+                else:
+                    preds = preds.detach().numpy()
+                    y = y.detach().numpy()
+
+                predicted = np.argmax(preds, -1)
+                _preds = np.atleast_1d(predicted) if _preds is None else np.concatenate(
+                    [_preds, np.atleast_1d(predicted)])
+                _targets = np.atleast_1d(y) if _targets is None else np.concatenate([_targets, np.atleast_1d(y)])
+
                 loss.backward()
                 self.optimizer.step()
 
                 train_loss = train_loss + loss.item()
 
+            train_acc, train_f1 = TextCNNClassifier.compute_metrics(_preds, _targets)
+
             self.clf.eval()
+            _preds, _targets = None, None
             with torch.no_grad():
                 for X, y in tqdm(self.test_loader, desc=f'Testing {epoch + 1}/{self.num_epochs}'):
                     X, y = X.type(torch.FloatTensor).to(self.device), y.type(torch.LongTensor).to(self.device)
                     preds = self.clf(X)
                     loss = self.criterion(preds, y)
+
+                    if self.device == 'cuda':
+                        preds = preds.detach().cpu().numpy()
+                        y = y.detach().cpu().numpy()
+                    else:
+                        preds = preds.detach().numpy()
+                        y = y.detach().numpy()
+
+                    predicted = np.argmax(preds, -1)
+                    _preds = np.atleast_1d(predicted) if _preds is None else np.concatenate(
+                        [_preds, np.atleast_1d(predicted)])
+                    _targets = np.atleast_1d(y) if _targets is None else np.concatenate([_targets, np.atleast_1d(y)])
+
                     test_loss = test_loss + loss.item()
 
-            print(f'Train loss: {train_loss / train_X.shape[0]} | Train acc: {train_acc} | Test loss: '
-                  f'{test_loss / test_X.shape[0]} | Test acc: {test_acc}')
+            test_acc, test_f1 = TextCNNClassifier.compute_metrics(_preds, _targets)
+
+            print(f'Train loss: {train_loss / train_X.shape[0]} | Train acc: {train_acc} | Train F1: '
+                  f'{train_f1} | Test loss: {test_loss / test_X.shape[0]} | Test acc: {test_acc} | Test F1: {test_f1}')
+
+        print('Finishing...')
+
+        return f'Train results:\n{self.get_overall_result(self.train_loader)}\n' \
+               f'Test results:\n{self.get_overall_result(self.test_loader)}'

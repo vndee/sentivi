@@ -9,11 +9,6 @@ from .gaussian_process import GaussianProcessClassifier
 from .text_cnn import TextCNNClassifier
 
 
-class CNNClassifier(ClassifierLayer):
-    def __init__(self):
-        super(CNNClassifier, self).__init__()
-
-
 class RNNClassifier(ClassifierLayer):
     def __init__(self):
         super(RNNClassifier, self).__init__()
