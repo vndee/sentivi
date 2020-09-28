@@ -1,6 +1,5 @@
 from typing import Optional
 from sentivi.base_model import ClassifierLayer
-from transformers import Trainer, TrainingArguments
 from transformers import AdamW, get_linear_schedule_with_warmup
 from transformers import AutoConfig, AutoTokenizer, AutoModelForSequenceClassification
 
@@ -64,3 +63,16 @@ class TransformerClassifier(ClassifierLayer):
         self.scheduler = get_linear_schedule_with_warmup(self.optimizer, num_warmup_steps=100, num_training_steps=1000)
 
         print(self.clf)
+
+        # training
+
+        # evaluate
+
+    def predict(self, X, *args, **kwargs):
+        pass
+
+    def save(self, save_path, *args, **kwargs):
+        pass
+
+    def load(self, model_path):
+        pass
