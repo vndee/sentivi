@@ -6,7 +6,7 @@ from sentivi.text_processor import TextProcessor
 if __name__ == '__main__':
     text_processor = TextProcessor(methods=['word_segmentation', 'remove_punctuation', 'lower'])
 
-    pipeline = Pipeline(DataLoader(text_processor=text_processor, n_grams=2, max_length=100),
+    pipeline = Pipeline(DataLoader(text_processor=text_processor, n_grams=3, max_length=100),
                         TextEncoder(encode_type='transformer'),
                         TransformerClassifier(num_labels=3, language_model_shortcut='vinai/phobert-base',
                                               device='cuda'))

@@ -42,17 +42,18 @@ class Corpus(object):
         self.__test_file = test_file
         self.__delimiter = delimiter
         self.__line_separator = line_separator
-        self.n_grams = n_grams
         self.__text_processor = text_processor
 
-        self.vocab = None
-        self.labels_set = None
-        self.max_length = max_length
-        self.truncation = truncation
         self.__train_sentences = list()
         self.__train_sentiments = list()
         self.__test_sentences = list()
         self.__test_sentiments = list()
+
+        self.vocab = None
+        self.labels_set = None
+        self.n_grams = n_grams
+        self.max_length = max_length
+        self.truncation = truncation
 
         self.build()
 
@@ -155,6 +156,7 @@ class DataLoader(DataLayer):
 
         self.__delimiter = delimiter
         self.__line_separator = line_separator
+
         self.max_length = max_length
         self.n_grams = n_grams
         self.text_processor = text_processor
