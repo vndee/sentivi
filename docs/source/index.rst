@@ -1,5 +1,3 @@
-Sentivi
-=======================================================================================================================
 A simple tool for Sentiment Analysis
 
 Sentivi - a simple tool for sentiment analysis which is a wrapper of `scikit-learn <https://scikit-learn.org/>`_ and
@@ -7,11 +5,9 @@ Sentivi - a simple tool for sentiment analysis which is a wrapper of `scikit-lea
 classification algorithms.
 
 .. toctree::
-     :maxdepth: 2
+     :maxdepth: 5
      :caption: Contents:
 
-.. automodule:: sentivi.pipeline
-    :members:
-
-.. autoclass:: sentivi.pipeline.Pipeline
-    :members:
+    pipeline
+    sklearn_classifier
+    neural_network_classifier

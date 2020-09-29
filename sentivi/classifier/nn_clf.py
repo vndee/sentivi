@@ -10,6 +10,9 @@ from sklearn.metrics import classification_report
 
 
 class NeuralNetworkClassifier(ClassifierLayer):
+    """
+    Neural Network classifier
+    """
     def __init__(self,
                  num_labels: int = 3,
                  embedding_size: Optional[int] = None,
@@ -24,6 +27,22 @@ class NeuralNetworkClassifier(ClassifierLayer):
                  num_workers: Optional[int] = 2,
                  *args,
                  **kwargs):
+        """
+        Neural network classifier
+        :param num_labels:
+        :param embedding_size:
+        :param max_length:
+        :param device:
+        :param num_epochs:
+        :param learning_rate:
+        :param batch_size:
+        :param shuffle:
+        :param random_state:
+        :param hidden_size:
+        :param num_workers:
+        :param args:
+        :param kwargs:
+        """
         super(NeuralNetworkClassifier, self).__init__()
 
         self.num_labels = num_labels

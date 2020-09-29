@@ -3,7 +3,16 @@ from sklearn.metrics import classification_report
 
 
 class ScikitLearnClassifier(ClassifierLayer):
+    """
+    Scikit-Learn Classifier-based
+    """
     def __init__(self, num_labels: int = 3, *args, **kwargs):
+        """
+        Initialize instance
+        :param num_labels:
+        :param args:
+        :param kwargs:
+        """
         super(ScikitLearnClassifier, self).__init__()
 
         self.num_labels = num_labels
