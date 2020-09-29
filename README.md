@@ -4,6 +4,8 @@
 [PyTorch](https://pytorch.org/) models. It is made for easy and faster pipeline to train and evaluate several
 classification algorithms.
 
+Documentation: https://sentivi.readthedocs.io/en/latest/index.html
+
 ### Install
 - Install legacy version from PyPI:
     ```bash
