@@ -49,5 +49,9 @@ Example:
     :caption: Contents:
 
     pipeline
+    text_processor
+    data_loader
+    text_encoder
     sklearn_classifier
     neural_network_classifier
+    transformer_classifier
