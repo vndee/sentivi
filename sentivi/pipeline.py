@@ -1,3 +1,9 @@
+"""
+Pipeline module
+=========================================
+A unified pipeline for classification model
+"""
+
 import logging
 
 from typing import Optional
