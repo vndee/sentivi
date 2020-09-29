@@ -1,17 +1,8 @@
 Sentivi
 *********
-A simple tool for Sentiment Analysis
-Sentivi - a simple tool for sentiment analysis which is a wrapper of `scikit-learn <https://scikit-learn.org/>`_ and
+A simple tool for sentiment analysis which is a wrapper of `scikit-learn <https://scikit-learn.org/>`_ and
 `PyTorch <https://pytorch.org/>`_ models. It is made for easy and faster pipeline to train and evaluate several
 classification algorithms.
-
-.. toctree::
-    :maxdepth: 2
-    :caption: Contents:
-
-    pipeline
-    sklearn_classifier
-    neural_network_classifier
 
 Example:
 --------------
@@ -41,3 +32,10 @@ Example:
     print(predict_results)
     print(f'Decoded results: {pipeline.decode_polarity(predict_results)}')
 
+.. toctree::
+    :maxdepth: 2
+    :caption: Contents:
+
+    pipeline
+    sklearn_classifier
+    neural_network_classifier
