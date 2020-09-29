@@ -130,12 +130,24 @@ class Corpus(object):
 
 
 class DataLoader(DataLayer):
+    """
+    DataLoader is an inheritance class of DataLayer
+    """
     def __init__(self,
                  delimiter: Optional[str] = None,
                  line_separator: Optional[str] = None,
                  n_grams: Optional[int] = None,
                  text_processor: Optional[TextProcessor] = None,
                  max_length: Optional[int] = 256):
+        """
+        Initialize DataLoader instance
+
+        :param delimiter:
+        :param line_separator:
+        :param n_grams:
+        :param text_processor:
+        :param max_length:
+        """
         super(DataLoader, self).__init__()
 
         if delimiter is None:

@@ -29,7 +29,7 @@ You can also add more regex pattern:
 
     text_processor.add_pattern(r'[0-9]', '')
 
-Or you can add your own method, use define method should be a lambda function.
+Or you can add your own method, use-defined method should be a lambda function.
 
 .. code-block:: python
 
