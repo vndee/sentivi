@@ -1,4 +1,4 @@
-## A Simple Tool For Vietnamese Sentiment Analysis
+## A Simple Tool For Sentiment Analysis
 
 **Sentivi** - a simple tool for sentiment analysis which is a wrapper of [scikit-learn](https://scikit-learn.org) and
 [PyTorch](https://pytorch.org/) models. It is made for easy and faster pipeline to train and evaluate several
