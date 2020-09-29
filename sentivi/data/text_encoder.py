@@ -15,7 +15,9 @@ class TextEncoder(DataLayer):
                  model_path: Optional[str] = None):
         """
         Simple text encode layer
-        :param encode_type: ['one-hot', 'word2vec', 'bow', 'tf-idf', 'transformer']
+
+        :param encode_type: one type in ['one-hot', 'word2vec', 'bow', 'tf-idf', 'transformer']
+        :param model_path: model is required for word2vec option
         """
         super(TextEncoder, self).__init__()
 
@@ -31,7 +33,16 @@ class TextEncoder(DataLayer):
         assert self.encode_type in ['one-hot', 'word2vec', 'bow', 'tf-idf', 'transformer'], ValueError(
             'Text encoder type must be one of [\'one-hot\', \'word2vec\', \'bow\', \'tf-idf\', \'transformer\']')
 
-    def forward(self, x: Optional[Corpus], *args, **kwargs) -> (np.ndarray, np.ndarray):
+    def forward(self, x: Optional[Corpus], *args, **kwargs):
+        """
+        Execute text encoder pipeline
+
+        :param x: sentivi.data.data_loader.Corpus instance
+        :param args: arbitrary arguments
+        :param kwargs: arbitrary keyword arguments
+        :return: Training and Test batch encoding
+        :rtype: Tuple, Tuple
+        """
         self.max_length = kwargs.get('max_length', 256)
 
         train_set, test_set = x.get_train_set(), x.get_test_set()
@@ -62,6 +73,17 @@ class TextEncoder(DataLayer):
                    (self.transformer_tokenizer(tokenizer, test_X), test_y)
 
     def predict(self, x, vocab, n_grams, *args, **kwargs):
+        """
+        Encode text for prediction purpose
+
+        :param x: list of text
+        :param vocab: corpus vocabulary
+        :param n_grams: n-grams parameters
+        :param args: arbitrary arguments
+        :param kwargs: arbitrary keyword arguments
+        :return: encoded text
+        :rtype: transformers.BatchEncoding
+        """
         if self.encode_type == 'one-hot':
             return self.one_hot(x, vocab, n_grams)
         elif self.encode_type == 'bow':
@@ -83,10 +105,12 @@ class TextEncoder(DataLayer):
     def one_hot(self, x, vocab, n_grams) -> np.ndarray:
         """
         Convert corpus into batch of one-hot vectors.
-        :param x:
-        :param vocab:
-        :param n_grams
-        :return:
+
+        :param x: list of texts
+        :param vocab: corpus vocabulary
+        :param n_grams: n-grams parameters
+        :return: one-hot vectors
+        :rtype: numpy.ndarray
         """
         _x = np.zeros((x.__len__(), self.max_length, vocab.__len__()))
         for i, item in enumerate(tqdm(x, desc='One Hot Text Encoder')):
@@ -101,11 +125,13 @@ class TextEncoder(DataLayer):
 
     def bow(self, x, vocab, n_grams) -> np.ndarray:
         """
-        Bag-of-Word encoder
-        :param x
-        :param vocab
-        :param n_grams
-        :return:
+        Bag-of-Words encoder
+
+        :param x: list of texts
+        :param vocab: corpus vocabulary
+        :param n_grams: n-grams parameters
+        :return: Bag-of-Words vectors
+        :rtype: numpy.ndarray
         """
         _x = np.zeros((x.__len__(), vocab.__len__()))
         for i, item in enumerate(tqdm(x, desc='Bag Of Words Text Encoder')):
@@ -118,11 +144,13 @@ class TextEncoder(DataLayer):
 
     def tf_idf(self, x, vocab, n_grams) -> np.ndarray:
         """
-        Simple TF-IDF feature
-        :param x:
-        :param vocab:
-        :param n_grams
-        :return:
+        Simple TF-IDF vectors
+
+        :param x: list of texts
+        :param vocab: corpus vocabulary
+        :param n_grams: n-grams parameters
+        :return: encoded vectors
+        :rtype: numpy.ndarray
         """
         items = [TextProcessor.n_gram_split(item, n_grams) for item in x]
         appearances_in_doc = {k: 0 for k in vocab}
@@ -153,10 +181,12 @@ class TextEncoder(DataLayer):
 
     def word2vec(self, x, n_grams) -> np.ndarray:
         """
-        Convert corpus instance into glove
-        :param x:
-        :param n_grams
-        :return:
+        word2vec embedding
+
+        :param x: list of texts
+        :param n_grams: n-grams parameters
+        :return: encoded vectors
+        :rtype: numpy.ndarray
         """
         if self.word_vectors is None:
             assert os.path.exists(self.model_path), FileNotFoundError(
@@ -197,10 +227,12 @@ class TextEncoder(DataLayer):
 
     def transformer_tokenizer(self, tokenizer, x):
         """
-        Transformer tokenizer
-        :param tokenizer
-        :param x:
-        :return:
+        Transformer tokenizer and encoder
+
+        :param tokenizer: transformer.AutoTokenizer
+        :param x: list of texts
+        :return: encoded vectors
+        :rtype: BatchEncoding
         """
         return tokenizer(x, truncation=True, padding=True, max_length=self.max_length)
 

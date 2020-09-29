@@ -7,6 +7,9 @@ from sentivi.text_processor import TextProcessor
 
 
 class Corpus(object):
+    """
+    Text corpus for sentiment analysis
+    """
     def __init__(self,
                  train_file: Optional[str] = None,
                  test_file: Optional[str] = None,
@@ -17,14 +20,15 @@ class Corpus(object):
                  max_length: Optional[int] = 256,
                  truncation: Optional[str] = 'head'):
         """
-        Text corpus for sentiment analysis
+        Initialize Corpus instance
+
         :param train_file: Path to train text file
         :param test_file: Path to test text file
         :param delimiter: Separator between text and labels
         :param line_separator: Separator between samples.
         :param n_grams: N-grams
-        :param text_processor:
-        :param max_length:
+        :param text_processor: sentivi.text_processor.TextProcessor instance
+        :param max_length: maximum length of input text
         """
         super(Corpus, self).__init__()
 
@@ -58,6 +62,13 @@ class Corpus(object):
         self.build()
 
     def text_transform(self, text):
+        """
+        Preprocessing raw text
+
+        :param text: raw text
+        :return: text
+        :rtype: str
+        """
         __text = [_x for _x in self.__text_processor(text).split(' ') if _x != '']
         if __text.__len__() > self.max_length:
             if self.truncation == 'head':
@@ -70,8 +81,10 @@ class Corpus(object):
 
     def build(self):
         """
-        Build sentivi.Corpus instance
-        :return:
+        Build sentivi.data.data_loader.Corpus instance
+
+        :return: sentivi.data.data_loader.Corpus instance
+        :rtype: sentivi.data.data_lodaer.Corpus
         """
         warehouse = set()
         label_set = set()
@@ -123,48 +136,42 @@ class Corpus(object):
         return self.vocab
 
     def get_train_set(self):
+        """
+        Get training samples
+
+        :return: Input and output of training samples
+        :rtype: Tuple[List, List]
+        """
         return self.__train_sentences, self.__train_sentiments
 
     def get_test_set(self):
+        """
+        Get test samples
+
+        :return: Input and output of test samples
+        :rtype: Tuple[List, List]
+        """
         return self.__test_sentences, self.__test_sentiments
 
 
 class DataLoader(DataLayer):
     """
-    DataLoader is an inheritance class of DataLayer
+    DataLoader is an inheritance class of DataLayer.
     """
     def __init__(self,
-                 delimiter: Optional[str] = None,
-                 line_separator: Optional[str] = None,
-                 n_grams: Optional[int] = None,
+                 delimiter: Optional[str] = '\n',
+                 line_separator: Optional[str] = '\n\n',
+                 n_grams: Optional[int] = 1,
                  text_processor: Optional[TextProcessor] = None,
                  max_length: Optional[int] = 256):
         """
-        Initialize DataLoader instance
-
-        :param delimiter:
-        :param line_separator:
-        :param n_grams:
-        :param text_processor:
-        :param max_length:
+        :param delimiter: separator between polarity and text
+        :param line_separator: separator between samples
+        :param n_grams: n-gram(s) use to split, for TextEncoder such as word2vec or transformer, n-gram should be 1
+        :param text_processor: sentivi.text_processor.TextProcessor instance
+        :param max_length: maximum length of input text
         """
         super(DataLoader, self).__init__()
-
-        if delimiter is None:
-            delimiter = '\n'
-            logging.warning(f'Default delimiter will be \'\\n\'')
-
-        if line_separator is None:
-            line_separator = '\n\n'
-            logging.warning(f'Default line_separator will be \'\\n\\n\'')
-
-        if n_grams is None:
-            n_grams = 1
-            logging.warning(f'Default n_grams will be 1')
-
-        if max_length is None:
-            max_length = 256
-            logging.warning(f'Default max_length will be 256')
 
         self.__delimiter = delimiter
         self.__line_separator = line_separator
@@ -176,6 +183,14 @@ class DataLoader(DataLayer):
         self.labels_set = None
 
     def forward(self, *args, **kwargs):
+        """
+        Execute loading data pipeline
+
+        :param args: arbitrary arguments
+        :param kwargs: arbitrary keyword arguments
+        :return: loaded data
+        :rtype: sentivi.data.data_loader.Corpus
+        """
         assert 'train' in kwargs, ValueError('train parameter is required.')
         assert 'test' in kwargs, ValueError('test parameter is required.')
 

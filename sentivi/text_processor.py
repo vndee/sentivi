@@ -9,9 +9,13 @@ class TextProcessor(object):
     """
         A simple text processor base on regex
     """
+
     def __init__(self, methods: Optional[list] = None):
         """
-        A simple text processor base on regex
+        Initialize TextProcessor instance
+
+        :param methods: list of text preprocessor methods need to be applied, for example: ['remove_punctuation',
+                        'word_segmentation']
         """
         super(TextProcessor, self).__init__()
         self.__apply_function = list()

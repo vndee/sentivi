@@ -5,12 +5,14 @@ A simple tool for sentiment analysis which is a wrapper of `scikit-learn <https:
 classification algorithms.
 
 - Install legacy version from PyPI:
-::
+
+.. code-block::
 
     pip install sentivi
 
 - Install latest version from source:
-::
+
+.. code-block::
 
     git clone https://github.com/vndee/sentivi
     cd sentivi

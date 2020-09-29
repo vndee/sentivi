@@ -11,10 +11,10 @@ class Pipeline(object):
     """
     def __init__(self, *args, **kwargs):
         """
-        Init pipeline
+        Initialize Pipeline instance
 
-        :param args:
-        :param kwargs:
+        :param args: arbitrary arguments
+        :param kwargs: arbitrary keyword arguments
         """
         super(Pipeline, self).__init__()
         self.apply_layers = list()
