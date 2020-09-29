@@ -46,6 +46,45 @@ Example:
     print(predict_results)
     print(f'Decoded results: {pipeline.decode_polarity(predict_results)}')
 
+Console output:
+
+.. code-block::
+
+    Word2Vec Text Encoder: 100%|██████████| 6/6 [00:00<00:00, 761.65it/s]
+    Word2Vec Text Encoder: 100%|██████████| 2/2 [00:00<00:00, 1349.52it/s]
+    Input features view be flatten into np.ndarray(6, 102400) for scikit-learn classifier.
+    Training classifier...
+    Testing classifier...
+    Saved classifier model to ./weights/svm.sentivi
+    Training results:
+                  precision    recall  f1-score   support
+
+               0       1.00      0.00      0.00         1
+               1       1.00      1.00      1.00         2
+               2       0.75      1.00      0.86         3
+
+        accuracy                           0.83         6
+       macro avg       0.92      0.67      0.62         6
+    weighted avg       0.88      0.83      0.76         6
+
+    Test results:
+                  precision    recall  f1-score   support
+
+               1       1.00      1.00      1.00         1
+               2       1.00      1.00      1.00         1
+
+        accuracy                           1.00         2
+       macro avg       1.00      1.00      1.00         2
+    weighted avg       1.00      1.00      1.00         2
+
+
+    Input features view be flatten into np.ndarray(2, 102400) for scikit-learn classifier.
+    Word2Vec Text Encoder: 100%|██████████| 2/2 [00:00<00:00, 2229.23it/s]
+    [1 2]
+    Decoded results: ['#NEG', '#POS']
+
+    Process finished with exit code 0
+
 .. toctree::
     :maxdepth: 2
     :caption: Contents:
