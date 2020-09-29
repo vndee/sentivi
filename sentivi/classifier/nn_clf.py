@@ -11,7 +11,7 @@ from sklearn.metrics import classification_report
 
 class NeuralNetworkClassifier(ClassifierLayer):
     """
-    Neural Network classifier
+    Neural Network Classifier
     """
     def __init__(self,
                  num_labels: int = 3,
