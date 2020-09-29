@@ -4,13 +4,20 @@
 [PyTorch](https://pytorch.org/) models. It is made for easy and faster pipeline to train and evaluate several
 classification algorithms.
 
-#### Install
-
+### Install
+Install legacy version from PyPI:
 ```bash
-    pip install sentivi
+pip install sentivi
 ```
 
-#### Example
+Install latest version from source:
+```bash
+git clone https://github.com/vndee/sentivi
+cd sentivi
+pip install .
+```
+
+### Example
 
 ```python
 from sentivi import Pipeline
