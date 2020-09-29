@@ -8,7 +8,7 @@ if __name__ == '__main__':
 
     pipeline = Pipeline(DataLoader(text_processor=text_processor, n_grams=3, max_length=100),
                         TextEncoder(encode_type='transformer'),
-                        TransformerClassifier(num_labels=3, language_model_shortcut='vinai/phobert-base',
+                        TransformerClassifier(num_labels=3, language_model_shortcut='vinai/phobert-large',
                                               device='cuda'))
 
     train_results = pipeline(train='./data/dev.vi', test='./data/dev_test.vi',
