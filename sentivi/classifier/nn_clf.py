@@ -21,6 +21,7 @@ class NeuralNetworkClassifier(ClassifierLayer):
                  shuffle: Optional[bool] = True,
                  random_state: Optional[int] = 101,
                  hidden_size: Optional[int] = 512,
+                 num_workers: Optional[int] = 2,
                  *args,
                  **kwargs):
         super(NeuralNetworkClassifier, self).__init__()
@@ -41,6 +42,7 @@ class NeuralNetworkClassifier(ClassifierLayer):
         self.shuffle = shuffle
         self.random_state = random_state
         self.hidden_size = hidden_size
+        self.num_workers = num_workers
         self.train_X = None
         self.train_y = None
         self.test_X = None
@@ -94,11 +96,12 @@ class NeuralNetworkClassifier(ClassifierLayer):
         self.batch_size = kwargs.get('batch_size', self.batch_size)
         self.criterion = kwargs.get('criterion', torch.nn.CrossEntropyLoss())
         self.num_epochs = kwargs.get('num_epochs', self.num_epochs)
+        self.num_workers = kwargs.get('num_workers', self.num_workers)
 
         self.train_loader = DataLoader(NeuralNetworkDataset(self.train_X, self.train_y), batch_size=self.batch_size,
-                                       shuffle=self.shuffle)
+                                       shuffle=self.shuffle, num_workers=self.num_workers)
         self.test_loader = DataLoader(NeuralNetworkDataset(self.test_X, self.test_y), batch_size=self.batch_size,
-                                      shuffle=self.shuffle)
+                                      shuffle=self.shuffle, num_workers=self.num_workers)
 
         for epoch in range(self.num_epochs):
             self.clf.train()
@@ -106,6 +109,7 @@ class NeuralNetworkClassifier(ClassifierLayer):
             train_loss, train_acc, train_f1, test_loss, test_acc, test_f1 = 0.0, 0.0, 0.0, 0.0, 0.0, 0.0
 
             for X, y in self.train_loader:
+                self.optimizer.zero_grad()
                 X, y = X.type(torch.FloatTensor).to(self.device), y.type(torch.LongTensor).to(self.device)
                 preds = self.clf(X)
                 loss = self.criterion(preds, y)

@@ -70,6 +70,15 @@ class TextEncoder(DataLayer):
             return self.tf_idf(x, vocab, n_grams)
         elif self.encode_type == 'word2vec':
             return self.word2vec(x, n_grams)
+        elif self.encode_type == 'transformer':
+            from sentivi.classifier.transformer import TransformerClassifier
+            assert self.language_model_shortcut in TransformerClassifier.TRANSFORMER_ALIASES, ValueError(
+                f'language_model_shortcut must be in {TransformerClassifier.TRANSFORMER_ALIASES} - '
+                f'not {self.language_model_shortcut}')
+
+            from transformers import AutoTokenizer
+            tokenizer = AutoTokenizer.from_pretrained(self.language_model_shortcut)
+            return self.transformer_tokenizer(tokenizer, x)
 
     def one_hot(self, x, vocab, n_grams) -> np.ndarray:
         """
