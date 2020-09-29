@@ -5,17 +5,17 @@
 classification algorithms.
 
 ### Install
-Install legacy version from PyPI:
-```bash
-pip install sentivi
-```
+- Install legacy version from PyPI:
+    ```bash
+    pip install sentivi
+    ```
 
-Install latest version from source:
-```bash
-git clone https://github.com/vndee/sentivi
-cd sentivi
-pip install .
-```
+- Install latest version from source:
+    ```bash
+    git clone https://github.com/vndee/sentivi
+    cd sentivi
+    pip install .
+    ```
 
 ### Example
 

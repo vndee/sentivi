@@ -4,6 +4,18 @@ A simple tool for sentiment analysis which is a wrapper of `scikit-learn <https:
 `PyTorch <https://pytorch.org/>`_ models. It is made for easy and faster pipeline to train and evaluate several
 classification algorithms.
 
+- Install legacy version from PyPI:
+::
+
+    pip install sentivi
+
+- Install latest version from source:
+::
+
+    git clone https://github.com/vndee/sentivi
+    cd sentivi
+    pip install .
+
 Example:
 --------------
 .. code-block:: python
