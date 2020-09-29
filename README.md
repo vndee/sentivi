@@ -4,7 +4,13 @@
 [PyTorch](https://pytorch.org/) models. It is made for easy and faster pipeline to train and evaluate several
 classification algorithms.
 
-### Example
+#### Install
+
+```bash
+    pip install sentivi
+```
+
+#### Example
 
 ```python
 from sentivi import Pipeline
