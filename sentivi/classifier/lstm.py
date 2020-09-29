@@ -109,7 +109,7 @@ class LSTMClassifier(NeuralNetworkClassifier):
         self.attention = attention
         self.hidden_layers = hidden_layers
 
-    def __call__(self, data, *args, **kwargs):
+    def forward(self, data, *args, **kwargs):
         """
         Training method
         :param data:
@@ -161,3 +161,5 @@ class LSTMClassifier(NeuralNetworkClassifier):
             X = X.reshape((X.shape[0], 1, X.shape[-1]))
 
         return self._predict(X)
+
+    __call__ = forward

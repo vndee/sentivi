@@ -61,7 +61,7 @@ class Pipeline(object):
         return {attr[11:]: getattr(self, attr) for attr in dir(self) if
                 attr[:10] == '_Pipeline_' and getattr(self, attr) is not None}
 
-    def __call__(self, *args, **kwargs):
+    def forward(self, *args, **kwargs):
         """
         Execute all callable layer in self.apply_layers
 
@@ -125,3 +125,5 @@ class Pipeline(object):
         :rtype: List
         """
         return self.__vocab
+
+    __call__ = forward

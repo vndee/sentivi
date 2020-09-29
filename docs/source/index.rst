@@ -55,3 +55,4 @@ Example:
     sklearn_classifier
     neural_network_classifier
     transformer_classifier
+    ensemble_learning

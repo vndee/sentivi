@@ -31,7 +31,7 @@ class TextEncoder(DataLayer):
         assert self.encode_type in ['one-hot', 'word2vec', 'bow', 'tf-idf', 'transformer'], ValueError(
             'Text encoder type must be one of [\'one-hot\', \'word2vec\', \'bow\', \'tf-idf\', \'transformer\']')
 
-    def __call__(self, x: Optional[Corpus], *args, **kwargs) -> (np.ndarray, np.ndarray):
+    def forward(self, x: Optional[Corpus], *args, **kwargs) -> (np.ndarray, np.ndarray):
         self.max_length = kwargs.get('max_length', 256)
 
         train_set, test_set = x.get_train_set(), x.get_test_set()
@@ -203,3 +203,5 @@ class TextEncoder(DataLayer):
         :return:
         """
         return tokenizer(x, truncation=True, padding=True, max_length=self.max_length)
+
+    __call__ = forward

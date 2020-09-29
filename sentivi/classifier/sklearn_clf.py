@@ -18,7 +18,7 @@ class ScikitLearnClassifier(ClassifierLayer):
         self.num_labels = num_labels
         self.clf = None
 
-    def __call__(self, data, *args, **kwargs):
+    def forward(self, data, *args, **kwargs):
         (train_X, train_y), (test_X, test_y) = data
         assert train_X.shape[1:] == test_X.shape[1:], ValueError(
             f'Number of train features must be equal to test features: {train_X.shape[1:]} != {test_X.shape[1:]}')
@@ -94,3 +94,5 @@ class ScikitLearnClassifier(ClassifierLayer):
         with open(model_path, 'rb') as file:
             self.clf = pickle.load(model_path)
             print(f'Loaded pretrained model from {model_path}.')
+
+    __call__ = forward

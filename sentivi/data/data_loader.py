@@ -175,7 +175,7 @@ class DataLoader(DataLayer):
         self.vocab = None
         self.labels_set = None
 
-    def __call__(self, *args, **kwargs):
+    def forward(self, *args, **kwargs):
         assert 'train' in kwargs, ValueError('train parameter is required.')
         assert 'test' in kwargs, ValueError('test parameter is required.')
 
@@ -186,3 +186,5 @@ class DataLoader(DataLayer):
         self.vocab = corpus.vocab
         self.labels_set = corpus.labels_set
         return corpus
+
+    __call__ = forward

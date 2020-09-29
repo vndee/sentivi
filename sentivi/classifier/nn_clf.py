@@ -70,7 +70,7 @@ class NeuralNetworkClassifier(ClassifierLayer):
         self.train_loader = None
         self.test_loader = None
 
-    def __call__(self, data, *args, **kwargs):
+    def forward(self, data, *args, **kwargs):
         pass
 
     @staticmethod

@@ -93,7 +93,7 @@ class TextCNNClassifier(NeuralNetworkClassifier):
         super(TextCNNClassifier, self).__init__(num_labels, embedding_size, max_length, device, num_epochs,
                                                 learning_rate, batch_size, shuffle, random_state, *args, **kwargs)
 
-    def __call__(self, data, *args, **kwargs):
+    def forward(self, data, *args, **kwargs):
         """
         Training method
         :param data:
@@ -151,3 +151,5 @@ class TextCNNClassifier(NeuralNetworkClassifier):
             X = X.reshape((X.shape[0], 1, X.shape[-1]))
 
         return self._predict(X)
+
+    __call__ = forward

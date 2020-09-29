@@ -138,7 +138,7 @@ class TransformerClassifier(ClassifierLayer):
 
         return NeuralNetworkClassifier.compute_metrics(_preds, _targets, eval=True)
 
-    def __call__(self, data, *args, **kwargs):
+    def forward(self, data, *args, **kwargs):
         self.no_decay = ['bias', 'LayerNorm.weight']
         optimizer_grouped_parameters = [
             {'params': [p for n, p in self.clf.named_parameters() if not any(nd in n for nd in self.no_decay)],
@@ -279,3 +279,5 @@ class TransformerClassifier(ClassifierLayer):
         """
         self.clf.load_state_dict(torch.load(model_path, map_location=self.device))
         print(f'Loaded classifier model to {model_path}')
+
+    __call__ = forward

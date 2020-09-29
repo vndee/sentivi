@@ -19,18 +19,20 @@ class DataLayer(object):
     def __init__(self):
         super(DataLayer, self).__init__()
 
-    def __call__(self, *args, **kwargs):
+    def forward(self, *args, **kwargs):
         pass
 
     def predict(self, *args, **kwargs):
         pass
+
+    __call__ = forward
 
 
 class ClassifierLayer(object):
     def __init__(self):
         super(ClassifierLayer, self).__init__()
 
-    def __call__(self, *args, **kwargs):
+    def forward(self, *args, **kwargs):
         pass
 
     def save(self, *args, **kwargs):
@@ -41,3 +43,5 @@ class ClassifierLayer(object):
 
     def predict(self, *args, **kwargs):
         pass
+
+    __call__ = forward
