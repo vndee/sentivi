@@ -50,9 +50,9 @@ Console output:
 
 .. code-block::
 
-    Word2Vec Text Encoder: 100%|██████████| 6/6 [00:00<00:00, 761.65it/s]
-    Word2Vec Text Encoder: 100%|██████████| 2/2 [00:00<00:00, 1349.52it/s]
-    Input features view be flatten into np.ndarray(6, 102400) for scikit-learn classifier.
+    One Hot Text Encoder: 100%|██████████| 6/6 [00:00<00:00, 761.65it/s]
+    One Hot Text Encoder: 100%|██████████| 2/2 [00:00<00:00, 1349.52it/s]
+    Input features view be flatten into np.ndarray(6, 35328) for scikit-learn classifier.
     Training classifier...
     Testing classifier...
     Saved classifier model to ./weights/svm.sentivi
@@ -77,13 +77,10 @@ Console output:
        macro avg       1.00      1.00      1.00         2
     weighted avg       1.00      1.00      1.00         2
 
-
-    Input features view be flatten into np.ndarray(2, 102400) for scikit-learn classifier.
-    Word2Vec Text Encoder: 100%|██████████| 2/2 [00:00<00:00, 2229.23it/s]
+    Input features view be flatten into np.ndarray(2, 35328) for scikit-learn classifier.
+    One Hot Text Encoder: 100%|██████████| 2/2 [00:00<00:00, 2229.23it/s]
     [1 2]
     Decoded results: ['#NEG', '#POS']
-
-    Process finished with exit code 0
 
 .. toctree::
     :maxdepth: 2
