@@ -44,4 +44,4 @@ predict_results = pipeline.predict(['hàng ok đầu tuýp có một số không
 print(predict_results)
 print(f'Decoded results: {pipeline.decode_polarity(predict_results)}')
 ```
-Take a look at more examples in [example/](https://github.com/vndee/sentivi/example).
+Take a look at more examples in [example/](https://github.com/vndee/sentivi/tree/master/example).
