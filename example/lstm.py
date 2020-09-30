@@ -21,3 +21,5 @@ if __name__ == '__main__':
                                         'đẹppppp', 'Son rất đẹp màu xinh lắm'])
     print(predict_results)
     print(f'Decoded results: {pipeline.decode_polarity(predict_results)}')
+
+    pipeline.save(f'./weights/lstm.sentivi')

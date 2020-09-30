@@ -142,6 +142,7 @@ class Pipeline(object):
         import dill
         with open(save_path, 'wb') as stream:
             dill.dump(self, stream)
+            print(f'Saved model to {save_path}')
 
     @staticmethod
     def load(model_path: str):
@@ -154,6 +155,7 @@ class Pipeline(object):
         import dill
         assert os.path.exists(model_path), FileNotFoundError(f'Could not found {model_path}')
         with open(model_path, 'rb') as stream:
+            print(f'Loaded model from {model_path}')
             return dill.load(stream)
 
     def serve(self):

@@ -2,7 +2,7 @@ from sentivi.pipeline import Pipeline
 
 
 if __name__ == '__main__':
-    pipeline = Pipeline.load('./weights/pipeline.sentivi')
+    pipeline = Pipeline.load('./weights/lstm.sentivi')
 
     train_results = pipeline(train='./data/dev.vi', test='./data/dev_test.vi')
     print(train_results)
