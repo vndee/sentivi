@@ -96,5 +96,19 @@ Predict polarity with given texts:
     [2 1]
     Decoded results: ['#NEG', '#POS']
 
+For persistency, pipe can be save and load later:
+
+.. code-block:: python
+
+    pipeline.save('./weights/pipeline.sentivi')
+    _pipeline = Pipeline.load('./weights/pipeline.sentivi')
+
+    predict_results = _pipeline.predict(['hàng ok đầu tuýp có một số không vừa ốc siết. chỉ được một số đầu thôi .cần '
+                                        'nhất đầu tuýp 14 mà không có. không đạt yêu cầu của mình sử dụng',
+                                        'Son đẹpppp, mùi hương vali thơm nhưng hơi nồng, chất son mịn, màu lên chuẩn, '
+                                        'đẹppppp'])
+    print(predict_results)
+    print(f'Decoded results: {_pipeline.decode_polarity(predict_results)}')
+
 .. autoclass:: sentivi.Pipeline
     :members:
