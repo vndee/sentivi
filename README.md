@@ -1,7 +1,7 @@
 ## A Simple Tool For Sentiment Analysis
 
 **Sentivi** - a simple tool for sentiment analysis which is a wrapper of [scikit-learn](https://scikit-learn.org) and
-[PyTorch Transformers](https://huggingface.co/transformers/) models (for more special purpose, it is recommend to use native library instead). It is made for easy and faster pipeline to train and evaluate several
+[PyTorch Transformers](https://huggingface.co/transformers/) models (for more specific purpose, it is recommend to use native library instead). It is made for easy and faster pipeline to train and evaluate several
 classification algorithms.
 
 Documentation: https://sentivi.readthedocs.io/en/latest/index.html
