@@ -20,6 +20,7 @@ Documentation: https://sentivi.readthedocs.io/en/latest/index.html
 - [x] Text Convolutional Neural Network
 - [x] Transformer
 - [ ] Ensemble
+- [ ] Lexicon-based 
 
 ### Install
 - Install legacy version from PyPI:
@@ -64,6 +65,7 @@ Take a look at more examples in [example/](https://github.com/vndee/sentivi/tree
 
 ### Future Releases
 
+- Lexicon-based
 - CharCNN
-- Ensemble learning methods.
-- Model serving (Back-end and Front-end).
+- Ensemble learning methods
+- Model serving (Back-end and Front-end)
