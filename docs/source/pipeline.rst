@@ -45,11 +45,11 @@ Executing pipeline with given corpus (text file). By default text file should be
 
 Pipeline also accept arbitrary keyword arguments when executed function is call, these arguments is passed through
 executed functions of each layer. Training results will be represented as text in the form of
-``sklearn.metrics.classification_report``. Trained model save at ``save_path`` if it is pre-defined as follows:
+``sklearn.metrics.classification_report``.
 
 .. code-block:: python
 
-    results = pipeline(train='train.txt', test='test.txt', save_path='model.sentivi')
+    results = pipeline(train='train.txt', test='test.txt')
 
 .. code-block::
 
