@@ -64,6 +64,16 @@ print(f'Decoded results: {_pipeline.decode_polarity(predict_results)}')
 ```
 Take a look at more examples in [example/](https://github.com/vndee/sentivi/tree/master/example).
 
+### Serving Pipeline
+
+Sentivi use [FastAPI](https://fastapi.tiangolo.com/) to serving pipeline. Simply run a web service as follows:
+
+```bash
+    # pip install uvicorn python-multipart
+    uvicorn test.serving:server --host 127.0.0.1 --port 8000 --reload
+```
+Access Swagger at http://127.0.0.1:8000/docs or Redoc http://127.0.0.1:8000/redoc
+
 ### Future Releases
 
 - Lexicon-based

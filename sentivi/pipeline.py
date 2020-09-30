@@ -170,12 +170,14 @@ class Pipeline(object):
             if isinstance(method, NeuralNetworkClassifier) or isinstance(method, TransformerClassifier):
                 method.clf = method.clf.to(device)
 
-    def serve(self):
+    def get_server(self):
         """
         Serving model
 
         :return:
         """
-        pass
+        from sentivi.service import RESTServiceGateway
+
+        return RESTServiceGateway(self, port=5000)
 
     __call__ = forward
