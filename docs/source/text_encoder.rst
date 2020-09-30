@@ -40,5 +40,6 @@ Word2Vec
 Transformer:
     Transformer text encoder is equivalent to ``transformer.AutoTokenizer`` from https://huggingface.co/transformers
 
+
 .. autoclass:: sentivi.data.TextEncoder
     :members:
