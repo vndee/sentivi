@@ -1,8 +1,14 @@
+import os
 import logging
 
 from typing import Optional
 from sentivi.data import DataLoader, TextEncoder
 from sentivi.classifier.transformer import TransformerClassifier
+
+try:
+    import _pickle as pickle
+except ModuleNotFoundError:
+    import pickle
 
 
 class Pipeline(object):
@@ -125,5 +131,31 @@ class Pipeline(object):
         :rtype: List
         """
         return self.__vocab
+
+    def save(self, save_path: str):
+        """
+        Save model to disk
+
+        :param save_path: path to saved model
+        :return:
+        """
+        pass
+
+    def load(self, model_path: str):
+        """
+        Load model from disk
+
+        :param model_path: path to pre-trained model
+        :return:
+        """
+        pass
+
+    def serve(self):
+        """
+        Serving model
+
+        :return:
+        """
+        pass
 
     __call__ = forward
