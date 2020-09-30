@@ -53,18 +53,17 @@ Console output:
 
 .. code-block::
 
-    One Hot Text Encoder: 100%|██████████| 6/6 [00:00<00:00, 11966.63it/s]
-    One Hot Text Encoder: 100%|██████████| 2/2 [00:00<00:00, 6732.43it/s]
-    One Hot Text Encoder: 100%|██████████| 2/2 [00:00<00:00, 12175.05it/s]
+    One Hot Text Encoder: 100%|██████████| 6/6 [00:00<00:00, 11602.50it/s]
+    One Hot Text Encoder: 100%|██████████| 2/2 [00:00<00:00, 4966.61it/s]
     Input features view be flatten into np.ndarray(6, 35328) for scikit-learn classifier.
     Training classifier...
     Testing classifier...
     Training results:
                   precision    recall  f1-score   support
 
-               0       1.00      1.00      1.00         2
+               0       1.00      0.00      0.00         1
                1       0.75      1.00      0.86         3
-               2       1.00      0.00      0.00         1
+               2       1.00      1.00      1.00         2
 
         accuracy                           0.83         6
        macro avg       0.92      0.67      0.62         6
@@ -73,18 +72,20 @@ Console output:
     Test results:
                   precision    recall  f1-score   support
 
-               0       1.00      1.00      1.00         1
                1       1.00      1.00      1.00         1
+               2       1.00      1.00      1.00         1
 
         accuracy                           1.00         2
        macro avg       1.00      1.00      1.00         2
     weighted avg       1.00      1.00      1.00         2
 
 
-    Input features view be flatten into np.ndarray(2, 35328) for scikit-learn classifier.
-    [0 1]
-    Decoded results: ['#NEG', '#POS']
     Saved model to ./weights/pipeline.sentivi
+    Loaded model from ./weights/pipeline.sentivi
+    Input features view be flatten into np.ndarray(2, 35328) for scikit-learn classifier.
+    [2 1]
+    Decoded results: ['#NEG', '#POS']
+    One Hot Text Encoder: 100%|██████████| 2/2 [00:00<00:00, 10796.15it/s]
 
 .. toctree::
     :maxdepth: 2
