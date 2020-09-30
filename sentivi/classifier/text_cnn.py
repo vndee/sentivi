@@ -9,6 +9,7 @@ class TextCNN(nn.Module):
     def __init__(self, num_labels: int, embedding_size: int, max_length: int):
         """
         Initialize TextCNN classifier
+
         :param num_labels:
         :param embedding_size:
         :param max_length:
@@ -78,28 +79,31 @@ class TextCNNClassifier(NeuralNetworkClassifier):
                  **kwargs):
         """
         Initialize TextCNNClassifier
-        :param num_labels:
-        :param embedding_size:
-        :param max_length:
-        :param device:
-        :param num_epochs:
-        :param learning_rate:
-        :param batch_size:
-        :param shuffle
-        :param random_state
-        :param args:
-        :param kwargs:
+
+        :param num_labels: number of polarities
+        :param embedding_size: input embedding size
+        :param max_length: maximum length of input text
+        :param device: training device
+        :param num_epochs: maximum number of epochs
+        :param learning_rate: training learning rate
+        :param batch_size: training batch size
+        :param shuffle: whether DataLoader is shuffle or not
+        :param random_state: random.seed
+        :param args: arbitrary arguments
+        :param kwargs: arbitrary keyword arguments
         """
         super(TextCNNClassifier, self).__init__(num_labels, embedding_size, max_length, device, num_epochs,
                                                 learning_rate, batch_size, shuffle, random_state, *args, **kwargs)
 
     def forward(self, data, *args, **kwargs):
         """
-        Training method
-        :param data:
-        :param args:
-        :param kwargs:
-        :return:
+        Training and evaluating method
+
+        :param data: TextEncoder output
+        :param args: arbitrary arguments
+        :param kwargs: arbitrary keyword arguments
+        :return: training and evaluating results
+        :rtype: str
         """
         (train_X, train_y), (test_X, test_y) = data
 
@@ -139,10 +143,12 @@ class TextCNNClassifier(NeuralNetworkClassifier):
     def predict(self, X, *args, **kwargs):
         """
         Predict polarity with given sentences
-        :param X:
-        :param args:
-        :param kwargs:
-        :return:
+
+        :param X: TextEncoder.predict output
+        :param args: arbitrary arguments
+        :param kwargs: arbitrary keyword arguments
+        :return: list of numeric polarities
+        :rtype: list
         """
         self.clf.eval()
         if X.shape.__len__() == 3:

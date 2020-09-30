@@ -10,20 +10,11 @@ from transformers import AutoConfig, AutoTokenizer, AutoModelForSequenceClassifi
 
 
 class TransformerClassifier(ClassifierLayer):
-    TRANSFORMER_ALIASES = [
-        'bert-base-multilingual-uncased',
-        'bert-base-multilingual-cased',
-        'xlm-roberta-base',
-        'xlm-mlm-xnli15-1024',
-        'xlm-mlm-tlm-xnli15-1024',
-        'vinai/phobert-base',
-        'vinai/phobert-large'
-    ]
-
     class TransformerDataset(Dataset):
         def __init__(self, batch_encodings, labels):
             """
             Initialize transformer dataset
+
             :param batch_encodings:
             :param labels:
             """
@@ -49,6 +40,7 @@ class TransformerClassifier(ClassifierLayer):
         def __init__(self, batch_encodings):
             """
             Initialize transformer dataset
+
             :param batch_encodings:
             """
             self.encodings = batch_encodings
@@ -83,6 +75,26 @@ class TransformerClassifier(ClassifierLayer):
                  num_workers: Optional[int] = 2,
                  *args,
                  **kwargs):
+        """
+        Initialize TransformerClassifier instance
+
+        :param num_labels: number of polarities
+        :param language_model_shortcut: language model shortcut
+        :param freeze_language_model: whether language model is freeze or not
+        :param batch_size: training batch size
+        :param warmup_steps: learning rate warm up step
+        :param weight_decay: learning rate weight decay
+        :param accumulation_steps: optimizer accumulation step
+        :param save_steps: saving step
+        :param learning_rate: training learning rate
+        :param device: training and evaluating rate
+        :param optimizer: training optimizer
+        :param criterion: training criterion
+        :param num_epochs: maximum number of epochs
+        :param num_workers: number of DataLoader workers
+        :param args: arbitrary arguments
+        :param kwargs: arbitrary keyword arguments
+        """
         super(TransformerClassifier, self).__init__()
 
         self.batch_size = batch_size
@@ -99,10 +111,6 @@ class TransformerClassifier(ClassifierLayer):
         self.learning_rate = learning_rate
         self.predict_loader = None
 
-        assert language_model_shortcut in TransformerClassifier.TRANSFORMER_ALIASES, ValueError(
-            f'language_model_shortcut must be in {TransformerClassifier.TRANSFORMER_ALIASES} '
-            f'- not {language_model_shortcut}')
-
         self.clf_config = AutoConfig.from_pretrained(language_model_shortcut)
         self.clf_config.num_labels = num_labels
 
@@ -114,6 +122,13 @@ class TransformerClassifier(ClassifierLayer):
                 param.requires_grad = True
 
     def get_overall_result(self, loader):
+        """
+        Get overall result
+
+        :param loader: DataLoader
+        :return: overall result
+        :rtype: str
+        """
         self.clf.eval()
         _preds, _targets = None, None
 
@@ -139,6 +154,15 @@ class TransformerClassifier(ClassifierLayer):
         return NeuralNetworkClassifier.compute_metrics(_preds, _targets, eval=True)
 
     def forward(self, data, *args, **kwargs):
+        """
+        Training and evaluating TransformerClassifier instance
+
+        :param data: TransformerTextEncoder output
+        :param args: arbitrary arguments
+        :param kwargs: arbitrary keyword arguments
+        :return: training and evaluating results
+        :rtype: str
+        """
         self.no_decay = ['bias', 'LayerNorm.weight']
         optimizer_grouped_parameters = [
             {'params': [p for n, p in self.clf.named_parameters() if not any(nd in n for nd in self.no_decay)],
@@ -237,6 +261,16 @@ class TransformerClassifier(ClassifierLayer):
                f'Test results:\n{self.get_overall_result(self.test_loader)}'
 
     def predict(self, X, *args, **kwargs):
+        """
+        Predict polarities with given list of sentences
+
+        :param X: list of sentences
+        :param args: arbitrary arguments
+        :param kwargs: arbitrary keyword arguments
+        :return: list of polarities
+        :rtype: str
+        """
+
         _preds = None
         self.predict_loader = DataLoader(TransformerClassifier.TransformerPredictedDataset(X), shuffle=True,
                                          batch_size=self.batch_size, num_workers=self.num_workers)
@@ -261,9 +295,10 @@ class TransformerClassifier(ClassifierLayer):
     def save(self, save_path, *args, **kwargs):
         """
         Save model to disk
-        :param save_path:
-        :param args:
-        :param kwargs:
+
+        :param save_path: path to saved model
+        :param args: arbitrary arguments
+        :param kwargs: arbitrary keyword arguments
         :return:
         """
         torch.save(self.clf.state_dict(), save_path)
@@ -272,9 +307,10 @@ class TransformerClassifier(ClassifierLayer):
     def load(self, model_path, *args, **kwargs):
         """
         Load model from disk
-        :param model_path:
-        :param args:
-        :param kwargs:
+
+        :param model_path: path to model path
+        :param args: arbitrary arguments
+        :param kwargs: arbitrary keyword arguments
         :return:
         """
         self.clf.load_state_dict(torch.load(model_path, map_location=self.device))

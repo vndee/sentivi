@@ -8,10 +8,11 @@ class ScikitLearnClassifier(ClassifierLayer):
     """
     def __init__(self, num_labels: int = 3, *args, **kwargs):
         """
-        Initialize instance
-        :param num_labels:
-        :param args:
-        :param kwargs:
+        Initialize ScikitLearnClassifier instance
+
+        :param num_labels: number of polarities
+        :param args: arbitrary arguments
+        :param kwargs: arbitrary keyword arguments
         """
         super(ScikitLearnClassifier, self).__init__()
 
@@ -19,6 +20,15 @@ class ScikitLearnClassifier(ClassifierLayer):
         self.clf = None
 
     def forward(self, data, *args, **kwargs):
+        """
+        Train and evaluate ScikitLearnClassifier instance
+
+        :param data: Output of TextEncoder
+        :param args: arbitrary arguments
+        :param kwargs: arbitrary keyword arguments
+        :return: Training and evaluating result
+        :rtype: str
+        """
         (train_X, train_y), (test_X, test_y) = data
         assert train_X.shape[1:] == test_X.shape[1:], ValueError(
             f'Number of train features must be equal to test features: {train_X.shape[1:]} != {test_X.shape[1:]}')
@@ -54,10 +64,12 @@ class ScikitLearnClassifier(ClassifierLayer):
     def predict(self, x, *args, **kwargs):
         """
         Predict polarities given sentences
-        :param x:
-        :param args:
-        :param kwargs:
-        :return:
+
+        :param x: TextEncoder.predict output
+        :param args: arbitrary arguments
+        :param kwargs: arbitrary keyword arguments
+        :return: list of polarities
+        :rtype: list
         """
         if x.shape.__len__() > 2:
             flatten_dim = 1
@@ -71,10 +83,11 @@ class ScikitLearnClassifier(ClassifierLayer):
 
     def save(self, save_path, *args, **kwargs):
         """
-        Dump model to disk
-        :param save_path:
-        :param args:
-        :param kwargs:
+        Save model to disk
+
+        :param save_path: path to save model
+        :param args: arbitrary arguments
+        :param kwargs: arbitrary keyword arguments
         :return:
         """
         import pickle
@@ -85,9 +98,10 @@ class ScikitLearnClassifier(ClassifierLayer):
     def load(self, model_path, *args, **kwargs):
         """
         Load model from disk
-        :param model_path:
-        :param args:
-        :param kwargs:
+
+        :param model_path: path to pre-trained model path
+        :param args: arbitrary arguments
+        :param kwargs: arbitrary keyword arguments
         :return:
         """
         import pickle

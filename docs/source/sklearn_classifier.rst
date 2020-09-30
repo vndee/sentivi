@@ -1,6 +1,9 @@
 Scikit-learn Classifier
 ****************************
 
+This module is a wrapper of `scikit-learn <https://scikit-learn.org/>`_ library. You can initialize classifier instance
+as same as when initialize ``scikit-learn`` instance. Initialize arguments of scikit-learn is fully accept.
+
 .. autoclass:: sentivi.classifier.sklearn_clf.ScikitLearnClassifier
     :members:
 

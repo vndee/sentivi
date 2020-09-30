@@ -5,6 +5,13 @@ from sklearn.gaussian_process import GaussianProcessClassifier as _GaussianProce
 
 class GaussianProcessClassifier(ScikitLearnClassifier):
     def __init__(self, num_labels: int = 3, *args, **kwargs):
+        """
+        Initialize GaussianProcessClassifier
+
+        :param num_labels: number of polarities
+        :param args: arbitrary arguments
+        :param kwargs: arbitrary keyword arguments
+        """
         super(GaussianProcessClassifier, self).__init__(num_labels=num_labels, *args, **kwargs)
 
         if 'kernel' not in kwargs:

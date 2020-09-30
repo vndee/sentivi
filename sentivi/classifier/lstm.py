@@ -14,9 +14,14 @@ class LSTM(nn.Module):
                  attention: bool = False,
                  hidden_layers: int = 1):
         """
-        Initialize TextCNN classifier
+        Initialize LSTM instance
+
         :param num_labels:
         :param embedding_size:
+        :param hidden_size:
+        :param bidirectional:
+        :param attention:
+        :param hidden_layers:
         """
         super(LSTM, self).__init__()
 
@@ -86,20 +91,21 @@ class LSTMClassifier(NeuralNetworkClassifier):
                  *args,
                  **kwargs):
         """
-        Initialize TextCNNClassifier
-        :param num_labels:
-        :param embedding_size:
-        :param max_length:
-        :param device:
-        :param num_epochs:
-        :param learning_rate:
-        :param batch_size:
-        :param shuffle:
-        :param random_state:
-        :param hidden_size:
-        :param bidirectional:
-        :param args:
-        :param kwargs:
+        Initialize LSTMClassifier
+
+        :param num_labels: number of polarities
+        :param embedding_size: input embeddings' size
+        :param max_length: maximum length of input text
+        :param device: training device
+        :param num_epochs: maximum number of epochs
+        :param learning_rate: model learning rate
+        :param batch_size: training batch size
+        :param shuffle: whether DataLoader is shuffle or not
+        :param random_state: random.seed number
+        :param hidden_size: Long Short Term Memory hidden size
+        :param bidirectional: whether to use BiLSTM or not
+        :param args: arbitrary arguments
+        :param kwargs: arbitrary keyword arguments
         """
         super(LSTMClassifier, self).__init__(num_labels, embedding_size, max_length, device, num_epochs, learning_rate,
                                              batch_size, shuffle, random_state, hidden_size, hidden_layers, attention,
@@ -111,11 +117,12 @@ class LSTMClassifier(NeuralNetworkClassifier):
 
     def forward(self, data, *args, **kwargs):
         """
-        Training method
-        :param data:
-        :param args:
-        :param kwargs:
-        :return:
+        Training and evaluating methods
+
+        :param data: TextEncoder output
+        :param args: arbitrary arguments
+        :param kwargs: arbitrary keyword arguments
+        :return: training results
         """
         (train_X, train_y), (test_X, test_y) = data
 
@@ -151,10 +158,12 @@ class LSTMClassifier(NeuralNetworkClassifier):
     def predict(self, X, *args, **kwargs):
         """
         Predict polarity with given sentences
-        :param X:
-        :param args:
-        :param kwargs:
-        :return:
+
+        :param X: TextEncoder.predict output
+        :param args: arbitrary arguments
+        :param kwargs: arbitrary keyword arguments
+        :return: list of numeric polarities
+        :rtype: list
         """
         self.clf.eval()
         if X.shape.__len__() == 2:
