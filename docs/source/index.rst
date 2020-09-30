@@ -1,8 +1,9 @@
 Sentivi
 *********
-A simple tool for sentiment analysis which is a wrapper of `scikit-learn <https://scikit-learn.org/>`_ and
-`PyTorch <https://pytorch.org/>`_ models. It is made for easy and faster pipeline to train and evaluate several
+A simple tool for sentiment analysis which is a wrapper of `scikit-learn <https://scikit-learn.org>`_ and
+`PyTorch Transformers <https://huggingface.co/transformers/>`_ models (for more special purpose, it is recommend to use native library instead). It is made for easy and faster pipeline to train and evaluate several
 classification algorithms.
+
 
 - Install legacy version from PyPI:
 
