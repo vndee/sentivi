@@ -28,20 +28,21 @@ class NeuralNetworkClassifier(ClassifierLayer):
                  *args,
                  **kwargs):
         """
-        Neural network classifier
-        :param num_labels:
-        :param embedding_size:
-        :param max_length:
-        :param device:
-        :param num_epochs:
-        :param learning_rate:
-        :param batch_size:
-        :param shuffle:
-        :param random_state:
-        :param hidden_size:
-        :param num_workers:
-        :param args:
-        :param kwargs:
+        Neural Network Classifier
+
+        :param num_labels: number of polarities
+        :param embedding_size: input embedding size
+        :param max_length: maximum number of input text
+        :param device: training device
+        :param num_epochs: maximum number of epochs
+        :param learning_rate: training learning rate
+        :param batch_size: training batch size
+        :param shuffle: whether DataLoader is shuffle or not
+        :param random_state: random.seed
+        :param hidden_size: hidden size
+        :param num_workers: number of DataLoader workers
+        :param args: arbitrary arguments
+        :param kwargs: arbitrary keyword arguments
         """
         super(NeuralNetworkClassifier, self).__init__()
 
@@ -71,10 +72,27 @@ class NeuralNetworkClassifier(ClassifierLayer):
         self.test_loader = None
 
     def forward(self, data, *args, **kwargs):
+        """
+        Training and evaluating NeuralNetworkClassifier
+
+        :param data: TextEncoder output
+        :param args: arbitrary arguments
+        :param kwargs: arbitrary keyword arguments
+        :return: training and evaluating results
+        :rtype: str
+        """
         pass
 
     @staticmethod
     def compute_metrics(preds, targets, eval=False):
+        """
+        Compute accuracy and F1
+
+        :param preds: prediction output
+        :param targets: ground-truth value
+        :param eval: whether is eval or not
+        :return:
+        """
         if eval is True:
             return classification_report(preds, targets, zero_division=1)
 
@@ -82,6 +100,14 @@ class NeuralNetworkClassifier(ClassifierLayer):
         return report['accuracy'], report['macro avg']['f1-score']
 
     def get_overall_result(self, loader):
+        """
+        Get overall result
+
+        :param loader: DataLoader
+        :return: overall result
+        :rtype: str
+        """
+
         self.clf.eval()
         _preds, _targets = None, None
 
@@ -105,6 +131,13 @@ class NeuralNetworkClassifier(ClassifierLayer):
         return NeuralNetworkClassifier.compute_metrics(_preds, _targets, eval=True)
 
     def fit(self, *args, **kwargs):
+        """
+        Feed-forward network
+
+        :param args: arbitrary arguments
+        :param kwargs: arbitrary keyword arguments
+        :return:
+        """
         assert isinstance(self.clf, torch.nn.Module), ValueError(
             f'Classifier model using Neural Network must be torch.nn.Module, not {self.clf}')
 
@@ -189,6 +222,16 @@ class NeuralNetworkClassifier(ClassifierLayer):
                f'Test results:\n{self.get_overall_result(self.test_loader)}'
 
     def _predict(self, X, *args, **kwargs):
+        """
+        Predict polarities with given list of sentences
+
+        :param X: list of sentences
+        :param args: arbitrary arguments
+        :param kwargs: arbitrary keyword arguments
+        :return: list of polarities
+        :rtype: str
+        """
+
         _preds = None
         self.predict_loader = DataLoader(X, batch_size=self.batch_size, shuffle=self.shuffle)
 
@@ -211,22 +254,26 @@ class NeuralNetworkClassifier(ClassifierLayer):
     def save(self, save_path, *args, **kwargs):
         """
         Save model to disk
-        :param save_path:
-        :param args:
-        :param kwargs:
+
+        :param save_path: path to saved model
+        :param args: arbitrary arguments
+        :param kwargs: arbitrary keyword arguments
         :return:
         """
+
         torch.save(self.clf.state_dict(), save_path)
         print(f'Saved classifier model to {save_path}')
 
     def load(self, model_path, *args, **kwargs):
         """
         Load model from disk
-        :param model_path:
-        :param args:
-        :param kwargs:
+
+        :param model_path: path to model path
+        :param args: arbitrary arguments
+        :param kwargs: arbitrary keyword arguments
         :return:
         """
+
         self.clf.load_state_dict(torch.load(model_path, map_location=self.device))
         print(f'Loaded classifier model to {model_path}')
 
