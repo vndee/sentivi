@@ -19,3 +19,4 @@ if __name__ == '__main__':
                                         'đẹppppp'])
     print(predict_results)
     print(f'Decoded results: {pipeline.decode_polarity(predict_results)}')
+    pipeline.save('./weights/gaussian_process.sentivi')
