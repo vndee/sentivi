@@ -39,7 +39,7 @@ Split n-grams example:
 
 .. code-block:: python
 
-    TextProcessor.n_gram_split('bài tập phân tích cảm xúc')
+    TextProcessor.n_gram_split('bài tập phân tích cảm xúc', n_grams=3)
 
 .. code-block::
 
