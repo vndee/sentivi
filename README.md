@@ -46,3 +46,8 @@ print(predict_results)
 print(f'Decoded results: {pipeline.decode_polarity(predict_results)}')
 ```
 Take a look at more examples in [example/](https://github.com/vndee/sentivi/tree/master/example).
+
+### Future Releases
+
+- Ensemble learning methods.
+- Model serving (Back-end and Front-end).
