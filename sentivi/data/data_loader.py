@@ -17,7 +17,7 @@ class Corpus(object):
                  line_separator: Optional[str] = None,
                  n_grams: Optional[int] = None,
                  text_processor: Optional[TextProcessor] = None,
-                 max_length: Optional[int] = 256,
+                 max_length: Optional[int] = None,
                  truncation: Optional[str] = 'head'):
         """
         Initialize Corpus instance

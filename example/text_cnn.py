@@ -7,11 +7,10 @@ if __name__ == '__main__':
     text_processor = TextProcessor(methods=['word_segmentation', 'remove_punctuation', 'lower'])
 
     pipeline = Pipeline(DataLoader(text_processor=text_processor, n_grams=2),
-                        TextEncoder(encode_type='word2vec', model_path='./pretrained/wiki.vi.model.bin.gz'),
+                        TextEncoder(encode_type='tf-idf', model_path='./pretrained/wiki.vi.model.bin.gz'),
                         TextCNNClassifier(num_labels=3))
 
-    train_results = pipeline(train='./data/dev.vi', test='./data/dev_test.vi',
-                             num_epochs=500)
+    train_results = pipeline(train='./data/dev.vi', test='./data/dev_test.vi', num_epochs=3)
     print(train_results)
 
     predict_results = pipeline.predict(['hàng ok đầu tuýp có một số không vừa ốc siết. chỉ được một số đầu thôi .cần '
@@ -20,3 +19,5 @@ if __name__ == '__main__':
                                         'đẹppppp', 'Son rất đẹp màu xinh lắm'])
     print(predict_results)
     print(f'Decoded results: {pipeline.decode_polarity(predict_results)}')
+
+    pipeline.save('./weights/text_cnn.sentivi')

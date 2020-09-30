@@ -43,7 +43,7 @@ class TextEncoder(DataLayer):
         :return: Training and Test batch encoding
         :rtype: Tuple, Tuple
         """
-        self.max_length = kwargs.get('max_length', 256)
+        self.max_length = kwargs.get('max_length', None)
 
         train_set, test_set = x.get_train_set(), x.get_test_set()
         train_X, train_y = train_set
@@ -62,12 +62,9 @@ class TextEncoder(DataLayer):
             return (self.word2vec(train_X, n_grams=n_grams), train_y), (
                 self.word2vec(test_X, n_grams=n_grams), test_y)
         elif self.encode_type == 'transformer':
-            from sentivi.classifier.transformer import TransformerClassifier
-            assert self.language_model_shortcut in TransformerClassifier.TRANSFORMER_ALIASES, ValueError(
-                f'language_model_shortcut must be in {TransformerClassifier.TRANSFORMER_ALIASES} - '
-                f'not {self.language_model_shortcut}')
-
             from transformers import AutoTokenizer
+            from sentivi.classifier.transformer import TransformerClassifier
+
             tokenizer = AutoTokenizer.from_pretrained(self.language_model_shortcut)
             return (self.transformer_tokenizer(tokenizer, train_X), train_y), \
                    (self.transformer_tokenizer(tokenizer, test_X), test_y)
@@ -93,12 +90,9 @@ class TextEncoder(DataLayer):
         elif self.encode_type == 'word2vec':
             return self.word2vec(x, n_grams)
         elif self.encode_type == 'transformer':
-            from sentivi.classifier.transformer import TransformerClassifier
-            assert self.language_model_shortcut in TransformerClassifier.TRANSFORMER_ALIASES, ValueError(
-                f'language_model_shortcut must be in {TransformerClassifier.TRANSFORMER_ALIASES} - '
-                f'not {self.language_model_shortcut}')
-
             from transformers import AutoTokenizer
+            from sentivi.classifier.transformer import TransformerClassifier
+
             tokenizer = AutoTokenizer.from_pretrained(self.language_model_shortcut)
             return self.transformer_tokenizer(tokenizer, x)
 

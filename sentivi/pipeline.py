@@ -3,6 +3,7 @@ import logging
 
 from typing import Optional
 from sentivi.data import DataLoader, TextEncoder
+from sentivi.classifier.nn_clf import NeuralNetworkClassifier
 from sentivi.classifier.transformer import TransformerClassifier
 
 try:
@@ -157,6 +158,17 @@ class Pipeline(object):
         with open(model_path, 'rb') as stream:
             print(f'Loaded model from {model_path}')
             return dill.load(stream)
+
+    def to(self, device):
+        """
+        To device
+
+        :param device:
+        :return:
+        """
+        for method in self.apply_layers:
+            if isinstance(method, NeuralNetworkClassifier) or isinstance(method, TransformerClassifier):
+                method.clf = method.clf.to(device)
 
     def serve(self):
         """
