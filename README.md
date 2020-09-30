@@ -6,6 +6,21 @@ classification algorithms.
 
 Documentation: https://sentivi.readthedocs.io/en/latest/index.html
 
+### Classifiers
+
+- [x] Decision Tree
+- [x] Gaussian Naive Bayes
+- [x] Gaussian Process
+- [x] Nearest Centroid
+- [x] Support Vector Machine
+- [x] Stochastic Gradient Descent
+- [ ] Character Convolutional Neural Network
+- [x] Multi-Layer Perceptron
+- [x] Long Short Term Memory
+- [x] Text Convolutional Neural Network
+- [x] Transformer
+- [ ] Ensemble
+
 ### Install
 - Install legacy version from PyPI:
     ```bash
@@ -49,5 +64,6 @@ Take a look at more examples in [example/](https://github.com/vndee/sentivi/tree
 
 ### Future Releases
 
+- CharCNN
 - Ensemble learning methods.
 - Model serving (Back-end and Front-end).
