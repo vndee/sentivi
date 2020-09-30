@@ -10,8 +10,7 @@ if __name__ == '__main__':
                         TextEncoder(encode_type='word2vec', model_path='./pretrained/wiki.vi.model.bin.gz'),
                         DecisionTreeClassifier(num_labels=3))
 
-    train_results = pipeline(train='./data/dev.vi', test='./data/dev_test.vi',
-                             save_path='./weights/decision_tree.sentivi')
+    train_results = pipeline(train='./data/dev.vi', test='./data/dev_test.vi')
     print(train_results)
 
     predict_results = pipeline.predict(['hàng ok đầu tuýp có một số không vừa ốc siết. chỉ được một số đầu thôi .cần '

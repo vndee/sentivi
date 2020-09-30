@@ -139,16 +139,22 @@ class Pipeline(object):
         :param save_path: path to saved model
         :return:
         """
-        pass
+        import dill
+        with open(save_path, 'wb') as stream:
+            dill.dump(self, stream)
 
-    def load(self, model_path: str):
+    @staticmethod
+    def load(model_path: str):
         """
         Load model from disk
 
         :param model_path: path to pre-trained model
         :return:
         """
-        pass
+        import dill
+        assert os.path.exists(model_path), FileNotFoundError(f'Could not found {model_path}')
+        with open(model_path, 'rb') as stream:
+            return dill.load(stream)
 
     def serve(self):
         """

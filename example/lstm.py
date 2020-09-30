@@ -12,7 +12,7 @@ if __name__ == '__main__':
                                        hidden_layers=1))
 
     train_results = pipeline(train='./data/dev.vi', test='./data/dev_test.vi',
-                             save_path='./weights/lstm.sentivi', num_epochs=3, learning_rate=1e-3)
+                             num_epochs=3, learning_rate=1e-3)
     print(train_results)
 
     predict_results = pipeline.predict(['hàng ok đầu tuýp có một số không vừa ốc siết. chỉ được một số đầu thôi .cần '
