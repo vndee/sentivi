@@ -280,7 +280,7 @@ class NeuralNetworkClassifier(ClassifierLayer):
 
 class NeuralNetworkDataset(Dataset):
     def __init__(self, X, y, *args, **kwargs):
-        super(NeuralNetworkDataset, self).__init__()
+        super(NeuralNetworkDataset, self).__init__(*args, **kwargs)
 
         assert X.shape[0] == y.shape[0], ValueError(f'Number of samples must be equal {X.shape[0]} != {y.shape[0]}.')
         self.X, self.y = X, y
