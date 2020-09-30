@@ -1,3 +1,4 @@
+import unittest
 from sentivi.text_processor import TextProcessor
 
 

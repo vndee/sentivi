@@ -89,7 +89,10 @@ class Corpus(object):
         warehouse = set()
         label_set = set()
 
-        train_file_reader = open(self.__train_file, 'r').read().split(self.__line_separator)
+        train_file_reader = None
+        with open(self.__train_file, 'r') as stream:
+            train_file_reader = stream.read().split(self.__line_separator)
+
         for line in train_file_reader:
             line = line.split('\n')
             label, text = line[0], ' '.join(line[1:])
@@ -105,7 +108,10 @@ class Corpus(object):
                 if word not in warehouse:
                     warehouse.add(word)
 
-        test_file_reader = open(self.__test_file, 'r').read().split(self.__line_separator)
+        test_file_reader = None
+        with open(self.__test_file, 'r') as stream:
+            test_file_reader = stream.read().split(self.__line_separator)
+
         for line in test_file_reader:
             line = line.split('\n')
             label, text = line[0], ' '.join(line[1:])
