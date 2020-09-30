@@ -72,7 +72,16 @@ Sentivi use [FastAPI](https://fastapi.tiangolo.com/) to serving pipeline. Simply
 # pip install uvicorn python-multipart
 uvicorn test.serving:server --host 127.0.0.1 --port 8000
 ```
-Access Swagger at http://127.0.0.1:8000/docs or Redoc http://127.0.0.1:8000/redoc
+Access Swagger at http://127.0.0.1:8000/docs or Redoc http://127.0.0.1:8000/redoc. For example, you can use
+[curl](https://curl.haxx.se/) to send post requests:
+
+```bash
+curl --location --request POST 'http://127.0.0.1:8000/get_sentiment/' \
+     --form 'text=Son đẹpppp, mùi hương vali thơm nhưng hơi nồng'
+
+# response
+{ "polarity": 2, "label": "#POS" }
+```
 
 ### Future Releases
 
