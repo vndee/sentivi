@@ -4,7 +4,7 @@ from sentivi.classifier import DecisionTreeClassifier
 from sentivi.text_processor import TextProcessor
 
 if __name__ == '__main__':
-    text_processor = TextProcessor(methods=['word_segmentation', 'remove_punctuation'])
+    text_processor = TextProcessor(methods=['word_segmentation', 'remove_punctuation', 'lower'])
 
     pipeline = Pipeline(DataLoader(text_processor=text_processor, n_grams=3),
                         TextEncoder(encode_type='word2vec', model_path='./pretrained/wiki.vi.model.bin.gz'),
@@ -19,5 +19,3 @@ if __name__ == '__main__':
                                         'đẹppppp'])
     print(predict_results)
     print(f'Decoded results: {pipeline.decode_polarity(predict_results)}')
-
-    pipeline.save('./weights/decision_tree.sentivi')

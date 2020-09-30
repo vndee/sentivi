@@ -112,8 +112,9 @@ class TextEncoder(DataLayer):
             for j, token in enumerate(items):
                 if j >= self.max_length:
                     break
-                idx = vocab.index(token)
-                _x[i][j][idx] = 1
+                if token in vocab:
+                    idx = vocab.index(token)
+                    _x[i][j][idx] = 1
 
         return _x
 
@@ -131,8 +132,9 @@ class TextEncoder(DataLayer):
         for i, item in enumerate(tqdm(x, desc='Bag Of Words Text Encoder')):
             items = TextProcessor.n_gram_split(item, n_grams)
             for token in items:
-                j = vocab.index(token)
-                _x[i][j] = _x[i][j] + 1
+                if token in vocab:
+                    j = vocab.index(token)
+                    _x[i][j] = _x[i][j] + 1
 
         return _x
 
@@ -168,8 +170,9 @@ class TextEncoder(DataLayer):
                     appearances_in_here[__] += 1
 
             for __ in _:
-                j = vocab.index(__)
-                _x[i][j] = math.log(1 + appearances_in_here[__]) * math.log(x.__len__() / appearances_in_doc[__])
+                if __ in vocab:
+                    j = vocab.index(__)
+                    _x[i][j] = math.log(1 + appearances_in_here[__]) * math.log(x.__len__() / appearances_in_doc[__])
 
         return _x
 
