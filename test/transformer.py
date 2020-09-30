@@ -15,6 +15,7 @@ class TransformerTestCase(unittest.TestCase):
     SAVED_PATH = './weights/pipeline_test.sentivi'
 
     W2V_PRETRAINED = './pretrained/wiki.vi.model.bin.gz'
+    LM_SHORTCUT = 'vinai/phobert-base'
 
     class EncodingAliases:
         ONE_HOT = 'one-hot'
@@ -33,7 +34,8 @@ class TransformerTestCase(unittest.TestCase):
     def test_one_hot(self):
         pipeline = Pipeline(DataLoader(text_processor=self.text_processor, n_grams=3),
                             TextEncoder(encode_type=TransformerTestCase.EncodingAliases.ONE_HOT),
-                            TransformerClassifier(num_labels=3))
+                            TransformerClassifier(num_labels=3,
+                                                  language_model_shortcut=TransformerTestCase.LM_SHORTCUT))
         pipeline(train=TransformerTestCase.INPUT_FILE, test=TransformerTestCase.OUTPUT_FILE)
         pipeline.save(TransformerTestCase.SAVED_PATH)
 
@@ -50,7 +52,8 @@ class TransformerTestCase(unittest.TestCase):
     def test_bow(self):
         pipeline = Pipeline(DataLoader(text_processor=self.text_processor, n_grams=3),
                             TextEncoder(encode_type=TransformerTestCase.EncodingAliases.BOW),
-                            TransformerClassifier(num_labels=3))
+                            TransformerClassifier(num_labels=3,
+                                                  language_model_shortcut=TransformerTestCase.LM_SHORTCUT))
         pipeline(train=TransformerTestCase.INPUT_FILE, test=TransformerTestCase.OUTPUT_FILE)
         pipeline.save(TransformerTestCase.SAVED_PATH)
 
@@ -67,7 +70,8 @@ class TransformerTestCase(unittest.TestCase):
     def test_tf_idf(self):
         pipeline = Pipeline(DataLoader(text_processor=self.text_processor, n_grams=3),
                             TextEncoder(encode_type=TransformerTestCase.EncodingAliases.TF_IDF),
-                            TransformerClassifier(num_labels=3))
+                            TransformerClassifier(num_labels=3,
+                                                  language_model_shortcut=TransformerTestCase.LM_SHORTCUT))
         pipeline(train=TransformerTestCase.INPUT_FILE, test=TransformerTestCase.OUTPUT_FILE)
         pipeline.save(TransformerTestCase.SAVED_PATH)
 
@@ -85,7 +89,8 @@ class TransformerTestCase(unittest.TestCase):
         pipeline = Pipeline(DataLoader(text_processor=self.text_processor, n_grams=3),
                             TextEncoder(encode_type=TransformerTestCase.EncodingAliases.W2V,
                                         model_path=TransformerTestCase.W2V_PRETRAINED),
-                            TransformerClassifier(num_labels=3))
+                            TransformerClassifier(num_labels=3,
+                                                  language_model_shortcut=TransformerTestCase.LM_SHORTCUT))
         pipeline(train=TransformerTestCase.INPUT_FILE, test=TransformerTestCase.OUTPUT_FILE)
         pipeline.save(TransformerTestCase.SAVED_PATH)
 
