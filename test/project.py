@@ -1,3 +1,4 @@
+import os
 import unittest
 
 from test.decision_tree import DecisionTreeTestCase
@@ -13,3 +14,4 @@ from test.transformer import TransformerTestCase
 
 if __name__ == '__main__':
     unittest.main()
+    os.remove(DecisionTreeTestCase.SAVED_PATH)
