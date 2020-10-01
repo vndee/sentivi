@@ -7,7 +7,7 @@ requires = (HERE / 'requirements.txt').read_text().split('\n')
 
 setup(
     name="sentivi",
-    version="1.0.4",
+    version="1.0.5",
     description="A simple tool for Vietnamese Sentiment Analysis",
     long_description=README,
     long_description_content_type="text/markdown",
