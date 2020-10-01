@@ -1,7 +1,7 @@
 Serving
 ************
 
-Sentivi use [FastAPI](https://fastapi.tiangolo.com/) to serving pipeline. Simply run a web service as follows:
+Sentivi use `FastAPI <https://fastapi.tiangolo.com/>`_ to serving pipeline. Simply run a web service as follows:
 
 .. code-block:: python
 
@@ -18,7 +18,7 @@ Sentivi use [FastAPI](https://fastapi.tiangolo.com/) to serving pipeline. Simply
     uvicorn serving:server --host 127.0.0.1 --port 8000
 
 Access Swagger at http://127.0.0.1:8000/docs or Redoc http://127.0.0.1:8000/redoc. For example, you can use
-[curl](https://curl.haxx.se/) to send post requests:
+`curl <https://curl.haxx.se/>`_ to send post requests:
 
 .. code-block::
 
@@ -28,7 +28,8 @@ Access Swagger at http://127.0.0.1:8000/docs or Redoc http://127.0.0.1:8000/redo
     # response
     { "polarity": 2, "label": "#POS" }
 
-#### Deploy using Docker
+Deploy using Docker
+
 .. code-block:: dockerfile
 
     FROM tiangolo/uvicorn-gunicorn-fastapi:python3.7
