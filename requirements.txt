@@ -18,6 +18,7 @@ fastapi==0.61.1
 filelock==3.0.12
 future==0.18.2
 gensim==3.8.3
+h11==0.10.0
 idna==2.10
 imagesize==1.2.0
 jeepney==0.4.3
@@ -37,6 +38,7 @@ pydantic==1.6.1
 Pygments==2.7.1
 pyparsing==2.4.7
 python-crfsuite==0.9.7
+python-multipart==0.0.5
 pytz==2020.1
 pyvi==0.1
 readme-renderer==26.0
@@ -74,5 +76,6 @@ tqdm==4.49.0
 transformers==3.1.0
 twine==3.2.0
 urllib3==1.25.10
+uvicorn==0.12.0
 wasabi==0.8.0
 webencodings==0.5.1

@@ -92,6 +92,27 @@ curl --location --request POST 'http://127.0.0.1:8000/get_sentiment/' \
 { "polarity": 2, "label": "#POS" }
 ```
 
+#### Deploy using Docker
+```dockerfile
+FROM tiangolo/uvicorn-gunicorn-fastapi:python3.7
+
+COPY . /app
+
+ENV PYTHONPATH=/app
+ENV APP_MODULE=serving:server
+ENV WORKERS_PER_CORE=0.75
+ENV MAX_WORKERS=6
+ENV HOST=0.0.0.0
+ENV PORT=80
+
+RUN pip install -r requirements.txt
+```
+
+```bash
+docker build -t sentivi .
+docker run -d -p 8000:80 sentivi
+```
+
 ### Future Releases
 
 - Lexicon-based
