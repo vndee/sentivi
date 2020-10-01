@@ -64,7 +64,7 @@ print(f'Decoded results: {_pipeline.decode_polarity(predict_results)}')
 ```
 Take a look at more examples in [example/](https://github.com/vndee/sentivi/tree/master/example).
 
-### Serving Pipeline
+### Pipeline Serving
 
 Sentivi use [FastAPI](https://fastapi.tiangolo.com/) to serving pipeline. Simply run a web service as follows:
 
