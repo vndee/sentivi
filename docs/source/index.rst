@@ -99,3 +99,4 @@ Console output:
     neural_network_classifier
     transformer_classifier
     ensemble_learning
+    serving
