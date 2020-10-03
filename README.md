@@ -29,6 +29,8 @@ Documentation: https://sentivi.readthedocs.io/en/latest/index.html
 - [x] Term Frequency - Inverse Document Frequency
 - [x] Word2Vec
 - [x] Transformer Tokenizer (for Transformer classifier only)
+- [ ] WordPiece
+- [ ] SentencePiece
 
 ### Install
 - Install legacy version from PyPI:
