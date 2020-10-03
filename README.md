@@ -22,6 +22,14 @@ Documentation: https://sentivi.readthedocs.io/en/latest/index.html
 - [ ] Ensemble
 - [ ] Lexicon-based 
 
+### Text Encoders
+
+- [x] One-hot
+- [x] Bag of Words
+- [x] Term Frequency - Inverse Document Frequency
+- [x] Word2Vec
+- [x] Transformer Tokenizer (for Transformer classifier only)
+
 ### Install
 - Install legacy version from PyPI:
     ```bash
