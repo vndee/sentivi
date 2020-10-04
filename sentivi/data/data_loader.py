@@ -90,7 +90,7 @@ class Corpus(object):
         label_set = set()
 
         train_file_reader = None
-        with open(self.__train_file, 'r') as stream:
+        with open(self.__train_file, 'r', encoding='utf-8-sig') as stream:
             train_file_reader = stream.read().split(self.__line_separator)
 
         for line in train_file_reader:
@@ -100,6 +100,8 @@ class Corpus(object):
             self.__train_sentences.append(text)
             self.__train_sentiments.append(label)
 
+            if label == '':
+                print('FF:', text, label)
             if label not in label_set:
                 label_set.add(label)
 
@@ -109,7 +111,7 @@ class Corpus(object):
                     warehouse.add(word)
 
         test_file_reader = None
-        with open(self.__test_file, 'r') as stream:
+        with open(self.__test_file, 'r', encoding='utf-8-sig') as stream:
             test_file_reader = stream.read().split(self.__line_separator)
 
         for line in test_file_reader:

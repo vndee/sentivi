@@ -1,0 +1,1485 @@
+#POS
+Đỉnh
+
+#POS
+ao đẹp 
+
+#POS
+quá đẹp 
+
+#NAG
+áo đẹp 
+
+#POS
+Ok nhá
+
+#POS
+ok đẹp
+
+#POS
+Áo đẹp 
+
+#POS
+áo đẹp
+
+#POS
+ngon. 
+
+#POS
+bnlhxxhk
+
+#POS
+áo đẹp
+
+#POS
+đẹp rất ok
+
+#POS
+ao rat dep
+
+#POS
+hàng oke ạ
+
+#NAG
+Hàng dổm
+
+#POS
+rat ok
+
+#POS
+Hàng tốt ạ
+
+#POS
+Okee
+
+#NAG
+Quá xấu
+
+#POS
+hàng ok
+
+#POS
+ao dep ok
+
+#POS
+Quá mõng
+
+#POS
+Được
+
+#POS
+cũng dc 
+
+#POS
+hok thích
+
+#POS
+hàng ok
+
+#POS
+OK đẹp 
+
+#POS
+đẹp lắm
+
+#POS
+rất thích
+
+#POS
+Áo đẹp
+
+#POS
+good
+
+#POS
+Rất tốt
+
+#POS
+Ok lắm 
+
+#POS
+áo bị
+
+#POS
+hài lòng. 
+
+#POS
+rất tốt
+
+#POS
+Áo rất ok
+
+#POS
+ok shop
+
+#POS
+hàng đẹp
+
+#POS
+đẹp rẻ
+
+#POS
+Đc của nó
+
+#POS
+Hang ok 
+
+#POS
+thấy OK
+
+#POS
+ao dep 
+
+#POS
+Tốt 
+
+#POS
+Ok dd
+
+#POS
+đẹp 
+
+#POS
+quá mỏng
+
+#POS
+hàng đẹp
+
+#POS
+Đẹp 
+
+#POS
+khá ok 
+
+#POS
+hàng ok
+
+#POS
+rất ok
+
+#POS
+Hang ok
+
+#POS
+khá ưng ý
+
+#POS
+ok đẹp
+
+#POS
+áo đẹp lắm
+
+#POS
+xuất sắc
+
+#POS
+hàng ok
+
+#POS
+đẹp lắm
+
+#POS
+Rất đẹp
+
+#POS
+áo đẹp
+
+#POS
+sp tốt. 👍
+
+#POS
+áo đẹp
+
+#POS
+ao dep ok
+
+#POS
+Quá tốt 
+
+#POS
+Qua dep
+
+#POS
+Quá đẹp 
+
+#POS
+Rất ok
+
+#POS
+Ok lắm
+
+#POS
+đẹp 
+
+#POS
+áo rất đẹp
+
+#POS
+rất tốt
+
+#POS
+Rất đẹp 
+
+#POS
+nên mua
+
+#POS
+áo đẹp
+
+#POS
+đẹp ok
+
+#POS
+ok lắm
+
+#POS
+áo mỏng
+
+#POS
+Đẹp... 
+
+#POS
+đẹp ok
+
+#POS
+ok luôn 
+
+#POS
+hàng ok
+
+#POS
+rất ok ạ 
+
+#POS
+áo đẹp
+
+#POS
+Rất đẹp
+
+#POS
+quá ổn
+
+#POS
+rất đẹp
+
+#POS
+Rất tốt 
+
+#POS
+tuyệt vời
+
+#POS
+ok dep
+
+#POS
+Hài lòng
+
+#POS
+Tuyệt😍
+
+#POS
+Sp đẹp:))
+
+#POS
+tạm đc
+
+#POS
+Dc đẹp
+
+#POS
+sp tốt
+
+#POS
+Cug duoc
+
+#POS
+hàng tốt 
+
+#POS
+chuẩn
+
+#POS
+Good
+
+#POS
+áo rất đẹp
+
+#POS
+đẹp 
+
+#MED
+Tạm được
+
+#POS
+sp ok lắm
+
+#POS
+hàng đẹp
+
+#POS
+áo đẹp
+
+#POS
+rất tốt
+
+#POS
+tốt 
+
+#POS
+hàng đẹp 
+
+#POS
+khá ổn
+
+#POS
+Áo đẹp 
+
+#MED
+tốt 
+
+#POS
+sp tạm. 
+
+#POS
+Áo đẹp
+
+#POS
+Hợp lí
+
+#POS
+SP tốt 
+
+#POS
+đẹp! OK
+
+#POS
+good
+
+#POS
+good
+
+#POS
+hang ok 
+
+#POS
+good
+
+#POS
+hàng ok
+
+#POS
+hàng đẹp 
+
+#POS
+tạm đc
+
+#POS
+giống hình
+
+#POS
+cũng ok
+
+#POS
+áo đẹp. 
+
+#POS
+ao rat tot
+
+#POS
+Quá tốt 
+
+#POS
+chất
+
+#POS
+.Đẹp
+
+#MED
+tốt 
+
+#MED
+Hài lòng
+
+#POS
+Áo đẹp
+
+#POS
+tốt 
+
+#NAG
+Áo may lỗi
+
+#POS
+Được
+
+#MED
+Tạm dc
+
+#POS
+Rất đẹp 
+
+#POS
+Hoi mong
+
+#POS
+Áo ok
+
+#POS
+... 
+
+#POS
+Đẹp nắm
+
+#POS
+Very Good
+
+#NAG
+áo như cc
+
+#POS
+Hàng đẹp 
+
+#POS
+ao dep 
+
+#POS
+Rất đẹp
+
+#POS
+áo đẹp
+
+#POS
+hàng giống hình, đẹp
+
+#POS
+hành đúg yêu cầu giao hàng nhanh chóng 
+
+#POS
+áo bị sơ ở cổ rộng hơn so với size thì phải mà áo đẹp
+
+#POS
+k giốg như hình... size M mà rộg như size L...k vừa, rộg
+
+#POS
+Cảm ơn ạ áo giống hệt 
+
+#POS
+Hàng rất tốt. Rất đáng tiền. Cảm ơn shop luôn đưa đến cho tôi những sản phẩm tốt
+
+#POS
+hàng đẹp lắm 😍😍😍
+
+#POS
+hàng cũng được chỉ có cái là trỉ kim thừa nhiều lắm 
+
+#POS
+Đẹp rẻ, chất lượng hơn cả giá tiền.
+
+#POS
+ao dep nhu trong hinh ok
+
+#POS
+Đường khâu lỏng như hợp vs giá tiền
+
+#POS
+đẹp mà nfu quá đặt mẹ size nhỏ nhất :v
+
+#POS
+đẹp giống trong hình
+
+#POS
+Đẹp, giống hình, cho shop 5* ạ!!
+
+#POS
+ko hài lòng
+
+#POS
+tốt hàng đug hình.. vải tốt rất hài lòng
+
+#POS
+cảm thấy ok 
+
+#POS
+đẹp mk rất hài lòng
+
+#POS
+sản phẩm ok 
+
+#POS
+hàng y như hình tốt đẹp giao hàng max nhanh 
+
+#POS
+Áo vừa nhận xong. Với giá 60k vải vậy là ok. Còn áo bị bung hẳn một đường chỉ dài
+
+#POS
+Đáng tiền mua
+
+#POS
+áo cũng ok lắm
+
+#POS
+san pham ok gia ca hop ly tks shop 
+
+#POS
+so với giá thì ok, tạm ổn
+
+#POS
+tiền nào của nấy
+
+#POS
+5 sao nek ^^
+
+#POS
+đẹp nhưng hơi nhỏ 
+
+#POS
+cũng rất ok 
+
+#POS
+Gọn , đẹp , giống ảnh ..... mình nghĩ giá thành như thế .... cầm cái áo ok ko còn gì hơn 
+
+#POS
+Không giống trong hình
+
+#POS
+Hàng đẹp i hình rất tốt
+
+#POS
+áo đẹp lắm shop ơi 
+
+#POS
+Đẹp chất lượng
+
+#MED
+áo đẹp , ổn trong tầm tiền. mua về bị rách ống tay áo trong
+
+#POS
+Áo y hình, giao hàng nhanh 
+
+#POS
+áo đẹp như trong hình nhưng vẫn còn vài sợi chỉ thừa....
+
+#POS
+đẹp vừa ý đáng đồng tiền
+
+#POS
+áo đep,mau sắc ok...ko bit giặt co phai màu ko.cho 5 sao khi nhận hàng ok
+
+#NAG
+chữ trắng in hỏi bảo thêu = lừa đảo, áo thùng thình hơn cái hình mẫu gọn gàng
+
+#POS
+Áo đẹp, rất hài lòng với tầm giá.
+
+#POS
+hài lòng về sản phẩm
+
+#POS
+Khá ổn trong tầm giá
+
+#POS
+khá là hợp lý với giá hiện tại.....
+
+#MED
+ưng shop nhé
+
+#POS
+nói chung là đc
+
+#NAG
+tạm được, áo mỏng, chỉ may chưa kỹ, 
+
+#POS
+tuy hàng ko dc ưng lắm nhưng vs giá như vậy là ok rồi
+
+#MED
+binh thuong
+
+#POS
+hàng giống như hình đẹp vừa mặc. 
+
+#MED
+ hàng được 
+
+#POS
+áo đẹp đấy. 5 sao nhen
+
+#POS
+đc vừa với túi tiền nhưng tiền ship hơi đắt ship về đăk lăk mất tiền bằng 1 nữa cái áo
+
+#POS
+áo đẹp.ok nhé mn
+
+#POS
+Tuyệt vời vượt mức mong đợi 
+
+#POS
+đẹp lắm..có chú ty chỉ thừa
+
+#POS
+2 túi mà 1 bên rất nông.... vải mát đẹp... giá này thì rất hợp lý r
+
+#POS
+áo đẹp so vs giá.  tks shop
+
+#POS
+áo đẹp giá rẻ rất hài lòng
+
+#MED
+hơi mỏng nhưng đúng giá r, hàng đẹp, ổn shop ah
+
+#POS
+áo đẹp đường may nhăn.. phần viền bị lỗi nhỏ..  hợp giá tiền
+
+#POS
+đẹp lắm nha shop
+
+#POS
+sản phẩm đúng mô tả 
+
+#MED
+Đẹp như hình mẫu nhưng sao bị rách 1 đường bên trong có dấu hiệu mai dá
+
+#POS
+chất lượng ổn.
+
+#POS
+Đẹp nhưng ko có cở lớn 
+
+#POS
+tốt . rất đẹp . nhưng tiền ship hơi cao
+
+#POS
+giống mẫu, đẹp, tks shop
+
+#MED
+hài....giống 60℅ tùy chất liệu.
+
+#POS
+Hàng đúng mẫu đẹp 5 sao
+
+#POS
+áo đẹp. không có chỉ dư. rất tốt 
+
+#POS
+Hàng đúng với ảnh nhưng hơi mỏng..Tiền nào của đó..
+
+#POS
+99k cả ship . khá hài lòng :)
+
+#POS
+Áo may lỗi 1 chút vải mỏng nhưng giống hình cũng đẹp hợp giá tiền 
+
+#POS
+áo đẹp ,vừa giá , giao nhanh , 5s nhé
+
+#POS
+giao hàng nhanh
+
+#POS
+áo ok nhưng màu ko đậm như chong hình
+
+#POS
+áo giống hình tuy nhiên hơi mỏng nhưng với giá tiền như vậy là ok rồi
+
+#POS
+Hàng oke, đợi dùng rồi đánh giá tiếp
+
+#POS
+Áo đẹp lắm shop ơi ! Vừa ý quá luôn sẽ ủng hộ shop dài dài..
+
+#POS
+áo như hình... đẹp. phí giao hàng cao thôi còn đâu ok
+
+#POS
+Sản phẩm như hình đẹp 
+
+#POS
+hàng đẹp nhưng shipp đắt quá.rẻ lại thành đắt
+
+#POS
+áo hình rất đp
+
+#POS
+vừa vặn áo đẹp
+
+#POS
+hang dep ok..
+
+#POS
+hàng đẹp như trong hình 
+
+#POS
+áo khá vừa giá tiền, may lỗi 1 số điểm nhưng ko đáng
+
+#POS
+Áo nhìn cưc đep rất thích mặc lai vừa trên cả tuyêt vời cho shop 5 sao
+
+#MED
+Áo mỏng quá mỏng , khoác thì đc
+
+#POS
+Áo đẹp vcl :)) ***** nhé
+
+#POS
+Khá hài lòng
+
+#POS
+Nt kiu hủy đơn shop ko hủy.. Nhận lun cho bỏ ghét haha..  Đẹp trong tầm giá
+
+#POS
+Đường may cũng chắc chắn nhưng in hơi mờ với bị vỡ hình. Nói chung là tạm ổn
+
+#POS
+Áo khá đẹp đúng kiểu "nhẹ". 5 sao ủng hộ shop
+
+#POS
+Hàng đẹp như hình, rất ok,chắc chắn sẽ còn ủng hộ shop
+
+#POS
+Hàng đẹp, giá hạt dẻ.. cho shop 5sao
+
+#POS
+Áo đẹp, ôm người 1 phát 5 sao cho sp
+
+#POS
+Hàng đẹp nên mua
+
+#POS
+Sp .. đẹp hợp giá tiền ok
+
+#POS
+Áo đẹp truất
+
+#POS
+ok sp tốt với giá 68k hài lòng
+
+#MED
+Áo thì ok giống hình nhưng về giặt thì máy cái hình nó bay luôn
+
+#POS
+hàng đúng như ảnh, giao hàng nhanh , rất tốt 
+
+#POS
+Áo đẹp , như hình , nhưng hình in trên áo giặt máy bị tróc ra hết , tạm dc 
+
+#POS
+Hang Rất ok
+
+#POS
+Giao hàng nhanh và tốt mẫu áo đẹp mn nên mua ủng hộ shop 👏🏻👏🏻
+
+#NAG
+giá vậy. áo cũng duoc
+
+#POS
+Giá tốt,rất phong cách !
+
+#POS
+So với hàng thì vừa ưng ý. Giá vậy đồ vậy là ok . Duyệt. 
+
+#POS
+So với giá tầm cỡ 100k vậy thì cũng dc xem là ok.  Tiền nào của náy. 
+
+#POS
+Áo như hình  
+Đẹp
+
+#POS
+May k đc đẹp lắm 
+
+#MED
+Hàng khá là ok vừa giá tiền. Nhìn cũng đẹp
+
+#POS
+Tuyệt Vời...
+
+#POS
+Tuyệt con nhà bà vời
+
+#POS
+Áo hợp lí trong tầm giá
+
+#POS
+Rất đẹp :v tuy vải hơi mỏng nhưng hợp với tầm giá
+
+#POS
+Sản phẩm chất lượng
+
+#POS
+Áo ĐK in hoạ tiết rất tốt. Mỏng nhẹ đẹp.
+
+#POS
+áo ổn. khoá hơi khó kéo. 
+
+#POS
+Mẫu này thì ok về chất lượng!!
+
+#POS
+bị rách ngay cổ  áo hơi nhỏ 
+
+#POS
+rất hài lòng 
+
+#POS
+sp oke túi hơi nhỏ
+
+#MED
+Tay áo bị lỗi, mỗi lần mang phải kéo lớp dù ra mới xỏ tay vào được
+Áo đẹp trong tầm giá
+
+#POS
+Áo vừa ý lắm..tiền nào của nấy..nhân viên vui vẻ..thank shop
+
+#POS
+đẹp so với số tiền
+
+#MED
+Áo hỏi mỏng, xài tạm được.
+
+#NAG
+Chất liệu áo k chuẩn lắm!
+
+#POS
+Size L nhưng hơi nhỏ. Ước gì có size XL shop ơi. Áo mặt trước in hơi nhoè. Cảm ơn shop
+
+#POS
+hàng tốt. nhưng đuòng chỉ xấu dễ rách
+
+#POS
+áo đẹp, hơi nhăn, dây kéo hơi kém chất lượng. nhưng vs cái giá này thì cũng đc
+
+#MED
+hàng tốt ^^
+
+#POS
+Áo đẹp số với tầm giá
+
+#POS
+K đepj như hình thật
+
+#MED
+Ngáo ngắn quá
+
+#NAG
+áo bị bẩn bên trong...
+
+#MED
+áo rất đẹp và rất bảh ok
+
+#POS
+áo đúng với hình. đường may tốt... chỉ có điều áo khá rộng và các chi tiết sơn chưa dc nét cho lắm
+
+#POS
+hàng đẹp nhưg gjao hàng hơi chậm
+
+#MED
+áo cũng được.hơi rộng nha.các bạn tướng body nên mua size m cho chắc.
+
+#POS
+Rất đẹp,mẫu giống hình,vải hơi mỏng nhưng tiền nào của đó,rất hợp túi tiền
+
+#NAG
+giao hàng thiếu
+
+#POS
+hàng đẹp lắm shop
+
+#MED
+áo vải hơi mỏng xíu nhưng cx rất gài lòng
+
+#POS
+màu in hoạ tiết bị mờ 
+
+#MED
+k giống như mong đợi lắm..hơi buồn 
+
+#MED
+hình. jog 80% vải k ok.giặc bi ra màu
+
+#MED
+vải mỏng. tạm đk
+
+#MED
+thích màu đỏ hơn có đổi đc màu đỏ ko shop
+
+#POS
+So với giá tiền này cũng tạm được ok
+
+#POS
+mua cái màu đen r. chắc mua thêm màu đỏ nữa để dễ phối đồ
+
+#POS
+tất cả đều ổn. riêng phần tay đường chỉ bị may lỗi 
+
+#MED
+áo đẹp mà giao không đúng size@.@
+
+#POS
+Giá tốt nhưng hình in bị nhoè nhiều chỗ. Nhì xa thì đệp lắm nhưng nhìn cận cảnh thì hơi tệ tí :)))
+
+#MED
+giao hàng nhanh, đúng mẫu. tuy nhiên áo vẫn có một vài lỗi
+
+#POS
+hàng đẹp như hình,đáng đồng tiền
+
+#POS
+noi chung ao cung dc hang tot
+
+#POS
+Áo đẹp. Nhưng áo mình bị may lỗi ở cổ tay 😡😡😡
+
+#POS
+áo đẹp...giao hàng nhanh...94k quá ok...
+
+#POS
+Rất Ok sẽ ung hộ Shop lần sau
+
+#POS
+áo với giá tiền vậy thì ok. có điều mua cho ông xã mặc giờ mình mặc luôn vì hơi nhỏ xíu
+
+#POS
+chất liệu vải đẹp, đường may chắc chắn... Hài lòng ạ
+
+#POS
+hàng tốt ngoài mong đợi 
+
+#POS
+áo như hình mỗi tội mặc vào hơi bí. nhưng cũng hào lòng với giá
+
+#POS
+giống hình mặc đẹp, tiền nào của đó, hình in
+
+#POS
+Vải giống vải dù, đẹp , mình thích
+
+#POS
+Hàng đẹp như hình
+
+#POS
+Tuyệt vời ko làm tui thất vọng 
+
+#POS
+áo rất đẹp và được đóng gói rất kỹ sẽ ủng hộ shop Tiếp 
+
+#POS
+sản phẩm tốt như hình chúc shop bán tôt
+
+#POS
+Giao hàng lâu hủy rồi mà vẫn gửi
+
+#POS
+ao rat dep va oke
+
+#POS
+hàng ok. chất liêu phu hơp.
+
+#POS
+Ao qua đẹp lun sop oi
+
+#NAG
+Đặt màu trắng lại giao màu đen 
+
+#POS
+hàng đẹp nên mua
+
+#POS
+đẹp lắm giống ik như hình
+
+#POS
+áo này rất đẹp hợp với giá tiền 
+
+#POS
+rất hài lòng 🥰 .hàng rất đẹp 
+tội là mỏng thôi ạ 😂
+
+#POS
+Áo quá đẹp vừa túi tiền lùn ủng hộ shop
+
+#POS
+Sản phẩm giống hình, đóng gói cẩn thận, tuy thời gian giao hàng hơi lâu 1 chút.
+
+#POS
+áo wá đẹp, thank shop
+
+#POS
+áo rất đẹp so với giá tiền . vượt ngoài mong đợi 
+
+#NAG
+Hàng ko đúng mẫu hình, lưa đảo
+
+#POS
+shop bán hàng kiểu gì mà chưa xem đã biết đẹp rồi
+
+#NAG
+Mua về đã bung chỉ  rồi😝😝. (Quá tệ. )Nhưg mà dc cái rẻ thì chịu thôi. Tiền nào của nấy 😁
+
+#POS
+rất tốt , mặc vào rất thoải mái 
+
+#POS
+chất lượng sản phẩm tương đối tốt so với giá cả. cảm ơn shop.!!
+
+#POS
+Áo đẹp mặc ra đường bạn bè ai cũng khen
+
+#MED
+áo hơi mỏng shop ạ
+
+#POS
+Tốt, Giống hình
+
+#POS
+áo đẹp cho 10*
+
+#POS
+hàng đẹp,giao nhanh,
+
+#POS
+Áo khá ok so với giá.giao hàng quá chậm Cho shop 4 sao
+
+#POS
+Áo áo rất đẹp, phù hợp với giá tiền
+
+#POS
+Áo đẹp, hai lớp, rất thích hợp để mặc vào mùa hè
+
+#POS
+hàng đẹp tốt
+
+#POS
+Áo giống hình. Vải tốt. Giá rẻ hợp lý. Sẽ ủng hộ shop 
+
+#NAG
+Chất liệu vải kém, đường chỉ ko đều, một bên túi may vải màu khác và chưa may xong.
+
+#NAG
+áo may bị xoáy lớp dù trong của tay trái. thêu logo bên tay trái ngược nữa ạk. shop xữ lý dùm e ạ 
+
+#NAG
+xấu chắc thợ k biết may mẫu thì đẹp mà về thì cx biết rồi đó
+
+#POS
+mẫu mã rất đẹp. vải  tốt. vừa túi tiền
+
+#POS
+áo đẹp  lắm  shop
+
+#POS
+Áo giống hình nhưng khoá kéo may ngược vãi Lìn thật
+
+#POS
+giống hình. in có chút lỗi sơn
+
+#POS
+hàng tam on
+
+#POS
+áo giống hình rất dep
+
+#POS
+sai cái hai màu mà gửi hai một màu buồn
+
+#POS
+Hàng vài thì ok nhg dao hàng lau . Nhận hang gần 20 ngày mới nhận dk hàng
+
+#POS
+hàng rất đẹp sẽ ủng hộ tiếp
+
+#POS
+rất hay lòng 
+
+#MED
+Chưa hài lòng lắm hơi thô nhé 
+
+#POS
+San pham giong nhu hinh 
+Cho shop 5 sao
+
+#POS
+đúng mẫu có đều hơi to 
+
+#POS
+Áo xám vải dù kh đc đẹp lắm mỏng với nhăn . Màu đen thì ok .
+
+#POS
+ tuyệt voi.  chống nuoc dc luôn . ủng hộ shop 
+
+#POS
+Áo nhẹ đẹp tks shop
+
+#POS
+Áo đẹp, chất lượng tốt, nói chung với giá tiền như v là rất ok
+
+#MED
+ cũng tạm dược rẻ
+
+#POS
+Hàng bị lỗi ở phía trong chỗ vai áo
+
+#POS
+Ok nha shop
+
+#POS
+sản phẩm như hình chất lượng ok
+
+#POS
+Áo đẹp nhé
+cảm ơn shop. ship nhanh nữa 
+
+#POS
+Rẻ đẹp có túi trong 
+
+#POS
+rất đẹp và giao nhanh nữa
+
+#POS
+Sản phẩm rất đẹp tuy chỉ ở tầm giá nài mọi người nên mua 
+
+#POS
+Hàng đc , tốt hợp lý vs giá tiền
+
+#POS
+hàng như hình, đẹp. chỉ hơi mỏng tý
+
+#POS
+Vải hơi mỏng nhưng được
+
+#POS
+các bạn nên mua.áo đẹp
+
+#POS
+Sp như hình 
+
+#POS
+Tốt, đẹp, giao hàng nhanh , 5*
+
+#POS
+Rất hài lòng 
+
+#POS
+ok hang dep
+rất hai long
+ung y 
+hang dung mau
+y như hinh
+
+#POS
+áo rất đẹp
+
+#POS
+vãi đẹp e rất thick ạ
+
+#POS
+áo khoác nam đẹp nên mua shop uy tín
+
+#POS
+rất tốt sản phẩm rất vừa ý của mình.
+
+#POS
+Áo rất ok tốt,,giao hàng cực nhanh,,.. Tuyệt!!!
+
+#POS
+fom dep nói chung ok . nên mua
+
+#MED
+Bên ngoài bình thường, phía trong may hơi ẩu đường chỉ không ăn vào mép vải
+
+#POS
+rất hoàn haot
+
+#POS
+ao đep ck  tui rat thich giao hang nhanh ok cho 5sao nha se ung ho lan sau nua
+
+#POS
+áo qá đẹp so với giá tiền, nhân viên giao hàng nhiệt tình :v
+
+#POS
+hàng rất tốt
+
+#POS
+sản phẩm giống như hình  chất lượng tốt giao nhanh 
+
+#POS
+Chất vải dù đẹp lắm shop
+
+#POS
+đẹp vừa màu hơi lợt so với hình
+
+#POS
+đẹp,ổn so với giá tiền 
+
+#POS
+áo rất đẹp 
+
+#POS
+giao hàng nhanh tuyệt
+
+#POS
+Áo khoác đẹp. Đáng để mua
+
+#POS
+hang vua jk nha shop giao hang rat nhanh toi rat thich 
+
+#POS
+đẹp,tốt trong tầm giá
+
+#POS
+K cho kiểm tra hàng thì k nhận hàng đâu 
+
+#POS
+hàng ok hợp giá tiền
+
+#POS
+ao giong hinh dep 
+
+#POS
+rất tốt vải nhìn đẹp 
+
+#POS
+phù hợp với giá tiền
+
+#POS
+vải  hơi  mỏng. 
+
+#POS
+đẹp, đúng hình
+
+#POS
+áo rất giống trong hình. a giao hàng rất tốt bụng.😁
+
+#POS
+áo đẹp lắm 
+
+#POS
+rất ổn, mang phối đồ rất đẹp
+
+#POS
+áo đẹp,vừa người,may chắc chắn
+
+#POS
+áo bị nhăn nhá... 
+
+#POS
+áo khoác đep giống hình giá cả hợp lý moi người nên mua
+
+#NAG
+chất lượng sản phẩm tuyệt 
+vời 
+
+#POS
+Đồ đẹp sài ok
+
+#POS
+giao dung mẫu
+
+#POS
+5 sao
+
+#NAG
+áo kém chất lượng, chạy xổ ra rất nhiều, đơn hàng ship lâu nhất mà tôi từng nhận, bực
+
+#POS
+Đúng hàng. Cực đẹp 
+
+#POS
+Sp đúng với giá tiền
+
+#POS
+hàng đẹp. mặc mát.
+
+#POS
+rất OK i như hình
+
+#POS
+vải hơi mỏng và rộng nhưng tốt với giá tiền
+
+#POS
+Hàng đẹp hợp với giá tiền lắm sẻ ủng hộ shop lâu dài
+
+#POS
+đẹp mỗi tội hơi bé 
+
+#NAG
+giao sai hàng
+
+#POS
+Áo đẹp. Đúng với hình ảnh
+
+#POS
+sản phẩm y như hình,giao hàng nhanh
+
+#POS
+Sp hợp với giá tiền
+
+#POS
+tầm giá ổn còn áo thì đẹp nên mua
+
+#POS
+ao đẹp .rất ok .
+
+#POS
+đẹp y hình 
+
+#POS
+đẹp y hình 
+
+#POS
+đẹp.60kg size L hơi chật
+
+#POS
+túi có dây kéo thì ok
+
+#POS
+Sản phẩm OK
+
+#POS
+tiền nào của nấy thoy..kiểu đẹp..vải mỏng..cho 4 sao nhé
+
+#POS
+Rất đẹp , nhẹ hơn tưởng tượng , đáng đồng tiền
+
+#POS
+đẹp... đúng mẫu... so với giá hàng rất ok
+
+#POS
+- Đẹp nhưng hơi mỏng .. 
+
+#POS
+tốt nên mua nha
+
+#POS
+tốt nên mua
+
+#POS
+đẹp ik hình
+
+#POS
+hàng bị lỗi ngay ống tay..nhét tay vô hk dk
+
+#POS
+chất lượng được tốt 
+
+#POS
+quá tuyệt vời, rất giống hình
+
+#NAG
+Đặt áo khoác thì chuyển 1 bộ đồ chơi thể thao. Dek thể tin dc
+
+#POS
+ao mac vua nhe... tam gia phai chang
+
+#POS
+Hàng đẹp giá rẻ chất liệu khá ok lần sau e sẽ ủng hộ tiếp ạ
+
+#POS
+K hài lòng giao hàng còn chậm và hàng cũng chưa giống như hình đã đặc.!!!!!
+
+#MED
+tạm cho 3 sao khuyến khích 
+
+#POS
+Áo rất đẹp giống hình, mà nếu có size lớn hơn thì càng tốt.
+
+#POS
+Áo rất đẹp đúng y như trong hình , mình mặc rất vừa đẹp 
+
+#POS
+Áo đúng như hình, đẹp, vải ko bị lỗi. cho shop 6* luôn
+
+#POS
+áo hơi mỏng nhưng so với giá tiền thì ko đòi hỏi gì 
+
+#POS
+áo đep mac vừa đug ý
+
+#POS
+đẹp giống hình 
+
+#POS
+đẹp như hình 
+
+#POS
+Giao nhanh, áo đẹp, đúng size đúng mẫu, hàng chất lượng
+
+#POS
+áo đẹp y hình 
+
+#POS
+in chữ quá xấu 
+
+#POS
+hàng ok lắm
+
+#MED
+đẹp nhưng mua 2 áo đều bị lỗi chỉ
+
+#POS
+Áo dẹp - giao hàng nhanh
+
+#POS
+áo như hình đẹp, chỉ có điều là túi áo bị rách 
+
+#MED
+áo đẹp. tiếc cái là áo lớn hơn size. 60kg mà mặc size L bị rộng quá. không mặc được
+
+#POS
+áo đẹp, cổ áo nhìn hơi mỏng nhìn chung là ok giao hàng hơi chậm
+
+#POS
+sản phẩm đẹp. giống hình. sẽ mua ủng hộ shop tiếp
+
+#POS
+áo đẹp sẽ ủng hộ thêm
+
+#POS
+áo đẹp
+
+#POS
+đẹp 
+
+#POS
+vừa vặn như in, áo đẹp nữa. ủng hộ shop😍
+
+#POS
+áo đẹp nhưng mỏng quá 
+
+#POS
+Hàng đẹp rất vừa ý.
+
+#POS
+áo đẹp, nhưng hoạ tiết dễ phai
+
+#POS
+Áo đẹp chỉ hơi dư . Với size M còn bé quá như size S ý xém tí là kh mặc vừa rồi. 
+
+#POS
+Y như hình, vải dù hơi mỏng nhưng rất đẹp mn ạ
+
+#POS
+áo đẹp giống hình 😍
+
+#POS
+Tư vấn áo hơi rộng
+
+#POS
+Áo hơi mỏng nhưng cx đc vì giá cả nên ko trách đẹp như hình
+
+#POS
+Chất vải đẹp.Bền
+
+#POS
+đẹp như hình 
+
+#POS
+hàng đẹp y hình đóng gói cẩn thận rất vừa ý
+
+#MED
+Nhanh rách quá vậyyy 
+
+#POS
+tiền nào của nấy. đủ xài. 3,5 sao
+
+#POS
+hang qua đep dong hinh 99pc se ung ho sop nua

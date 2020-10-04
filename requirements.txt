@@ -71,7 +71,6 @@ tabulate==0.8.7
 thinc==7.4.1
 threadpoolctl==2.1.0
 tokenizers==0.8.1rc2
-torch==1.6.0
 tqdm==4.49.0
 transformers==3.1.0
 twine==3.2.0
