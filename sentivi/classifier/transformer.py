@@ -1,5 +1,6 @@
 import torch
 import numpy as np
+from tqdm import tqdm
 from typing import Optional
 
 from sentivi.base_model import ClassifierLayer
@@ -195,7 +196,8 @@ class TransformerClassifier(ClassifierLayer):
             _preds, _targets = None, None
             train_loss, train_acc, train_f1, test_loss, test_acc, test_f1 = 0.0, 0.0, 0.0, 0.0, 0.0, 0.0
 
-            for idx, (input_ids_X, token_type_ids_X, attention_mask_X, y) in enumerate(self.train_loader):
+            for idx, (input_ids_X, token_type_ids_X, attention_mask_X, y) in enumerate(tqdm(self.train_loader,
+                                                                                            desc=f'Training {epoch + 1}/{self.num_epochs}')):
                 self.optimizer.zero_grad()
                 input_ids_X = input_ids_X.to(self.device)
                 attention_mask_X = attention_mask_X.to(self.device)
@@ -226,7 +228,8 @@ class TransformerClassifier(ClassifierLayer):
             self.clf.eval()
             _preds, _targets = None, None
             with torch.no_grad():
-                for input_ids_X, token_type_ids_X, attention_mask_X, y in self.test_loader:
+                for input_ids_X, token_type_ids_X, attention_mask_X, y in tqdm(self.test_loader,
+                                                                               desc=f'Evaluating {epoch + 1}/{self.num_epochs}'):
                     input_ids_X = input_ids_X.to(self.device)
                     attention_mask_X = attention_mask_X.to(self.device)
                     y = y.to(self.device)

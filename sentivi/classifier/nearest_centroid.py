@@ -5,7 +5,7 @@ from sentivi.classifier.sklearn_clf import ScikitLearnClassifier
 class NearestCentroidClassifier(ScikitLearnClassifier):
     def __init__(self, num_labels: int = 3, *args, **kwargs):
         """
-        Initialize NearestCentroidClassifier
+        Initialize NearestCentroidClassifier.txt
 
         :param num_labels: number of polarities
         :param args: arbitrary arguments

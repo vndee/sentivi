@@ -8,7 +8,7 @@ if __name__ == '__main__':
 
     pipeline = Pipeline(DataLoader(text_processor=text_processor, n_grams=2, max_length=100),
                         TextEncoder(encode_type='word2vec', model_path='./pretrained/wiki.vi.model.bin.gz'),
-                        LSTMClassifier(num_labels=3, bidirectional=False, attention=True, device='cuda',
+                        LSTMClassifier(num_labels=2, bidirectional=False, attention=True, device='cuda',
                                        hidden_layers=1))
 
     train_results = pipeline(train='./data/dev.vi', test='./data/dev_test.vi',

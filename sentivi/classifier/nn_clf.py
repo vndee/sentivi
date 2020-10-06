@@ -160,7 +160,7 @@ class NeuralNetworkClassifier(ClassifierLayer):
             _preds, _targets = None, None
             train_loss, train_acc, train_f1, test_loss, test_acc, test_f1 = 0.0, 0.0, 0.0, 0.0, 0.0, 0.0
 
-            for X, y in self.train_loader:
+            for X, y in tqdm(self.train_loader, desc=f'Training {epoch + 1}/{self.num_epochs}'):
                 self.optimizer.zero_grad()
                 X, y = X.type(torch.FloatTensor).to(self.device), y.type(torch.LongTensor).to(self.device)
                 preds = self.clf(X)
@@ -188,7 +188,7 @@ class NeuralNetworkClassifier(ClassifierLayer):
             self.clf.eval()
             _preds, _targets = None, None
             with torch.no_grad():
-                for X, y in self.test_loader:
+                for X, y in tqdm(self.test_loader, desc=f'Evaluating {epoch + 1}/{self.num_epochs}'):
                     X, y = X.type(torch.FloatTensor).to(self.device), y.type(torch.LongTensor).to(self.device)
                     preds = self.clf(X)
                     loss = self.criterion(preds, y)

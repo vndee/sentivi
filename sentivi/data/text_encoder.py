@@ -63,7 +63,6 @@ class TextEncoder(DataLayer):
                 self.word2vec(test_X, n_grams=n_grams), test_y)
         elif self.encode_type == 'transformer':
             from transformers import AutoTokenizer
-            from sentivi.classifier.transformer import TransformerClassifier
 
             tokenizer = AutoTokenizer.from_pretrained(self.language_model_shortcut)
             return (self.transformer_tokenizer(tokenizer, train_X), train_y), \
