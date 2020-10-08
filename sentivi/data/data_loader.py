@@ -13,12 +13,13 @@ class Corpus(object):
     def __init__(self,
                  train_file: Optional[str] = None,
                  test_file: Optional[str] = None,
-                 delimiter: Optional[str] = None,
+                 delimiter: Optional[str] = '\n',
                  line_separator: Optional[str] = None,
                  n_grams: Optional[int] = None,
                  text_processor: Optional[TextProcessor] = None,
                  max_length: Optional[int] = None,
-                 truncation: Optional[str] = 'head'):
+                 truncation: Optional[str] = 'head',
+                 mode: Optional[str] = 'sentivi'):
         """
         Initialize Corpus instance
 
@@ -53,6 +54,7 @@ class Corpus(object):
         self.__test_sentences = list()
         self.__test_sentiments = list()
 
+        self.__mode = mode
         self.vocab = None
         self.labels_set = None
         self.n_grams = n_grams
@@ -89,13 +91,21 @@ class Corpus(object):
         warehouse = set()
         label_set = set()
 
+        if self.__mode == 'VLSP':
+            self.__line_separator = '\n'
+            self.__delimiter = '\t'
+
         train_file_reader = None
         with open(self.__train_file, 'r', encoding='utf-8-sig') as stream:
-            train_file_reader = stream.read().split(self.__line_separator)
+            train_file_reader = stream.read().strip().split(self.__line_separator)
 
         for line in train_file_reader:
-            line = line.split('\n')
-            label, text = line[0], ' '.join(line[1:])
+            line = line.split(self.__delimiter)
+            if self.__mode == 'VLSP':
+                text, label = line[0].strip(), line[1].strip()
+            else:
+                label, text = line[0].strip(), ' '.join(line[1:]).strip()
+
             text = self.text_transform(text)
             self.__train_sentences.append(text)
             self.__train_sentiments.append(label)
@@ -112,11 +122,15 @@ class Corpus(object):
 
         test_file_reader = None
         with open(self.__test_file, 'r', encoding='utf-8-sig') as stream:
-            test_file_reader = stream.read().split(self.__line_separator)
+            test_file_reader = stream.read().strip().split(self.__line_separator)
 
         for line in test_file_reader:
-            line = line.split('\n')
-            label, text = line[0], ' '.join(line[1:])
+            line = line.split(self.__delimiter)
+            if self.__mode == 'VLSP':
+                text, label = line[0].strip(), line[1].strip()
+            else:
+                label, text = line[0].strip(), ' '.join(line[1:]).strip()
+
             text = self.text_transform(text)
 
             self.__test_sentences.append(text)
@@ -171,7 +185,8 @@ class DataLoader(DataLayer):
                  line_separator: Optional[str] = '\n\n',
                  n_grams: Optional[int] = 1,
                  text_processor: Optional[TextProcessor] = None,
-                 max_length: Optional[int] = 256):
+                 max_length: Optional[int] = 256,
+                 mode: Optional[str] = 'sentivi'):
         """
         :param delimiter: separator between polarity and text
         :param line_separator: separator between samples
@@ -189,6 +204,7 @@ class DataLoader(DataLayer):
         self.text_processor = text_processor
         self.vocab = None
         self.labels_set = None
+        self.mode = mode
 
     def forward(self, *args, **kwargs):
         """
@@ -204,7 +220,7 @@ class DataLoader(DataLayer):
 
         corpus = Corpus(train_file=kwargs['train'], test_file=kwargs['test'], delimiter=self.__delimiter,
                         line_separator=self.__line_separator, n_grams=self.n_grams, text_processor=self.text_processor,
-                        max_length=self.max_length)
+                        max_length=self.max_length, mode=self.mode)
 
         self.vocab = corpus.vocab
         self.labels_set = corpus.labels_set

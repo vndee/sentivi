@@ -5,3 +5,5 @@ build/
 sentivi.egg-info/
 pretrained/
 dist/
+data/*
+data/
