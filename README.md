@@ -33,7 +33,7 @@ Documentation: https://sentivi.readthedocs.io/en/latest/index.html
 - [ ] SentencePiece
 
 ### Install
-- Install legacy version from PyPI:
+- Install standard version from PyPI:
     ```bash
     pip install sentivi
     ```
