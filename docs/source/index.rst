@@ -5,7 +5,7 @@ A simple tool for sentiment analysis which is a wrapper of `scikit-learn <https:
 classification algorithms.
 
 
-- Install legacy version from PyPI:
+- Install standard version from PyPI:
 
 .. code-block::
 
